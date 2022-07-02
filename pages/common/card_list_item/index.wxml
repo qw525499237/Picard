@@ -1,0 +1,360 @@
+<!-- <l-card full type="cover" image="{{data.image}}" image-mode="widthFix" title="" l-class="life-container" l-img-class="life-img" l-title-class="life-title" bindtap="onProduct">
+  <view class='life-product-contianer'> -->
+<!-- <view class='art-content'>{{data.describe}}</view>
+    <view class='info'>
+      <view class="info_item">
+        <image style="width: 35rpx;height: 35rpx; border-radius: 17.5rpx;" src="/pages/images/logo_512_512.jpg"><cover-image src="/pages/images/play.png"></cover-image></image> 
+        <text style="margin-left: 5rpx; font-size: 23rpx;">美滋滋</text>
+      </view>
+      <view class="info_item2">
+        <image style="width: 25rpx;height: 25rpx; border-radius: 12.5rpx; margin-top: 2rpx;" src="/pages/images/star.png"></image> 
+        <text style="margin-left: 5rpx; font-size: 23rpx; ">1245512</text>
+      </view>
+    </view>
+    <view class='info'>
+      <view class="info_item">
+        <image style="width: 35rpx;height: 35rpx; " src="/pages/images/card5.png"></image> 
+        <text style="margin-left: 5rpx; font-size: 23rpx;margin-top: 2rpx;">50/100</text>
+      </view>
+      <view class="info_item2">
+        <image style="width: 35rpx;height: 35rpx; " src="/pages/images/ssr.png"></image> 
+        <text style="margin-left: 5rpx; font-size: 23rpx;margin-top: 2rpx;">99</text>
+      </view>
+    </view> -->
+
+<!-- </view>
+</l-card> -->
+
+
+<!-- <view class="total_bc">
+  <view style="margin-top: 20rpx;margin-left: 2%;">
+    <image mode="widthFix" src="{{data.image}}" style="width: 98%;"></image>
+    <text class='art-content'>{{data.describe}}</text>
+    <view class='info'>
+      <view class="info_item">
+        <image style="width: 35rpx;height: 35rpx; border-radius: 17.5rpx;" src="/pages/images/logo_radio.png"></image>
+        <text style="margin-left: 5rpx; font-size: 23rpx;">美滋滋</text>
+      </view>
+      <view class="info_item2">
+        <image style="width: 25rpx;height: 25rpx; border-radius: 12.5rpx; margin-top: 2rpx;"
+          src="/pages/images/star.png"></image>
+        <text style="margin-left: 5rpx; font-size: 23rpx; ">1245512</text>
+      </view>
+    </view>
+    <view class='info2'>
+      <view class="info_item">
+        <image style="width: 35rpx;height: 35rpx; " src="/pages/images/card5.png"></image>
+        <text style="margin-left: 5rpx; font-size: 23rpx;margin-top: 2rpx;">50/100</text>
+      </view>
+      <view class="info_item2">
+        <image style="width: 35rpx;height: 35rpx; " src="/pages/images/ssr.png"></image>
+        <text style="margin-left: 5rpx; font-size: 23rpx;margin-top: 2rpx;">99</text>
+      </view>
+    </view>
+  </view>
+</view> -->
+
+
+
+<view class="total_bc">
+  <view style="width: 100%;flex-direction: column;display: flex;justify-content: center;align-content:center;align-items: center; ">
+    <view class="l-badge">
+      <!-- <view
+        style="width:358rpx;margin-top: 5rpx;border-radius: 15rpx;box-shadow: 1px 1px 3px #777777e8;display: flex;justify-content: center;align-content:center;align-items: center;background-color: black;"> -->
+      <image style="width: 367rpx;height: 367rpx;border-radius: 15rpx;" mode="aspectFill" src="{{data.images[0].image_url}}/limit_width_400" wx:if="{{data.images[0].ratio==1}}" bindtap="clickListItem"></image>
+      <image style="width: 367rpx;border-radius: 15rpx;" mode="widthFix" src="{{data.images[0].image_url}}/limit_width_400" wx:elif="{{data.images[0].ratio<1.33&&data.images[0].ratio>0.75}}" bindtap="clickListItem"></image>
+      <image style="width: 367rpx;height: 488rpx;border-radius: 15rpx;" mode="aspectFill" src="{{data.images[0].image_url}}/limit_width_400" wx:elif="{{data.images[0].ratio>=1.33}}" bindtap="clickListItem"></image>
+      <image style="width: 367rpx;height: 274rpx;border-radius: 15rpx;" mode="aspectFill" src="{{data.images[0].image_url}}/limit_width_400" wx:elif="{{data.images[0].ratio<=0.75}}" bindtap="clickListItem"></image>
+      <!-- </view> -->
+      <view class="l-badge-content-bottomleft l-badge-content l-class l-class-self l-self-class" bindtap="clickListItem">
+        {{isSelf?'拥有':'ta有'}}:{{data.have_card_num}}块</view>
+      <!-- <image class="l-badge-content-topleft l-badge-content l-class l-class-self l-self-class" style="width: 100rpx;height: 100rpx;" src="{{data.card_badge_url}}/limit_width_100" bindtap="showBadge" wx:if="{{data.have_card_badge}}">
+      </image> -->
+      <image class="l-badge-content-bottomright l-badge-content l-class l-class-self l-self-class" style="width: 38rpx;height: 38rpx;" src="/pages/images/play.png" wx:if="{{data.images[0].type=='video'}}">
+      </image>
+      <!-- <image class="l-badge-content-topright l-badge-content l-class l-class-self l-self-class" style="width: 80rpx;height: 80rpx;" src="/pages/images/hot_white.png" bindtap="showAllInfo" wx:if="{{data.hot_card}}">
+      </image> -->
+      <view wx:if="{{data.card_type=='SQUARE'}}" style="z-index: 9999;" bindtap="clickListItem">
+        <image style="width: {{0.205*imgheight}}px;height: {{0.205*imgheight}}px;position: absolute;top:{{0.199*imgheight}}px;left: {{(window_width_px-0.199*imgheight)/2}}px;" src="/pages/images/square_blue.png"></image>
+        <image style="width: {{0.169*imgheight}}px;height: {{0.169*imgheight}}px;position: absolute;top:{{0.539*imgheight}}px;left: {{(window_width_px-0.169*imgheight)/2}}px;" src="/pages/images/square_btn.png"></image>
+
+        <!-- <image style="width: {{0.042*square_info_height}}rpx;height: {{0.042*square_info_height}}rpx;position: absolute;top:{{0.144*square_info_height}}rpx;left: {{(750-(0.538*square_info_height-3))/2+((0.538-0.149)*square_info_height)/2}}rpx;" src="{{item.account_icon}}"></image> -->
+        <view style="position: absolute;top:{{0.199*imgheight+0.094*(0.205*imgheight)}}px;left: {{(window_width_px-0.199*imgheight)/2+0.094*(0.205*imgheight)}}px;">
+          <view style="width: {{(0.205*imgheight)*0.812}}px;height: {{(0.205*imgheight)*0.812}}px;display: flex;justify-content: center;align-content: center;align-items: center;flex-direction: column;">
+            <view style="display: flex; flex-direction: column;height: {{(0.205*imgheight)*0.812*0.99}}px;width: {{(0.205*imgheight)*0.812*0.99}}px;justify-content:center;align-items: center;align-content: center;">
+              <!-- <view style="display: flex;flex-direction: row;margin-top: 1rpx; ">
+                <image style="width:{{(0.205*imgheight)*0.812*0.282}}px;height:{{(0.205*imgheight)*0.812*0.282}}px;border-radius: {{(0.205*imgheight)*0.812*0.282/2}}px;border:1px white solid;" src="{{data.account_icon}}"></image>
+                <view style="display: flex;flex-direction: column;margin-left: 5rpx;font-size: {{0.015*imgheight}}px;color: white;font-weight: bold; transform:scale(0.6) translateX(-18rpx);">
+                  <view style="padding-left: -15rpx;width: {{(0.205*imgheight)*0.812*(0.99-0.282)-5}}px;line-height: {{0.015*imgheight}}px;height: {{0.015*imgheight*2}}px;word-break: break-all;text-overflow: ellipsis;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;white-space:nowrap;">{{data.account_name}}</view>
+                  <view style="padding-left: -15rpx;width: {{(0.205*imgheight)*0.812*(0.99-0.282)-5}}px;white-space:nowrap;line-height: {{0.015*imgheight}}px;height: {{0.015*imgheight*2}}px;">{{data.card_show_id}}</view>
+                </view>
+              </view> -->
+              <image style="width:{{(0.205*imgheight)*0.812*0.4}}px;height:{{(0.205*imgheight)*0.812*0.4}}px;border-radius: {{(0.205*imgheight)*0.812*0.4/2}}px;border:1px white solid;" src="{{data.account_icon}}"></image>
+              <view style="width: 80%;word-break: break-all;text-overflow: ellipsis;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;color: white;font-size: 8px;height: 8px;text-align: center;margin-top: 8rpx;line-height: 8px;transform: scale(0.75);">{{data.account_name}}</view>
+              <view style="display: flex;justify-content: center;align-content: center;align-items: center;width: 100%;;margin-top: 5rpx;transform: scale(0.65);">
+                <view style="font-size: 8px;color: white;width: 100vw;text-align:center; white-space:nowrap;height: 8px;line-height: 8px;">购于 {{filter.format(data.createtime,'YY-MM-DD')}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- top  {{(0.01)*square_info_height+card_to_top+2}}rpx -->
+        <!-- left   {{(750-(0.538*square_info_height-3))/2}}rpx -->
+        <view style="position: absolute;font-size: {{(0.037*imgheight)}}px;color: #E4C383;left: {{0.348*imgheight}}px;;top: {{0.858*imgheight}}px;">{{data.card_show_id}}</view>
+        <view style="color: white;position: absolute;font-size: {{0.031*imgheight}}px;top: {{0.309*imgheight}}px;left: {{0.038*imgheight}}px;">{{data.city_name}}</view>
+        <view style="color: white;position: absolute;font-size: {{0.031*imgheight}}px;top: {{0.309*imgheight}}px;right: {{0.038*imgheight}}px;" wx:if="{{data.deal_num==0||data.deal_num==1}}">初次购买</view>
+        <view style="color: white;position: absolute;font-size: {{0.031*imgheight}}px;top: {{0.309*imgheight}}px;right: {{0.038*imgheight}}px;" wx:else>交易{{data.deal_num}}次</view>
+        <view style="color: white;position: absolute;font-size: {{0.037*imgheight}}px;top:{{0.415*imgheight}}px;left: {{0.098*imgheight}}px;">{{data.area_name}}</view>
+        <view style="color: white;position: absolute;font-size: {{0.037*imgheight}}px;top: {{0.415*imgheight}}px;right: {{0.098*imgheight}}px;">第{{data.square_num}}块</view>
+      </view>
+      <view class="l-badge-content-topleft l-badge-content" style="z-index: 99;" wx:if="{{(sell_check_box&&!data.assessing&&data.card_type!='SQUARE'&&!(data.self&&data.can_sell_num<=0))}}" bindtap="clickListItem">
+        <view style="display: flex;align-content: center;align-items: center;justify-content: center;height: 35rpx;width: 35rpx;border-style: solid;border-color: {{isExist.isExist(data.card_id,sell_list)?'#F46563':'#CCC'}};border-radius: 50%;border-width: 8rpx;background-color: white;">
+          <view style="height: 25rpx;width: 25rpx;background-color: #F46563;border-radius: 50%;" wx:if="{{isExist.isExist(data.card_id,sell_list)}}"> </view>
+        </view>
+      </view>
+      <view class="l-badge-content-topleft l-badge-content" style="z-index: 99;" wx:if="{{(sell_mult_card&&!data.assessing&&data.card_type!='SQUARE'&&!(data.self&&data.can_sell_num<=0))}}" bindtap="clickListItem">
+        <view style="display: flex;align-content: center;align-items: center;justify-content: center;height: 35rpx;width: 35rpx;border-style: solid;border-color: {{isExist.isExist(data.card_id,sell_list)?'#F46563':'#CCC'}};border-radius: 50%;border-width: 8rpx;background-color: white;">
+          <view style="height: 25rpx;width: 25rpx;background-color: #F46563;border-radius: 50%;" wx:if="{{isExist.isExist(data.card_id,sell_list)}}"> </view>
+        </view>
+      </view>
+      <!--  -->
+      <view class="l-badge-content-topleft2 l-badge-content2" style="width: 305rpx;height: 43rpx;z-index: 99;" wx:if="{{sell_check_box&&!data.assessing&&data.card_type!='SQUARE'&&data.self}}"  catchtap="showSelfSellToast">
+          <view style="display: flex;justify-content: center;align-items: center;align-content: center;background-color: #000000c0;border-radius: 11rpx;height: 43rpx;width: 290rpx;">自己创造的碎片至多售出<span style="color: #F46563;">{{data.can_sell_num}}/3</span>块</view>
+      </view>
+      
+
+      <view class="l-badge-content-topleft1 l-badge-content" style="width: 367rpx;height: 367rpx;border-radius: 15rpx;background-color: rgba(0, 0, 0, 0.493);" wx:if="{{data.images[0].ratio==1&&sell_check_box&&isExist.isExist(data.card_id,sell_list)}}" bindtap="clickListItem"></view>
+      <view class="l-badge-content-topleft1 l-badge-content" style="width: 367rpx;border-radius: 15rpx;background-color: rgba(0, 0, 0, 0.493);" wx:elif="{{data.images[0].ratio<1.33&&data.images[0].ratio>0.75&&sell_check_box&&isExist.isExist(data.card_id,sell_list)}}" bindtap="clickListItem"></view>
+      <view class="l-badge-content-topleft1 l-badge-content" style="width: 367rpx;height: 488rpx;border-radius: 15rpx;background-color: rgba(0, 0, 0, 0.493);" wx:elif="{{data.images[0].ratio>=1.33&&sell_check_box&&isExist.isExist(data.card_id,sell_list)}}" bindtap="clickListItem"></view>
+      <view class="l-badge-content-topleft1 l-badge-content" style="width: 367rpx;height: 274rpx;border-radius: 15rpx;background-color: rgba(0, 0, 0, 0.493);" wx:elif="{{data.images[0].ratio<=0.75&&sell_check_box&&isExist.isExist(data.card_id,sell_list)}}" bindtap="clickListItem"></view>
+    </view>
+    <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center; ">
+      <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; border-radius:0 0 0 10rpx;background-color: #848DC8;width: {{0.18*get_card_height}}rpx;height: {{0.08*get_card_height}}rpx;" bindtap="showCardNum">
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/ssr.png" wx:if="{{data.card_type=='SSR'}}">
+        </image>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/sr.png" wx:if="{{data.card_type=='BONUS'}}">
+        </image>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/sr.png" wx:if="{{data.card_type=='SR'}}">
+        </image>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;margin-left: -5rpx;" src="/pages/images/square.png" wx:if="{{data.card_type=='SQUARE'}}">
+        </image>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/function.png" wx:if="{{data.card_type=='FUNCATION'}}">
+        </image>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/true_card.png" wx:if="{{data.card_type=='TRUE_CARD'}}">
+        </image>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:if="{{data.card_type=='FUNCATION'}}"></image>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:elif="{{data.card_type=='BONUS'}}"></image>
+        <view style="font-size: {{0.035*get_card_height}}rpx;color: white;margin-left: -5rpx;" wx:elif="{{data.card_type!='FUNCATION'}}">
+          <view wx:if="{{data.surplus_card_num>9999}}" style="font-size: {{0.025*get_card_height}}rpx;">{{data.surplus_card_num}}/{{data.total_card_num}}</view>
+          <view wx:elif="{{data.total_card_num>9999}}" style="font-size: {{0.025*get_card_height}}rpx;">{{data.surplus_card_num}}/{{data.total_card_num}}</view>
+          <view wx:elif="{{data.total_card_num>999&&data.surplus_card_num>9}}" style="font-size: {{0.025*get_card_height}}rpx;">{{data.surplus_card_num}}/{{data.total_card_num}}</view>
+          <view wx:elif="{{data.total_card_num>99&&data.surplus_card_num>99}}" style="font-size: {{0.025*get_card_height}}rpx;">{{data.surplus_card_num}}/{{data.total_card_num}}</view>
+          <view wx:elif="{{data.total_card_num>9&&data.surplus_card_num>999}}" style="font-size: {{0.025*get_card_height}}rpx;">{{data.surplus_card_num}}/{{data.total_card_num}}</view>
+          <view wx:else style="font-size: {{0.035*get_card_height}}rpx;">{{data.surplus_card_num}}/{{data.total_card_num}}</view>
+        </view>
+      </view>
+      <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; background-color: #58B8B7;width: {{0.18*get_card_height}}rpx;height: {{0.08*get_card_height}}rpx;" bindtap="showCardLv">
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/c_info_lv.png" wx:if="{{data.card_type=='SQUARE'}}"></image>
+        <image style="height: {{0.07*get_card_height*0.9}}rpx;width: {{0.07*get_card_height*0.9*2}}rpx;" src="/pages/images/pick.png" wx:elif="{{data.card_type!='SQUARE'}}"></image>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:if="{{data.function_card}}"></image>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:if="{{data.card_type=='FUNCATION'}}"></image>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;margin-top: -5rpx;" src="/pages/images/infiniteness.png" wx:elif="{{data.card_type=='BONUS'}}"></image>
+        <view style="font-size: {{0.035*get_card_height}}rpx;color: white;;display: flex;justify-content: center;align-content:center;align-items: center;margin-left: 5rpx;" wx:elif="{{data.card_type!='FUNCATION'}}">
+          <view wx:if="{{data.card_type!='SQUARE'}}">{{data.pick_num}}</view>
+          <view wx:else>{{data.card_lv}}</view>
+        </view>
+      </view>
+      <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; border-radius: 0 0 10rpx 0;background-color: #E4C383;width: {{0.18*get_card_height}}rpx;height: {{0.08*get_card_height}}rpx;" bindtap="showCardCPoint">
+        <image style="height: {{0.064*get_card_height}}rpx;width: {{0.064*get_card_height}}rpx;" src="/pages/images/assess_white.png" wx:if="{{data.assessing}}"></image>
+        <image style="height: {{0.064*get_card_height}}rpx;width: {{0.064*get_card_height}}rpx;" src="/pages/images/c_info_point.png" wx:else></image>
+        <!-- <image style="height: {{0.064*get_card_height}}rpx;width: {{0.064*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:if="{{data.function_card}}"></image> -->
+        <view style="line-height: {{0.028*get_card_height}}rpx;font-size: {{0.028*get_card_height}}rpx;color: white;;display: flex;justify-content: center;align-content:center;align-items: center;margin-left: -5rpx;font-weight: bold;white-space:nowrap;" wx:if="{{data.assessing}}">
+          <view>宇宙首发</view>
+        </view>
+        <image style="height: {{0.07*get_card_height}}rpx;width: {{0.07*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:elif="{{data.card_type=='FUNCATION'||data.card_type=='SQUARE'}}"></image>
+        <view style="font-size: {{0.035*get_card_height}}rpx;color: white;;display: flex;justify-content: center;align-content:center;align-items: center;margin-left: 5rpx;" wx:elif="{{data.card_type!='FUNCATION'}}">
+          <view>{{data.card_cpoint}}</view>
+        </view>
+      </view>
+    </view>
+    <view style="width: {{0.18*3*get_card_height}}rpx;;display: flex;flex-direction: row;justify-content:left;align-content:center;align-items: center;margin-top: {{0.019*get_card_height}}rpx;" bindtap="clickListItem">
+      <view wx:if="{{data.card_type=='TRUE_CARD'}}">
+        <view style="max-width: {{0.18*3*get_card_height}}rpx;font-size: {{0.054*get_card_height}}rpx;color: #D545C1;">{{data.content1}}</view>
+        <view style="max-width: {{0.18*3*get_card_height}}rpx;font-size: {{0.054*get_card_height}}rpx;color: #D545C1;">{{data.content2}}</view>
+      </view>
+      <view wx:elif="{{data.card_type=='FUNCATION'}}">
+        <view style="max-width: {{0.18*3*get_card_height}}rpx;font-size: {{0.054*get_card_height}}rpx;color: #27A2DF;">{{data.content1}}</view>
+        <view style="max-width: {{0.18*3*get_card_height}}rpx;font-size: {{0.054*get_card_height}}rpx;color: #27A2DF;">{{data.content2}}</view>
+      </view>
+      <view wx:else>
+        <view style="max-width: {{0.18*3*get_card_height}}rpx;font-size: {{0.054*get_card_height}}rpx;color: {{data.card_type=='SSR'?'#E4C383':'#000000'}};">{{data.content1}}</view>
+        <view style="max-width: {{0.18*3*get_card_height}}rpx;font-size: {{0.054*get_card_height}}rpx;color: {{data.card_type=='SSR'?'#E4C383':'#000000'}};">{{data.content2}}</view>
+      </view>
+      <!-- <view
+        style="display: flex;flex-direction: row;font-size:  {{0.018*get_card_height}}rpx;border-radius: 7rpx;border: 2rpx solid #E4C383;width:{{0.064*get_card_height}}rpx;height:{{0.023*get_card_height}}rpx;justify-content: center;align-content:center;align-items: center;margin-left: 3rpx;color: #E4C383;font-weight: bold;margin-left: 15rpx;"
+        wx:if="{{data.function_card}}">
+        <view>功能卡</view>
+      </view> -->
+    </view>
+
+    <view style="margin-top: {{0.019*get_card_height}}rpx;width: {{0.54*get_card_height}}rpx;height: {{0.08*get_card_height}}rpx;display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;" wx:if="{{data.hot_up_num>0}}">
+      <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;color: white;width: {{0.43*get_card_height}}rpx;height: {{0.08*get_card_height}}rpx;font-size: {{0.037*get_card_height}}rpx;border-radius: {{0.04*get_card_height}}rpx;background-color: #E4C383;">
+        <image style="width: {{0.05*get_card_height}}rpx;height: {{0.05*get_card_height}}rpx;" src="/pages/images/first.png" wx:if="{{data.hot_up_rank==1}}"></image>
+        <image style="width: {{0.06*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" src="/pages/images/second.png" wx:if="{{data.hot_up_rank==2}}"></image>
+        <image style="width: {{0.06*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" src="/pages/images/third.png" wx:if="{{data.hot_up_rank==3}}"></image>
+        <view style="margin-left: 7rpx;font-weight: bold;">近期升值{{data.hot_up_num}}</view>
+        <image style="width: {{0.05*get_card_height}}rpx;height: {{0.05*get_card_height}}rpx; margin-left: 10rpx;margin-top: 2rpx;" src="/pages/images/c_info_point.png"></image>
+      </view>
+    </view>
+
+    <view style="margin-top: {{0.019*get_card_height}}rpx;width: {{0.54*get_card_height}}rpx;height: {{0.08*get_card_height}}rpx;display: flex;flex-direction: row;justify-content: space-between;" wx:if="{{data.hot_up_num<=0}}">
+      <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100%;" wx:if="{{data.card_type=='FUNCATION'}}">
+        <image style="width:{{0.065*get_card_height}}rpx;height: {{0.065*get_card_height}}rpx;border-radius: {{data.card_type=='FUNCATION'?'0':0.08*get_card_height/2}}rpx;" src="/pages/images/function_card.png"></image>
+        <view style="display: flex;flex-direction: row;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width: 180rpx;font-size: 21rpx;margin-left: 15rpx;color: #27A2DF;">
+          功能卡</view>
+      </view>
+      <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100%;" wx:elif="{{data.card_type=='TRUE_CARD'}}">
+        <image style="width:{{0.065*get_card_height}}rpx;height: {{0.065*get_card_height}}rpx;" src="/pages/images/true_card_no_bg.png"></image>
+        <view style="display: flex;flex-direction: row;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width: 180rpx;font-size: 21rpx;margin-left: 15rpx;color: #D545C1;">实物卡</view>
+      </view>
+      <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100%;" wx:else>
+        <image style="width:{{0.065*get_card_height}}rpx;height: {{0.065*get_card_height}}rpx;border-radius: {{data.card_type=='SSR'?'0':0.08*get_card_height/2}}rpx;" src="{{data.card_type=='SR'||data.card_type=='SQUARE'||data.card_type=='BONUS'?data.account_icon:'/pages/images/ssr_no_bg.png'}}" wx:if="{{!data.function_card}}"></image>
+        <view style="display: flex;flex-direction: row;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width: 180rpx;font-size: 21rpx;margin-left: 15rpx;color: {{data.card_type=='SSR'?'#E4C383':'#6F6F6F'}};">
+          {{data.card_type=='SR'||data.card_type=='SQUARE'||data.card_type=='BONUS'?data.account_name:'稀有卡'}}</view>
+      </view>
+      <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: {{0.08*get_card_height}}rpx;" bindtap="likeCard" wx:if="{{data.card_type=='FUNCATION'}}">
+        <image style=" width:{{0.06*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" src="/pages/images/heart_btn_white_blue.png" wx:if="{{!data.liked}}">
+        </image>
+        <image style="width:{{0.06*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" src="/pages/images/heart_btn_selected.png" wx:if="{{data.liked}}"></image>
+        <view style="display: flex;flex-direction: row;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width: 100rpx;font-size: 25rpx;margin-left: 15rpx;color: #27A2DF;">
+          {{data.like_num}}</view>
+      </view>
+      <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: {{0.08*get_card_height}}rpx;" bindtap="likeCard" wx:elif="{{data.card_type=='TRUE_CARD'}}">
+        <image style=" width:{{0.06*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" src="/pages/images/heart_btn_purple.png" wx:if="{{!data.liked}}">
+        </image>
+        <image style="width:{{0.06*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" src="/pages/images/heart_btn_selected.png" wx:if="{{data.liked}}"></image>
+        <view style="display: flex;flex-direction: row;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width: 100rpx;font-size: 25rpx;margin-left: 15rpx;color: #D545C1;">
+          {{data.like_num}}</view>
+      </view>
+      <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: {{0.08*get_card_height}}rpx;" bindtap="likeCard" wx:else>
+        <image style=" width:{{0.06*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" src="{{data.card_type=='SR'||data.card_type=='SQUARE'?'/pages/images/heart2.png':'/pages/images/heart_btn_yellow.png'}}" wx:if="{{!data.function_card&&!data.liked}}">
+        </image>
+        <image style="width:{{0.06*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" src="/pages/images/heart_btn_selected.png" wx:if="{{!data.function_card&&data.liked}}"></image>
+        <view style="display: flex;flex-direction: row;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width: 100rpx;font-size: 25rpx;margin-left: 15rpx;color: {{data.card_type=='SSR'?'#E4C383':'#6F6F6F'}};">
+          {{data.like_num}}</view>
+      </view>
+    </view>
+    <view style="align-content:center;align-items: center;margin-top: {{0.027*get_card_height}}rpx;width: {{0.52*get_card_height}}rpx;display: flex;flex-direction: row-reverse;font-size:  {{0.02*get_card_height}}rpx;color: #545454;">
+    </view>
+  </view>
+</view>
+
+
+<wxs module="isExist">
+  function isExist(id, list) {
+    var have = 0
+    for (var i = 0; i < list.length; i++) {
+      if (id == list[i]) {
+        have = 1
+        break
+      }
+    }
+    return have
+  }
+
+  module.exports.isExist = isExist;
+</wxs>
+
+
+<wxs module="filter">
+  function format(ts, option) {
+    if (ts.lenght <= 0) {
+      return ''
+    }
+    var date = getDate(ts)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var week = date.getDay()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+
+    //获取 年月日
+    if (option == 'YY-MM-DD') return [year, month, day].map(formatNumber).join('-')
+
+    //获取 年月
+    if (option == 'YY-MM') return [year, month].map(formatNumber).join('-')
+
+    //获取 年
+    if (option == 'YY') return [year].map(formatNumber).toString()
+
+    //获取 月
+    if (option == 'MM') return [mont].map(formatNumber).toString()
+
+    //获取 日
+    if (option == 'DD') return [day].map(formatNumber).toString()
+
+    //获取 年月日 周一 至 周日
+    if (option == 'YY-MM-DD Week') return [year, month, day].map(formatNumber).join('-') + ' ' + getWeek(week)
+
+    //获取 月日 周一 至 周日
+    if (option == 'MM-DD Week') return [month, day].map(formatNumber).join('-') + ' ' + getWeek(week)
+
+    //获取 月日 
+    if (option == 'MM-DD') {
+      // if (year != day.getFullYear()) {
+      //   return [year, month, day].map(formatNumber).join('-')
+      // }
+      return [month, day].map(formatNumber).join('-')
+    }
+
+    //获取 周一 至 周日
+    if (option == 'Week') return getWeek(week)
+
+    //获取 时分秒
+    if (option == 'hh-mm-ss') return [hour, minute, second].map(formatNumber).join(':')
+
+    //获取 时分
+    if (option == 'hh-mm') return [hour, minute].map(formatNumber).join(':')
+
+    //获取 分秒
+    if (option == 'mm-dd') return [minute, second].map(formatNumber).join(':')
+
+    //获取 时
+    if (option == 'hh') return [hour].map(formatNumber).toString()
+
+    //获取 分
+    if (option == 'mm') return [minute].map(formatNumber).toString()
+
+    //获取 秒
+    if (option == 'ss') return [second].map(formatNumber).toString()
+
+    //默认 时分秒 年月日
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  }
+
+  function formatNumber(n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+  }
+
+  function getWeek(n) {
+    switch (n) {
+      case 1:
+        return '星期一'
+      case 2:
+        return '星期二'
+      case 3:
+        return '星期三'
+      case 4:
+        return '星期四'
+      case 5:
+        return '星期五'
+      case 6:
+        return '星期六'
+      case 7:
+        return '星期日'
+    }
+  }
+  module.exports.format = format;
+</wxs>

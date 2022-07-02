@@ -1,0 +1,24 @@
+{
+  "usingComponents": {
+    "i-card": "../../utils/iview/dist/card/index",
+    "l-water-flow":"../../miniprogram_npm/lin-ui/water-flow/index",
+    "l-sticky":"../../miniprogram_npm/lin-ui/sticky/index",
+    "l-sticky-item":"../../miniprogram_npm/lin-ui/sticky-item/index",
+    "l-tabs":"../../miniprogram_npm/lin-ui/tabs/index",
+    "l-tabpanel":"../../miniprogram_npm/lin-ui/tabpanel/index",
+    "product":"../common/card_list_item/index",
+    "card_info":"/pages/common/card_info/index",
+    "l-mask":"../../miniprogram_npm/lin-ui/mask/index",
+    "l-loading":"../../miniprogram_npm/lin-ui/loading/index",
+    "l-loadmore":"../../miniprogram_npm/lin-ui/loadmore/index",
+    "sell_card_toast":"/pages/common/sell_card_toast/index",
+    "new_account_sold_toast":"/pages/common/new_account_sold_toast/index",
+    "l-toast": "../../miniprogram_npm/lin-ui/toast/index"
+
+
+  },
+  "navigationStyle": "custom", 
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#000000"
+}

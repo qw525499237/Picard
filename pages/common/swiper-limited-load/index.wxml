@@ -1,0 +1,62 @@
+<!--components/swiper-limited-load/index.wxml-->
+
+<!-- 这里我没用到别的属性，如果你们用到其它属性的话可以查下文档，直接加进来就行 -->
+
+<wxs module="ant">
+  var timeout = "";
+  var show = false;
+  module.exports = {
+    wxsFunction: function (event, ownerInstance) {
+      var instance = ownerInstance.selectAllComponents('#showCP') // 返回组件的实例
+      // instance.addClass("show-cp-ant")
+      for (var i = 0; i < instance.length; i++) {
+        instance[i].removeClass("hide-cp-ant")
+        instance[i].addClass("show-cp-ant")
+      }
+      ownerInstance.setTimeout(function () {
+        for (var i = 0; i < instance.length; i++) {
+          instance[i].setStyle({
+            "opacity": 1 // 支持rpx
+          })
+        }
+      }, 200)
+      ownerInstance.clearTimeout(timeout)
+      timeout = ownerInstance.setTimeout(function () {
+        for (var i = 0; i < instance.length; i++) {
+          instance[i].removeClass("show-cp-ant")
+          instance[i].addClass("hide-cp-ant")
+        }
+        ownerInstance.setTimeout(function () {
+          for (var i = 0; i < instance.length; i++) {
+            instance[i].setStyle({
+              "opacity": 0 // 支持rpx
+            })
+          }
+        }, 400)
+      }, 2000)
+    },
+    propObserver: function (newValue, oldValue, ownerInstance, instance) {
+      console.log('prop observer', newValue, oldValue)
+    }
+  }
+</wxs>
+
+<swiper style="height:{{swiperHeight}}" current="{{swiperCurrent}}" bindtouchstart="{{ant.wxsFunction}}" bindchange="swiperChange" circular vertical="true">
+  <swiper-item style="display: flex;justify-content: center;align-content:center;align-items: center; margin-top: 15rpx;height:{{swiperHeight}};" wx:key="sss" wx:for="{{swiperList}}" catchtouchmove="{{!swiperCanMove||showPickInfo?'stopTouchMove':''}}" skip-hidden-item-layout="true">
+
+    <item-view id="item" class="item_class" item="{{item}}" change_show="{{change_show}}" get_card_height="{{get_card_height}}" data-item="{{item}}" card_to_top="{{card_to_top}}" bindtap="metaSwiperTap" bindlongpress="metaSwiperLongTap" bindtouchend="metaSwiperTouchEnd" bind:changeMuteTap="changeMuteTap" bind:showCardNum="showCardNum" bind:showCardLv="showCardLv" bind:showCardCPoint="showCardCPoint" bind:showAllInfo="showAllInfo" bind:wantCard="wantCard" currentShowItem="{{swiperList[swiperCurrent]}}" bind:likeCard="likeCard" bind:showComment="showComment" bind:showAssessResult="showAssessResult"></item-view>
+
+    <view id="showCP" style="position:fixed;right: -5rpx;top: 35%;background-color: #e4c483a1;border: 2px white solid;height: 130rpx;border-radius: 15rpx 0 0 15rpx;z-index: 9999;" hidden="{{!(item.card_type!='SQUARE'&&!item.assessing&&!change_show)}}" catchtap="showCPInfo" bindlongpress="metaSwiperLongTap" bindtouchend="metaSwiperTouchEnd" data-item="{{item}}">
+      <view style="width: 100%;height: 100%;display: flex;flex-direction: column;">
+        <view style="background-color: white;color: #e4c383;border-radius: 10rpx 0 15rpx 0;display: flex;align-items: center;align-content: center;justify-content: center;width: 80rpx;font-size: 25rpx;height: 40rpx;">价值</view>
+        <view style="display: flex;align-items: center;align-content: center;justify-content: center;font-size: 55rpx;flex-direction: row;color: white;font-weight: bold;">
+          <view style="margin-left: 15rpx;">{{item.card_cpoint}}</view>
+          <image style="width: 60rpx;height: 60rpx;margin-left: 10rpx;margin-right: 15rpx;" src="/pages/images/c_info_point.png"></image>
+        </view>
+      </view>
+    </view>
+
+  </swiper-item>
+
+
+</swiper>

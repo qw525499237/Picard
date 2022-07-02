@@ -1,0 +1,25 @@
+{
+  "usingComponents": {
+    "l-popup": "../../miniprogram_npm/lin-ui/popup/index",
+    "card_info":"/pages/common/card_info/index",
+    "toast_info":"/pages/common/toast_info/index",
+    "i-card": "../../utils/iview/dist/card/index",
+    "l-water-flow":"../../miniprogram_npm/lin-ui/water-flow/index",
+    "l-sticky":"../../miniprogram_npm/lin-ui/sticky/index",
+    "l-sticky-item":"../../miniprogram_npm/lin-ui/sticky-item/index",
+    "l-tabs":"../../miniprogram_npm/lin-ui/tabs/index",
+    "l-tabpanel":"../../miniprogram_npm/lin-ui/tabpanel/index",
+    "recycle-view": "miniprogram-recycle-view/recycle-view",
+    "recycle-item": "miniprogram-recycle-view/recycle-item",
+    "l-badge":"../../miniprogram_npm/lin-ui/badge/index",
+    "l-loading":"../../miniprogram_npm/lin-ui/loading/index",
+    "l-mask":"../../miniprogram_npm/lin-ui/mask/index",
+    "l-dialog":"../../miniprogram_npm/lin-ui/dialog/index",
+    "card_toast4":"/pages/common/card_toast4/index",
+    "card_toast6":"/pages/common/card_toast6/index",
+    "card_toast7":"/pages/common/card_toast7/index"
+  },
+  "navigationStyle": "custom", 
+  "navigationBarTextStyle": "white",
+  "disableScroll": true
+}

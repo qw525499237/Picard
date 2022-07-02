@@ -1,0 +1,126 @@
+<!--pages/badge_card/badge_card.wxml-->
+<view style="min-height: 100vh;width: 100vw;background-color: #F4F8FB;">
+<view style="position: fixed;top: {{menuButtonToTop}}px;width: 100vw; z-index: 98;left: 25rpx;">
+  <image style="height:{{menuButtonHeight}}px;width: {{menuButtonHeight}}px;" src="/pages/images/back3.png" bindtap="backLastPage"></image>
+</view>
+
+<view class="top_bc" style="position: fixed;top: 0;width: 100vw; z-index: 97;width: 750rpx;height: 468rpx;">
+  <view style="display: flex;flex-direction: column;margin-top: 8vh;margin-bottom: 15rpx;">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;align-self: center;">
+      <image
+        style="width: 180rpx;height: 180rpx;display: flex;flex-direction: row;justify-content: center;align-items: center;align-self: center;margin-left: 25rpx;"
+        src="{{data.badge_url}}/limit_width_200"></image>
+      <view
+        style="margin-top: 10rpx;margin-left: 25rpx;width: 550rpx;display: flex;flex-direction: column;justify-content: space-between;align-items: center;align-self: stretch;;height: 160rpx;">
+        <view style="width: 100%;display: flex;flex-direction: row;align-items: center;align-self: center;margin-top: 20rpx;">
+          <view style="font-size: 35rpx;font-weight: bold;">{{data.badge_name}}</view>
+          <view
+            style="margin-left: 15rpx;width: 120rpx;background-color: #F46563;border-radius: 10rpx;display: flex;flex-direction: row;justify-content: center;align-items: center;align-self: center;color: white;font-size: 20rpx;font-weight: bold;padding-top: 3rpx;padding-bottom: 3rpx;">
+            <view>已收集：{{data.have_num}}</view>
+          </view>
+          <view
+            style="margin-left: 15rpx;width: 145rpx;background-color: #5E4D83;border-radius: 10rpx;display: flex;flex-direction: row;justify-content: center;align-items: center;align-self: center;color: white;font-size: 20rpx;font-weight: bold;padding-top: 3rpx;padding-bottom: 3rpx;">
+            <view>集齐人数：{{data.collected_account_num}}</view>
+          </view>
+        </view>
+        <view
+          style="width: 550rpx;display: flex;flex-direction: column;justify-content: center;align-items: center;align-self: center;margin-top: 25rpx;">
+          <view style="font-size: 28rpx;color: #999999;width: 100%;">{{data.badge_content}}</view>
+        </view>
+
+
+        <view style="display: flex;flex-direction: row;align-content: center;align-items: center;width: 550rpx;margin-top: 25rpx;">
+          <view style="font-size: 33rpx;font-weight: bold;">包括</view>
+          <view
+            style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;margin-left: 35rpx;">
+            <image style="height: 50rpx;width: 50rpx;" src="/pages/images/sr.png"></image>
+            <view>x</view>
+            <view style="font-size: 35rpx;font-weight: 700;">{{data.sr_num}}</view>
+          </view>
+          <view
+            style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;margin-left: 35rpx;">
+            <image style="height: 50rpx;width: 50rpx;" src="/pages/images/ssr.png"></image>
+            <view>x</view>
+            <view style="font-size: 35rpx;font-weight: 700;">{{data.ssr_num}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <view style="margin-top: 15rpx;width: 100vw;height: 1rpx;background-color: black;"></view> -->
+  </view>
+</view>
+
+<view
+  style="position: fixed;top: 370rpx;left: 34rpx;width: 682rpx;height: 100rpx;border-radius: 50rpx;background-color: #FE802B;z-index: 98;">
+  <view
+    style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;align-content: center;width: 682rpx;height: 100rpx;">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;">
+      <view style="display: flex;flex-direction: column;font-size: 33rpx;color: white;margin-left: 55rpx;">
+        <view
+          style="display: flex;flex-direction: column;justify-content: center;align-content: center;font-size: 22rpx;" wx:if="{{data.have_num<data.sr_num+data.ssr_num}}">
+          <view>已收集{{data.have_num}}/{{data.sr_num+data.ssr_num}}</view>
+          <view>集齐兑换</view>
+        </view>
+        <view
+          style="display: flex;flex-direction: column;justify-content: center;align-content: center;font-size: 22rpx;" wx:if="{{data.have_num==(data.sr_num+data.ssr_num)}}">
+          <view>徽章{{change_show?'卡片':'碎片'}}已全部收集</view>
+          <view>是否消耗各1块兑换?</view>
+        </view>
+      </view>
+      <image
+        style="display: flex;flex-direction: column;font-size: 22rpx;color: white;width: 38rpx;height: 38rpx;margin-top: 4rpx;margin-left: 10rpx;"
+        src="/pages/images/exchange_littel_btn.png"></image>
+      <view style="font-size: 33rpx;color: white;margin-left: 10rpx;" bindtap="toTrueCardCardDetaile" data-item="{{data}}">[{{data.true_card_name}}]</view>
+    </view>
+    <view
+      style="width: 153rpx;height: 59rpx;border-radius: 30rpx;background-color: #FFE670;display: flex;justify-content: center;align-content: center;align-items: center;color: #560B01;font-size: 26rpx;font-weight: bold;margin-right: 55rpx;"
+      bindtap="toCoolection" wx:if="{{data.have_num==(data.sr_num+data.ssr_num)}}">
+      兑换
+    </view>
+    <view
+      style="width: 153rpx;height: 59rpx;border-radius: 30rpx;background-color: #FFE670;display: flex;justify-content: center;align-content: center;align-items: center;color: #560B01;font-size: 26rpx;font-weight: bold;margin-right: 55rpx;"
+      bindtap="toCoolection" wx:if="{{data.have_num!=(data.sr_num+data.ssr_num)}}">
+      去Pick
+    </view>
+  </view>
+</view>
+
+
+
+<view style="display: flex;width: 750rpx;height: 480rpx;background-color: #F4F8FB;">
+</view>
+<view class=".water-flow" style="margin-top: 0;">
+  <l-water-flow generic:l-water-flow-item="card_item" bind:showCardNum="showCardNum" bind:showCardLv="showCardLv"
+    bind:showCardCPoint="showCardCPoint" bind:showAllInfo="showAllInfo" bind:clickListItem="clikcListItem" />
+  <view class="list_toast" wx:if="{{not_have_card}}">
+    <image style="width: 150rpx;height: 150rpx;" src="/pages/images/hava_card.png"></image>
+    <text style="margin-top: 15rpx; color: #979797;">你还未拥有{{change_show?'卡片':'碎片'}}哦，快去集{{change_show?'卡片':'碎片'}}吧!</text>
+  </view>
+</view>
+</view>
+<!-- <view class=".water-flow">
+    <l-water-flow generic:l-water-flow-item="product" />
+</view> -->
+
+<l-mask show="{{show_mask}}" opacity="0.7">
+  <view
+    style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;"
+    bindtap="backList">
+    <card_info data="{{contents}}"></card_info>>
+  </view>
+</l-mask>
+
+<l-mask show="{{show_mask2}}" opacity="0.7">
+  <view
+    style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;"
+    bindtap="backList">
+    <toast_info data="{{toast_data}}" bind:clickAffirm="clickAffirm"></toast_info>
+  </view>
+</l-mask>
+
+
+<l-mask show="{{show_mask3}}" opacity="0.7">
+  <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+    <exchange_card_toast data="{{contents}}" bind:clickAffirm="affirmToExchange" bind:clickCancel="cancelToExchang"></exchange_card_toast>
+  </view>
+</l-mask>

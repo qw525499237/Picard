@@ -1,0 +1,39 @@
+<view style="display: flex;flex-direction: column;">
+  <image style="width: 540rpx;border-radius: 15rpx 15rpx 0 0;" mode="widthFix" src="https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/toast_exchange_top_bg.png">
+  </image>
+  <view style="display: flex;flex-direction: column;width: 540rpx;background-color: white;border-radius: 0 0 15rpx 15rpx;align-items: center;align-content: center;justify-content: center;font-size: 25rpx;">
+    <view style="margin-top: 45rpx;font-size: 26rpx;color: #1C0941;margin-left: 50rpx;margin-right: 50rpx;display: flex;flex-direction: column;">
+      <!-- <view style="font-weight: bold;"></view> -->
+      <view style="display: flex;justify-content: center;align-items: center;align-content: center;width: 100%;">恭喜您，实物兑换成功!</view>
+      <view style="display: flex;justify-content: center;align-items: center;align-content: center;width: 100%;font-size: 34rpx;color: #E4C383;margin-top: 25rpx;">「{{data.title}}」</view>
+      <view style="display: flex;justify-content: center;align-items: center;align-content: center;width: 100%;font-size: 34rpx;color: #E4C383;margin-top: 25rpx;">价值{{data.true_card_price}}元 </view>
+      <view wx:if="{{data.true_card_exchange_type=='cash'}}">
+        <view style="display: flex;justify-content: center;height: 50rpx;align-items: center;align-content: center;width: 100%;border: 2rpx solid #797979; border-radius: 15rpx;margin-top: 25rpx;width: 440rpx;">
+          <input type="number" style="width: 400rpx;height: 30rpx;font-size: 20rpx;line-height: 30rpx;" bindinput="phoneInput" placeholder="请输入支付宝绑定手机号" maxlength="11"></input>
+        </view>
+        <view style="margin-top: 25rpx;">请输入<span style="color: #F46563;">支付宝绑定的手机号</span>，用于转账</view>
+        <view style="margin-top: 25rpx;">我们会在<span style="color: #F46563;">12小时内</span>将实物对应的现金打入您的支付宝账户</view>
+        <view style="margin-top: 25rpx;">收到转账或实物后，您可以在创造卡片时选择<span style="color: #F46563;">“验证卡”</span>；创造的“验证卡”包含<span style="color: #F46563;">所兑换实物</span>且内容优质的话，我们还会给以1张价值500 C-point的稀有卡[成熟Picker]奖励</view>
+      </view>
+      <view wx:if="{{data.true_card_exchange_type=='post'}}">
+        <view style="display: flex;justify-content: center;height: 50rpx;align-items: center;align-content: center;width: 100%;border: 2rpx solid #797979; border-radius: 15rpx;margin-top: 25rpx;width: 440rpx;">
+          <input type="number" style="width: 400rpx;height: 30rpx;font-size: 20rpx;line-height: 30rpx;" bindinput="phoneInput" placeholder="请输入手机号" maxlength="11"></input>
+        </view>
+        <view style="display: flex;justify-content: center;height: 50rpx;align-items: center;align-content: center;width: 100%;border: 2rpx solid #797979; border-radius: 15rpx;margin-top: 25rpx;width: 440rpx;">
+          <input style="width: 400rpx;height: 30rpx;font-size: 20rpx;line-height: 30rpx;" bindinput="consigneeInput" placeholder="请输入收货人姓名" maxlength="10"></input>
+        </view>
+        <view style="display: flex;justify-content: center;height: 50rpx;align-items: center;align-content: center;width: 100%;border: 2rpx solid #797979; border-radius: 15rpx;margin-top: 25rpx;width: 440rpx;">
+          <input style="width: 400rpx;height: 30rpx;font-size: 20rpx;line-height: 30rpx;" bindinput="addressInput" placeholder="请输入收货地址" maxlength="40"></input>
+        </view>
+        <view style="margin-top: 25rpx;">请输入<span style="color: #F46563;">收货所需信息</span>，我们会在<span style="color: #F46563;">7天内</span>给您安排发货</view>
+        <view style="margin-top: 25rpx;">收到转账或实物后，您可以在创造卡片时选择<span style="color: #F46563;">“验证卡”</span>；创造的“验证卡”包含<span style="color: #F46563;">所兑换实物</span>且内容优质的话，我们还会给以1张价值500 C-point的稀有卡[成熟Picker]奖励</view>
+      </view>
+
+    </view>
+    <view style="display: flex;margin-top:40rpx;align-items: center;align-content: center;justify-content: center;margin-bottom: 40rpx;">
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #1C0941;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-right: 15rpx;" bindtap="clickAffirm">确认</view>
+
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #AEAEAE;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-left: 15rpx;" bindtap="clickCancel">取消</view>
+    </view>
+  </view>
+</view>

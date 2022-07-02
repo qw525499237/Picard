@@ -1,0 +1,38 @@
+<view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;flex-direction: column;" catchtap="preventPenetrate">
+  <view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;background-color: #E4C383;border-radius: 15rpx 15rpx 0 0;flex-direction: column;align-items: center;justify-content: center;align-content: center;">
+    <image style="width: 80rpx ;height: 80rpx;margin-top: 15rpx;" src="/pages/images/buy_square_white.png">
+    </image>
+    <view style="margin-top: {{15-10}}rpx;font-size: 28rpx;font-weight: bold;color: white;margin-bottom: 20rpx;display: flex; flex-direction: row;justify-content: center;align-content: center;align-items: center;">
+      <text space="ensp">购买宇宙地盘</text>
+    </view>
+  </view>
+  <view style="background-color: white;border-radius: 0 0 15rpx 15rpx;width: 500rpx;margin-left: 50rpx;margin-right: 50rpx;">
+    <view style="margin-top: 45rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+       
+    </view>
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;display: flex;flex-direction: row;align-items: center;align-content: center;line-height:26rpx;margin-top: 15rpx;">
+      <view> 即将支付500</view>
+      <image style="width: 30rpx;height: 30rpx;" src="/pages/images/c_info_point.png"></image>
+      <view>购买一块宇宙地</view>
+    </view>
+
+
+    <view style="margin-top: 25rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      盘，是否确认？
+    </view>
+    <!-- <view style="width: 100%;;margin-top: 30rpx;margin-bottom: 35rpx;display: flex;justify-content: center;align-content: center;align-items: center;" bindtap="affirm">
+      <view style="font-size: 26rpx;color: #52515A;background-color: #E4C383;width: 200rpx;height: 55rpx;border-radius: 15rpx;display: flex;justify-content: center;align-content: center;align-items: center;font-weight: bold;color: white;">
+        买入碎片
+      </view>
+    </view> -->
+    <view style="display: flex;margin-top:40rpx;align-items: center;align-content: center;justify-content: center;margin-bottom: 40rpx;font-size: 28rpx;">
+      <cover-view
+      style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #E4C383;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-right: 15rpx;"
+      catchtap="clickAffirm"><cover-view style="top: 0;bottom: 0;left: 0;right: 0;margin: auto;">确认</cover-view></cover-view>
+
+      <cover-view
+      style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #AEAEAE;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-left: 15rpx;"
+      catchtap="clickCancel"><cover-view style="top: 0;bottom: 0;left: 0;right: 0;margin: auto;">取消</cover-view></cover-view>
+    </view>
+  </view>
+</view>

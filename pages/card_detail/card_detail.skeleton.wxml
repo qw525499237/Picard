@@ -1,0 +1,81 @@
+<!--
+此文件为开发者工具生成，生成时间: 2021/9/28 下午1:37:19
+使用方法：
+在 D:\WorkFile\Weiyu\WeChatMiniProgram\pages\card_detail\card_detail.wxml 引入模板
+
+```
+<import src="card_detail.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 D:\WorkFile\Weiyu\WeChatMiniProgram\pages\card_detail\card_detail.wxss 中引入样式
+```
+@import "./card_detail.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <scroll-view scroll-x="true" enhanced="true" show-scrollbar="true" style="background-color: white;">
+      <image class="img sk-image" mode="widthFix" style="width: 750rpx;; height: 750rpx;"></image>
+      <view class="acount_info" style="margin-top: 5px;">
+        <view style="width: 32%;height: 55px;border-radius: 6px;background-color: #EFEFEF;">
+        </view>
+        <view style="width: 32%;height: 55px;border-radius: 6px;background-color: #EFEFEF;">
+        </view>
+        <view style="width: 32%;height: 55px;border-radius: 6px;background-color: #EFEFEF;">
+        </view>
+      </view>
+      <view class="content" style="background-color: white;">
+        <view style="font-size: 16px;margin-left: 4%;margin-right: 4%;word-break: break-all;font-weight: bold;" class="sk-transparent sk-text-14-2857-530 sk-text">1：1</view>
+        <view style="font-size: 14px;margin-left: 4%;margin-top: 14px;;margin-right: 4%;word-break: break-all; " class="sk-transparent sk-text-14-2857-782 sk-text">想你想你大姐夫酒精发酵腹肌腹肌超级超级下班采不采纳超级烦开飞机。盗将行交电话费好的好的经济短发ii付大包小包多喝点好好发挥</view>
+      </view>
+     
+      <view class="other_info" style="background-color: white;">
+        <view style="display: flex;justify-content: center;align-items: center; ">
+          <image data-item="45527" style="width: 28px;height: 28px; border-radius: 19px;" class="sk-image"></image>
+          <text style="margin-left: 7px;font-size: 12px;max-width: 120px;white-space:nowrap;text-overflow:ellipsis;-webkit-text-overflow:ellipsis;overflow:hidden;color: #000000;" class="sk-transparent sk-text-14-2857-250 sk-text">Isa123123123123ac</text>
+        </view>
+        
+      </view>
+      <view style="margin-left:4%;margin-right: 4%; background-color: rgba(128, 128, 128, 0.226); height: 1px;margin-top: 12px;"></view>
+      <view style="display: flex;flex-direction: row;align-items: center;align-content: center;margin-left: 4.5%;margin-top: 12px;justify-content: space-between;margin-right: 4.5%;background-color: white;">
+        <image style="width: 38px;height: 38px;" class="sk-image"></image>
+        <view is="miniprogram_npm/lin-ui/badge/index" style="display: flex;margin-left: 2px;">
+          <view class="badge-index--l-badge">
+            <image data-item="45527" style="width: 38px;height: 38px;border-radius: 19px;" class="sk-image"></image>
+          </view>
+        </view>
+        <view is="miniprogram_npm/lin-ui/badge/index" style="display: flex;margin-left: 2px;">
+          <view class="badge-index--l-badge">
+            <image data-item="45527" style="width: 38px;height: 38px;border-radius: 19px;" class="sk-image"></image>
+          </view>
+        </view>
+        <view is="miniprogram_npm/lin-ui/badge/index" style="display: flex;margin-left: 2px;">
+          <view class="badge-index--l-badge">
+            <image data-item="45527" style="width: 38px;height: 38px;border-radius: 19px;" class="sk-image"></image>
+          </view>
+        </view>
+        <image style="width: 38px;height: 38px;" class="sk-image"></image>
+      </view>
+      <view style="margin-left:4%;margin-right: 4%; background-color: rgba(128, 128, 128, 0.226); height: 1px;margin-top: 12px;"></view>
+      <view class="inscription" style="background-color: white;">
+        <image style="width: 28px;height: 28px;border-radius: 14px;" class="sk-image"></image>
+        <view style="display: flex; flex-direction: row; width: 90%; margin-left: 4%; border-radius: 14px; margin-right: 1px; height: 28px; background-color: rgb(246, 247, 246); place-content: center; align-items: center; border: none;">
+          <view style="display: flex;flex-direction: row;width: 100%;">
+            <!-- <text style="font-size: 11px;color: #9A9A9A;margin-left: 12px;" class="sk-transparent sk-text-14-2857-187 sk-text">发条评论带给卡片神秘力量~</text> -->
+          </view>
+        </view>
+      </view>
+      <view class="bottom_info" style="background-color: white;">
+        <view class="giftListView"></view>
+        <view class="list_toast">
+          <!-- <image style="width: 66px;height: 43px;" class="sk-image"></image> -->
+        </view>
+      </view>
+    </scroll-view>
+
+   
+  </view>
+</template>

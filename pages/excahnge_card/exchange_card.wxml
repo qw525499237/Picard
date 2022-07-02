@@ -1,0 +1,250 @@
+<!--pages/excahnge_card/exchange_card.wxml-->
+
+<view style="position: fixed;top: {{menuButtonToTop}}px;width: 100vw; z-index: 98;left: 25rpx;">
+  <image style="height:{{menuButtonHeight}}px;width: {{menuButtonHeight}}px;" src="/pages/images/back3.png" bindtap="backLastPage"></image>
+</view>
+
+<view style="position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;z-index: 1;background-color: black;">
+  <image style="position: fixed;top: 0;left: 0;width: 100vw;" mode="widthFix" src="{{change_show?'https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/exchange_bg2.png':'https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/exchange_bg.png'}}"></image>
+</view>
+
+<view style="position: fixed;top:  566rpx;z-index: 50;" wx:if="{{!change_show}}">
+  <view class="middle" style="height: 400rpx;width: 750rpx;display: flex;flex-direction: column;font-weight: bold;">
+    <view class="middle" style="display: flex;flex-direction: row;">
+      <view class="middle" style="font-size: 30rpx;color:white;width: 208rpx;">总资产</view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;opacity: 0;">
+        <view style="font-size: 50rpx;color: white;height: 10rpx;">=</view>
+      </view>
+      <view class="middle" style="font-size: 30rpx;color:white;width: 208rpx;">现有C-point</view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;opacity: 0;">
+        <view style="font-size: 50rpx;color: white;height: 10rpx;">=</view>
+      </view>
+      <view class="middle" style="font-size: 30rpx;color:white;width: 208rpx;">{{account_info.total_card_num}}块{{change_show?'卡片':'碎片'}}</view>
+
+    </view>
+    <view style="display: flex;flex-direction: row;">
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+        <view style="font-size: 50rpx;color: #E4C383;">{{account_info.cpoint+account_info.total_card_cp}}</view>
+        <image style="width: 44rpx;height: 44rpx;margin-left: 10rpx;margin-top: 5rpx;" src="/pages/images/c_info_point_purple_yellow.png">
+        </image>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;">
+        <view style="font-size: 50rpx;color: white;">=</view>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+        <view style="font-size: 50rpx;color: #E4C383;">{{account_info.cpoint}}</view>
+        <image style="width: 44rpx;height: 44rpx;margin-left: 10rpx;margin-top: 5rpx;" src="/pages/images/c_info_point_purple_yellow.png">
+        </image>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;">
+        <view style="font-size: 50rpx;color: white;">+</view>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+        <view style="font-size: 50rpx;color: #E4C383;">{{account_info.total_card_cp}}</view>
+        <image style="width: 44rpx;height: 44rpx;margin-left: 10rpx;margin-top: 5rpx;" src="/pages/images/c_info_point_purple_yellow.png">
+        </image>
+      </view>
+
+    </view>
+    <view class="middle" style="display: flex;flex-direction: row;">
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;opacity: 0;">
+        <view style="font-size: 50rpx;color: white;height: 10rpx;">=</view>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+        <view class="middle" style="width: 158rpx;height: 47rpx;border-radius: 10rpx;background-color: #FDFF84;font-size: 22rpx;margin-top:5rpx;font-weight: bold;color: #1C0941;" bindtap="toHandBook">
+          {{change_show?'框选范围':'购买宇宙地盘'}}
+        </view>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;opacity: 0;">
+        <view style="font-size: 50rpx;color: white;height: 10rpx;">=</view>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+        <view class="middle" style="width: 158rpx;height: 47rpx;border-radius: 10rpx;background-color: #FDFF84;font-size: 22rpx;margin-top:5rpx;font-weight: bold;color: #1C0941;" bindtap="toMy">
+          兑换为C-point
+        </view>
+      </view>
+    </view>
+
+
+  </view>
+</view>
+
+
+
+<view style="position: fixed;top: 1066rpx;left: 102rpx;z-index: 50;width: 378rpx;height: 44rpx;" bindtap="showInputBox">
+  <view style="display: flex;align-items: center;align-content: center;font-size: 30rpx;line-height: 30rpx;height: 100%;margin-left: 10rpx;">
+    <view wx:if="{{exchange_card_code.length>0}}">{{exchange_card_code}}</view>
+    <view style="color: rgba(0, 0, 0, 0.322);font-size: 23rpx;line-height: 23rpx;" wx:else>{{change_show?'输入关键字查询':'输入或粘贴碎片码，获取碎片'}}</view>
+  </view>
+</view>
+
+
+<view style="position: fixed;top: 1166rpx;left: 101rpx;z-index: 50;width: 197rpx;height: 55rpx;" bindtap="pasteCardCode">
+
+</view>
+
+<view style="position: fixed;top: 1166rpx;left: 298rpx;z-index: 50;width: 212rpx;height: 55rpx;" bindtap="exchangeCard">
+
+</view>
+
+
+
+
+<!-- <view style="width: 100vw;height: 100vh;position: fixed;left: 0;top: 0;background-color: #1C0941;"> -->
+<!-- <view style="background-image: url('https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/exchange_card_bg.png');width: 750rpx;height: 1262rpx;background-size: 100%;display: flex;flex-direction: column;">
+  <view style="height: 529rpx;width: 750rpx;"></view>
+  <view class="middle" style="height: 400rpx;width: 750rpx;display: flex;flex-direction: column;font-weight: bold;">
+    <view class="middle" style="display: flex;flex-direction: row;">
+      <view class="middle" style="font-size: 30rpx;color:white;width: 208rpx;">收集总价值</view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;opacity: 0;">
+        <view style="font-size: 50rpx;color: white;height: 10rpx;">=</view>
+      </view>
+      <view class="middle" style="font-size: 30rpx;color:white;width: 208rpx;">现有C-point</view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;opacity: 0;">
+        <view style="font-size: 50rpx;color: white;height: 10rpx;">=</view>
+      </view>
+      <view class="middle" style="font-size: 30rpx;color:white;width: 208rpx;">{{account_info.total_card_num}}块碎片</view>
+
+    </view>
+    <view style="display: flex;flex-direction: row;">
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+        <view style="font-size: 50rpx;color: #E4C383;">{{account_info.cpoint+account_info.total_card_cp}}</view>
+        <image style="width: 44rpx;height: 44rpx;margin-left: 10rpx;margin-top: 5rpx;" src="/pages/images/c_info_point_purple_yellow.png">
+        </image>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;">
+        <view style="font-size: 50rpx;color: white;">=</view>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+        <view style="font-size: 50rpx;color: #E4C383;">{{account_info.cpoint}}</view>
+        <image style="width: 44rpx;height: 44rpx;margin-left: 10rpx;margin-top: 5rpx;" src="/pages/images/c_info_point_purple_yellow.png">
+        </image>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;">
+        <view style="font-size: 50rpx;color: white;">+</view>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+        <view style="font-size: 50rpx;color: #E4C383;">{{account_info.total_card_cp}}</view>
+        <image style="width: 44rpx;height: 44rpx;margin-left: 10rpx;margin-top: 5rpx;" src="/pages/images/c_info_point_purple_yellow.png">
+        </image>
+      </view>
+
+    </view>
+    <view class="middle" style="display: flex;flex-direction: row;">
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;opacity: 0;">
+        <view style="font-size: 50rpx;color: white;height: 10rpx;">=</view>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+        <view class="middle" style="width: 158rpx;height: 47rpx;border-radius: 10rpx;background-color: #FDFF84;font-size: 22rpx;margin-top:5rpx;font-weight: bold;color: #1C0941;" bindtap="toHandBook">
+          兑换为碎片
+        </view>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;margin-left: 10rpx;margin-right: 10rpx;opacity: 0;">
+        <view style="font-size: 50rpx;color: white;height: 10rpx;">=</view>
+      </view>
+      <view class="middle" style="display: flex;flex-direction: row;margin-top: 5rpx;width: 208rpx;">
+        <view class="middle" style="width: 158rpx;height: 47rpx;border-radius: 10rpx;background-color: #FDFF84;font-size: 22rpx;margin-top:5rpx;font-weight: bold;color: #1C0941;" bindtap="toMy">
+          兑换为C-point
+        </view>
+      </view>
+    </view>
+
+
+  </view>
+  <view style="height: 200rpx;width: 750rpx;" bindtap="toCardDetail" data-item="{{top_item}}"></view>
+
+  <view style="display: flex;flex-direction: row;">
+    <view style="height: 64rpx;width: 100rpx;"></view>
+    <view style="height: 64rpx;width: 200rpx;color: white;display: flex;justify-content: center;align-content: center;align-items: center;font-weight: 650;" bindtap="toBadgePage1">徽章碎片{{top_item.collection_badge_num}}/{{top_item.collection_badge_total_num}}</view>
+    <view style="height: 64rpx;width: 210rpx;color: #1C0941;display: flex;justify-content: center;align-content: center;align-items: center;font-weight: 650;" bindtap="showToast1">C-point兑换</view>
+  </view>
+</view>
+<view style="display: flex;justify-content: center;align-content: center;align-items: center;text-decoration:underline;background-color: #1C0941;color: #949494;font-size: 19rpx;">
+  <view style="margin-top: -15rpx;" bindtap="toProtocolPage">兑换规则</view>
+</view>
+<view style="display: flex;display: flex; width: 750rpx; flex-direction: column;background-color: #1C0941;">
+  <view style="height: 15rpx;width: 750rpx;"></view>
+  <block wx:for="{{items}}" style="margin-top: 15rpx;">
+    <view style="width: 750rpx;height: 250rpx;display: flex;flex-direction: column;" wx:key="{{item.id}}" data-item="{{item}}" data-id="{{item.card_id}}">
+      <view style="display: flex;flex-direction: row;">
+        <image style="width: 331rpx;height: 237rpx;margin-bottom: 21rpx;" wx:if="{{item.cover_url==''||item.cover_url==null}}" src="{{item.images[0].image_url}}/limit_width_400" bindtap="toCardDetail" data-item="{{item}}"></image>
+        <image style="width: 331rpx;height: 237rpx;margin-bottom: 21rpx;" wx:else src="{{item.cover_url}}/limit_width_400" bindtap="toCardDetail" data-item="{{item}}"></image>
+        <view style="width: 419rpx;height: 237rpx;;background-color: #D545C1;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;color: white;">
+          <view style="font-size: 21rpx;">「 {{item.title}} 」</view>
+          <view style="height: 19rpx;width: 100%;"></view>
+          <view style="display: flex;flex-direction: row;align-items: flex-end;">
+            <view style="font-size: 21rpx;">价值C-point</view>
+            <view style="font-size: 39rpx;;margin-left: 15rpx;margin-bottom: -6rpx;">{{item.card_cpoint}}</view>
+            <image style="width: 39rpx;height: 39rpx;margin-left: 5rpx;" src="/pages/images/c_info_point_purple.png">
+            </image>
+          </view>
+          <view style="height: 35rpx;width: 100%;"></view>
+
+
+          <view class="l-badge" style="width: 310rpx;height: 51rpx;">
+            <image style="width: 310rpx;height: 51rpx;" src="https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/exchange_item_ben_bg.png">
+            </image>
+
+            <view class="l-badge-content-topleft l-badge-content l-class l-class-self l-self-class" style="width: 155rpx;height: 51rpx;font-size: 21rpx;z-index: 99;line-height: 51rpx;" bindtap="toBadgePage" data-item="{{item}}">
+              徽章碎片{{item.collection_badge_num}}/{{item.collection_badge_total_num}}
+            </view>
+
+            <view class="l-badge-content-topright l-badge-content l-class l-class-self l-self-class" style="width: 155rpx;height: 51rpx;font-size: 21rpx;line-height: 51rpx;color: #1C0941;" bindtap="showToast" data-item="{{item}}">
+              C-point兑换
+            </view>
+          </view>
+
+
+
+         
+        </view>
+      </view>
+      <view style="height: 13rpx;width: 750rpx;background-color: #1C0941;"></view>
+
+    </view>
+  </block>
+</view> -->
+
+<l-mask show="{{show_mask2}}" opacity="0.7">
+  <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+    <toast_info data="{{toast_data}}" bind:clickAffirm="clickAffirm" bind:clickAffirm2="clickAffirm2" bind:clickCancel2="clickCancel2"></toast_info>
+  </view>
+</l-mask>
+
+
+<l-mask show="{{true}}" opacity="0.7" wx:if="{{show_login_loading}}">
+  <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;">
+    <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;height: 235rpx;background-color: white;border-radius: 15rpx;">
+      <view style="height: 15rpx;"></view>
+      <l-loading l-container-class="l-container" bg-color="#f3f3f3" z-index="776" show="{{true}}" type="circle" style="margin-left: 25rpx;margin-right: 25rpx;">
+      </l-loading>
+      <view style="height: 25rpx;"></view>
+      <view style="margin-top: 20rpx;color: black;margin-left: 25rpx;margin-right: 25rpx;">登陆中.....</view>
+    </view>
+  </view>
+</l-mask>
+
+<l-mask show="{{login_mask}}" opacity="0.7">
+  <view style="width: 750rpx;height: 100vh;display: flex;justify-content: center;align-items: center;align-content: center;">
+    <card_toast7 bind:clickAffirm="affirmToLogIn"></card_toast7>
+  </view>
+</l-mask>
+
+<view id="ctInput" class="ct-input" wx:if="{{ showComtBox }}" style="top: {{ ctInput_top }}px;z-index: 888;">
+  <textarea placeholder="{{input_place_holder}}" focus="{{ showComtBox }}" bindblur="comtBlur" maxlength="19" bindfocus="ctFocus" bindlinechange="ctLineChange" bindinput="codeInput" bindconfirm="doneTap" show-confirm-bar="{{ false }}" confirm-type="done" adjust-position="{{ false }}" value="{{exchange_card_code1}}" style="background-color: #F6F3F7; border-radius: 33rpx; padding: 15rpx 20rpx;min-height: 37rpx;height: 37rpx;" disable-default-padding="{{true}}">
+  </textarea>
+  <!-- <image src="../../assets/icon/icon_zpxq_@@2x.png"></image>  -->
+</view>
+
+
+<!-- <view id="ctInput2" class="ct-input" style="top:-200px;z-index: 1;">
+  <textarea placeholder="" focus="{{false}}"  maxlength="19" auto-height  show-confirm-bar="{{ false }}" confirm-type="done" adjust-position="{{ false }}" value="" style="background-color: #F6F3F7; border-radius: 33rpx; padding: 15rpx 20rpx;min-height: 37rpx;">
+  </textarea> -->
+<!-- <image src="../../assets/icon/icon_zpxq_@@2x.png"></image>  -->
+<!-- </view> -->

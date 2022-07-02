@@ -1,0 +1,23 @@
+<view style="display: flex;flex-direction: column;">
+  <image style="width: 540rpx;border-radius: 15rpx 15rpx 0 0;" mode="widthFix" src="https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/exchange_debris.png">
+  </image>
+  <view style="display: flex;flex-direction: column;width: 540rpx;background-color: white;border-radius: 0 0 15rpx 15rpx;align-items: center;align-content: center;justify-content: center;font-size: 25rpx;">
+    <view style="margin-top: 45rpx;font-size: 25rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;display: flex;flex-direction: column;font-weight: bold;">
+      <!-- <view style="font-weight: bold;"></view> -->
+      <view style="display: flex;justify-content: center;align-items: center;align-content: center;width: 100%;">
+        <view style="display: flex;justify-content: center;align-items: center;align-content: center;width: 100%;flex-direction: row;">
+          <view style="line-height: 25rpx;">售出 <span style="color:#F46563 ;">{{sell_card_num}}</span> 块碎片，获得 <span style="color:#E4C383 ;">{{sell_card_cp}}</span> </view>
+          <image style="width: 35rpx;height: 35rpx;" src="/pages/images/c_info_point.png"></image>
+        </view>
+      </view>
+      <view style="display: flex;justify-content: center;align-items: center;align-content: center;width: 100%;">您将失去这些碎片，是否确认？</view>
+      <!-- <view style="display: flex;justify-content: center;align-items: center;align-content: center;width: 100%;font-size: 15rpx;margin-top: 10rpx;color: #878789;">注：兑换后如徽章卡不再是集齐状态，已点亮的徽章将会取消</view> -->
+
+    </view>
+    <view style="display: flex;margin-top:40rpx;align-items: center;align-content: center;justify-content: center;margin-bottom: 40rpx;">
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #1C0941;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-right: 15rpx;" bindtap="clickAffirm">确认</view>
+
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #AEAEAE;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-left: 15rpx;" bindtap="clickCancel">取消</view>
+    </view>
+  </view>
+</view>

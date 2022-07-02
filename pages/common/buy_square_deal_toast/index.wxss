@@ -1,0 +1,153 @@
+.life-container {
+  width: 350rpx !important;
+  padding: 0 0 20rpx 0 !important;
+  background-color: #fff !important;
+  box-shadow: 0px 8rpx 20rpx 0px rgba(9, 36, 66, 0.04) !important;
+  border-radius: 16rpx !important;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+
+.life-img {
+  width: 350rpx !important;
+
+}
+
+.life-product-contianer {
+  padding: 0 10rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.life-title {
+  margin-left: 10rpx !important;
+}
+
+.tag {
+  height: 30rpx !important;
+  line-height: 30rpx !important;
+}
+
+.art-content {
+  font-size: 28rpx;
+  color: black;
+  margin-top: 5rpx;
+  display: flex;
+  flex-wrap: wrap;
+  width: 98%;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-weight: bold;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  width: 98%;
+  margin-top: 5rpx;
+  justify-content: space-between
+}
+
+.info2 {
+  display: flex;
+  flex-direction: row;
+  width: 98%;
+  margin-top: 5rpx;
+  margin-bottom: 15rpx;
+  justify-content: space-between
+}
+
+.info_item {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.info_item2 {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.total_bc {
+  display: flex;
+  /* margin-top: 15rpx;
+  margin-left: 1vw; */
+  background-color: rgba(128, 128, 128, 0.041);
+  flex-direction: column;
+  width: 100%;
+  border-radius: 15rpx;
+}
+
+
+
+.l-badge {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+  width: 356rpx;
+}
+
+.l-badge-content {
+  max-width: 650rpx;
+  left: 70%;
+  color: #fff;
+  position: absolute;
+  font-size: 20rpx;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 10;
+  letter-spacing: .5rpx
+}
+
+.l-badge-content-bottomleft {
+  height: 45rpx;
+  min-width: 100rpx;
+  padding: 5rpx 15rpx;
+  border-radius: 0 15rpx 0 15rpx;
+  line-height: 35rpx;
+  bottom: 1rpx;
+  left: 1rpx;
+  font-size: 25rpx;
+  background-color: #F46563;
+}
+
+.l-badge-content-topleft {
+  top: 1rpx;
+  left: 1rpx;
+}
+
+.l-badge-content-topright {
+  top: 13rpx;
+  right: 0rpx;
+}
+
+
+.rich-text-content {
+  font-size: 26rpx;
+  color: #52515A;
+  margin-left: 50rpx;
+  margin-right: 50rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  line-height: 26rpx;
+  margin-top: 15rpx;
+}
+
+
+.rich-text-image {
+  width: 35rpx;
+  height: 35rpx;
+}

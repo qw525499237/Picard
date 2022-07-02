@@ -1,0 +1,212 @@
+<page-meta>
+  <navigation-bar title="创造{{change_show?'卡片':'宇宙碎片'}}" background-color="{{top_bar_color}}" front-color="{{top_bar_font_color}}" color-animation-duratio="1500" color-animation-timing-func="linear" />
+</page-meta>
+
+<scroll-view style="height: {{window_height-200}}rpx;" scroll-y>
+  <view style="margin-left: 3%;margin-right: 3%;">
+    <view class="first_selected_view" wx:if="{{first_selected}}" bindtap="firstSelecteMedia">
+      <image class="first_selected_view_img" src="../../miniprogram_npm/lin-ui/image-picker/image/add.png"></image>
+    </view>
+    <l-image-picker l-class="image_picker" l-item-class="image_picker_item" wx:if="{{selected_img}}" urls="{{arr}}" count="9" size="4" bind:linremove="onRemoveTap" bind:linchange="onAddTap" />
+
+    <view style="margin-left: 15rpx;position: relative;height: 0;border: 1rpx solid #eee;border-radius: 24rpx;background-color: #fff;width: {{video_width}}px;padding-bottom: {{video_height}}px;" wx:if="{{selected_video}}">
+      <!-- <image
+      style="position: absolute;left: 0; top: 0;width: 100%;height: 100%;border: 1rpx solid #eee; border-radius: 24rpx"
+      mode="aspectFill" src="{{video_temp}}">
+    </image> -->
+
+      <video style="position: absolute;left: 0; top: 0;width: 100%;height: 100%;border: 1rpx solid #eee; border-radius: 24rpx" src="{{video_temp}}" muted="{{true}}" controls="{{false}}" enable-progress-gesture="{{false}}" show-center-play-btn="{{false}}" object-fit="cover"></video>
+
+      <view class="selected_video_view_cancel" bindtap="cancelVideo">
+        <l-icon name="close" color="#ffffff" size="18" />
+      </view>
+      <view class="selected_video_view_play" bindtap="placeVideo">
+        <image style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);width: 70rpx;height: 70rpx;" mode="aspectFill" src="/pages/images/play.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <view style="display: flex;margin-left: 4%;margin-right: 4%;width: 92%;margin-top: 35rpx; flex-direction: column;" wx:if="{{show_content}}">
+    <textarea style="width: 100%;height: 60rpx;font-size: 33rpx;" placeholder="{{change_show?'卡片':'碎片'}}名称" name="" id="" cols="30" rows="1" maxlength="20" bindinput="titleInput" value="{{title_value}}"></textarea>
+    <view style="height: 1rpx;width: 100%;background-color: rgba(128, 128, 128, 0.199);"></view>
+    <textarea style="width: 100%;height: 180rpx;margin-top: 35rpx;font-size: 30rpx;" placeholder="添加正文{{change_show?'':'，分享你的宇宙观，获得更多认购'}}" name="" id="" cols="30" rows="10" maxlength="1500" bindinput="contentInput" value="{{content_value}}"></textarea>
+    <view style="margin-top: 35rpx; height: 50rpx;font-size: 23rpx;display: flex;flex-direction: row;">
+      <view style="font-size: 23rpx;flex-direction: row;display: flex; justify-content: center;align-items: center;align-content: center;padding-left: 25rpx;padding-right: 25rpx;border-radius: 15rpx;background-color: #F7F7F7;" bindtap="searchPlace">
+        <image style="height: 25rpx;width: 25rpx;" src="{{place_name_icon}}"></image>
+        <view style="margin-left: 8rpx;color: {{place_name_color}};">{{place_name}}</view>
+      </view>
+      <view style="font-size: 23rpx;flex-direction: row;display: flex; justify-content: center;align-items: center;align-content: center;padding-left: 25rpx;padding-right: 25rpx;border-radius: 15rpx;margin-left: 15rpx;" wx:if="{{account_info.verify_card_num>0}}">
+        <l-radio-group current='0' bind:linchange="verifyCardSwitch">
+          <l-radio size="20" select-color="#F46563" key="1">验证{{change_show?'卡片':'碎片'}}</l-radio>
+        </l-radio-group>
+      </view>
+      <!-- <view>#话题</view> -->
+    </view>
+    <view style="margin-top: 35rpx; display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;">
+      <view style="margin-top: 35rpx; display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;font-size: 31rpx;">
+        <image style="width: 60rpx;height: 60rpx;" src="/pages/images/assess_black.png"></image>
+        <view style="margin-left: 0rpx;line-height: 31rpx;">{{change_show?'创造数量':'首发价值'}}</view>
+        <!-- <view style="margin-left: 14rpx;color: #E4C383; width: 50rpx;justify-content: center;align-items: center;align-content: center;line-height: 31rpx;display: flex;">{{gotCardValue?value:'--'}}</view> -->
+
+        <input value="{{gotCardValue?value:value2}}" placeholder="--" placeholder-style="color:#E4C383;" type="number" style="color: #E4C383;width:{{platform=='iOS'?'60':'55'}}rpx;text-align:center;border:1rpx  #E4C383;border-style:none none solid none;" maxlength="3" bindblur="cardCPInputBlur" />
+
+        <image style="width: 40rpx;height: 40rpx;margin-left: 5rpx;" src="/pages/images/c_info_point.png"></image>
+        <image style="width: 43rpx;height: 43rpx;margin-left: 15rpx;" src="/pages/images/save_num_toast_icon.png" bindtap="saveCardToast" wx:if="{{!change_show}}"></image>
+      </view>
+      <view style="font-size: 20rpx;color: #6B6B6B;" wx:if="{{!change_show}}">将创造400块该宇宙碎片，您拥有100块，其中50块用于首发</view>
+      <view style="margin-top: 35rpx; display: flex;flex-direction: row;justify-content: space-between;align-items: center;align-content: center;font-size: 31rpx;width: 100%;">
+        <view style="color: #E4C383;">1</view>
+        <view class="component-slider">
+          <!-- 覆盖slider组件盒子 -->
+          <view class="slider-box">
+            <!-- 未选中区线 -->
+            <view class="slider-line">
+              <view style="width: 100%;height: 100%;display: flex; flex-direction: row-reverse;justify-content: space-between;align-items: center;align-content: center;">
+                <view style="height: 18rpx;width: 18rpx;background-color: white;border-radius: 9rpx;margin-right: 15rpx;">
+                </view>
+              </view>
+            </view>
+            <!-- 选中区线 -->
+            <view class="slider-line-active" style="width: {{((value-min)*(90/(max-min))+10)}}%;">
+              <view style="width: 100%;height: 100%;display: flex; flex-direction: row-reverse;justify-content: space-between;align-items: center;align-content: center;">
+                <view style="height: 25rpx;width: 25rpx;background-color: white;border-radius: 12.5rpx;margin-right: 15rpx;">
+                </view>
+              </view>
+            </view>
+            <!-- 拖动按钮 -->
+            <!-- <view class="slider-btn" style="margin-left: {{ (value-min)*(102/(max-min))-7}}%;"></view> -->
+          </view>
+          <!-- slider组件 -->
+          <slider style="margin-left: 10%;" block-size="28" bindchanging="sliderChangeing" bindchange="sliderChangeing" min="{{min}}" max="{{max}}" model:value="{{value}}" />
+        </view>
+        <view style="color: #E4C383;">999</view>
+      </view>
+
+    </view>
+
+  </view>
+</scroll-view>
+<!-- <view
+  style="display: flex;flex-direction: row;margin-top: 35rpx;justify-content: space-between; margin-left: 4%;margin-right: 4%;"
+  bindtap="searchPlace">
+  <view
+    style="font-size: 23rpx;flex-direction: row;display: flex; justify-content: center;align-items: center;align-content: center;">
+    <image style="height: 25rpx;width: 25rpx;" src="/pages/images/location2.png"></image>
+    <view style="margin-left: 15rpx;">添加地点</view>
+  </view>
+  <image style="height: 25rpx;width: 25rpx;" src="/pages/images/right.png"></image>
+</view> -->
+<view style="position: fixed;bottom: 153rpx;width: 750rpx; " wx:if="{{!change_show}}">
+  <view style="justify-content: center;align-items: center;align-content: center;flex-direction: row;display: flex;width: 750rpx;">
+    <!-- <image style="width: 32rpx;height: 32rpx;" src="/pages/images/exclamation_black.png"></image> -->
+    <view style="font-size: 22rpx;margin-left: 5rpx;line-height: 22rpx;">创造后，将根据该{{change_show?'卡片':'碎片'}}的<span style="color: #F46563;">首发认购</span>情况，生成<span style="color: #F46563;">交易价值</span></view>
+    <!-- <image style="width: 28rpx;height: 28rpx;" src="/pages/images/c_info_point.png"></image>
+    <view style="font-size: 22rpx;line-height: 22rpx;">的初始价值</view> -->
+  </view>
+</view>
+
+<view style="position: fixed;bottom: 35rpx;width: 92%;left: 4%; background-color: #E4C383; height: 100rpx; border-radius: 50rpx;">
+  <view style="display: flex;height: 100%;width: 100%;justify-content: center;align-items: center;align-content: center;" bindtap="createCard">
+    <view style="font-size: 33rpx;color: white;font-weight: bold;">{{change_show?'创造卡片':'创造碎片'}}</view>
+  </view>
+</view>
+
+
+<l-popup show="{{showPop}}" content-align="bottom" wx:if="{{showPop}}">
+  <view class="popup_botton">
+    <view style="height: 31%; width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;" bindtap="firstSelectedVideo">
+      <view>视频</view>
+    </view>
+    <view style="height: 0.5%; background-color: #E5E5E5; width: 100%;"></view>
+    <view style="height: 31%; width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;" bindtap="firstSelectedImg">
+      <view>图片</view>
+    </view>
+    <view style="height: 0.5%; background-color: #E5E5E5; width: 100%;"></view>
+    <view style="height: 5%; background-color: #F8F8F8; width: 100%;"></view>
+    <view style="height: 32%; width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;" bindtap="cancelFirstSelected">
+      <view>取消</view>
+    </view>
+  </view>
+</l-popup>
+
+
+<l-popup show="{{showSelectVideoPop}}" content-align="bottom" wx:if="{{showSelectVideoPop}}">
+  <view class="popup_botton">
+    <view style="height: 31%; width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;" data-item="haveShoot" bindtap="editVideo">
+      <view>拍摄</view>
+    </view>
+    <view style="height: 0.5%; background-color: #E5E5E5; width: 100%;"></view>
+    <view style="height: 31%; width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;" bindtap="firstSelectedVideo">
+      <view>直接上传</view>
+    </view>
+    <view style="height: 0.5%; background-color: #E5E5E5; width: 100%;"></view>
+    <view style="height: 31%; width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;" data-item="noShoot" bindtap="editVideo">
+      <view>剪辑并上传</view>
+    </view>
+    <view style="height: 0.5%; background-color: #E5E5E5; width: 100%;"></view>
+    <view style="height: 5%; background-color: #F8F8F8; width: 100%;"></view>
+    <view style="height: 32%; width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;" bindtap="cancelChooseVideoType">
+      <view>取消</view>
+    </view>
+  </view>
+</l-popup>
+
+
+<page-container wx:if="{{play_video}}" show="{{play_video}}" style="position: fixed;height: 100vh;width: 100vw;top: 0;" bind:beforeleave="sonPageBack">
+  <view style="position: fixed;height: 100vh;width: 100vw;top: 0;" wx:if="{{play_video}}">
+    <video autoplay="true" loop="true" show-fullscreen-btn="false" style="position: absolute;left: 0; top: 0;width: 100%;height: 100%;" src="{{video_url}}">
+    </video>
+  </view>
+</page-container>
+
+<page-container wx:if="{{selected_place}}" show="{{selected_place}}" style="position: fixed;height: 100vh;width: 100vw;top: 0;z-index: 1000;" bind:beforeleave="sonPageBack">
+  <view style="position: fixed;height: 100vh;width: 100vw;top: 0; background-color: white;">
+    <view style="margin-top: 15rpx;">
+      <l-search-bar l-class="search_bar" placeholder="搜索地点" bind:linconfirm="searchPlaceByKey" />
+    </view>
+    <view style="background-color: rgba(0, 0, 0, 0.055);height: 1rpx; width: 100%; margin-top: 20rpx;"></view>
+
+    <view>
+      <scroll-view scroll-y style="height: {{no_data?'100':window_height-100}}rpx;">
+        <l-list l-class="list_item" title="不显示位置" desc="" bindtap="noSelectedPlace" />
+        <block wx:for="{{places}}">
+          <view class='item' wx:key="{{item.id}}" bindtap='placeAction' data-item="{{item}}" data-id="{{item.id}}">
+            <l-list l-class="list_item" title="{{item.title}}" desc="{{item.address}}" />
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+    <view class="list_toast" wx:if="{{no_data}}">
+      <image style="width: 114rpx;height: 114rpx;" src="{{toast_icon}}"></image>
+      <text style="margin-top: 35rpx; color: #929292;font-size: 27rpx;">{{toast_content}}</text>
+    </view>
+
+
+  </view>
+
+</page-container>
+<l-dialog show="{{show_dialog}}" wx:if="{{!change_show}}" type="alert" title="首发价值" content="创造成功后，将以[首发价值]对其他用户进行首发，根据首发认购情况，生成[交易价值]。" content2="过高的[首发价值]会减少首发认购，拉低[交易价值]，甚至首发失败，影响后续的交易、兑换。" content3="过低的[首发价值]会使您的创造得不到充分回报。" content4="请适当选择[首发价值]，让你的宇宙有意思，让你的创造有价值！" bottomInfo="{{bottom_info}}" />
+
+
+
+<!-- show_loading -->
+<l-mask show="{{show_loading}}" opacity="0.7">
+  <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+    <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;height: 235rpx;background-color: white;border-radius: 15rpx;">
+      <view style="height: 15rpx;"></view>
+      <l-loading l-container-class="l-container" bg-color="#f3f3f3" z-index="776" show="{{true}}" type="circle" style="margin-left: 25rpx;margin-right: 25rpx;">
+      </l-loading>
+      <view style="height: 25rpx;"></view>
+      <view style="margin-top: 20rpx;color: black;margin-left: 25rpx;margin-right: 25rpx;">正在创造{{change_show?'卡片':'宇宙碎片'}}，请稍候.....</view>
+    </view>
+  </view>
+</l-mask>
+
+
+
+<l-mask show="{{show_mask1}}" opacity="0.7">
+  <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;">
+    <card_toast5 bind:clickAffirm="affirmToCreate" bind:clickCancel="cancleExchange" bind:phoneInput="phoneInput">
+    </card_toast5>
+  </view>
+</l-mask>

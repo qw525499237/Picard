@@ -1,0 +1,88 @@
+<!--
+此文件为开发者工具生成，生成时间: 2021/12/5 下午9:30:38
+使用方法：
+在 D:\WorkFile\Weiyu\WeChatMiniProgram\pages\map\map.wxml 引入模板
+
+```
+<import src="map.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 D:\WorkFile\Weiyu\WeChatMiniProgram\pages\map\map.wxss 中引入样式
+```
+@import "./map.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view style=" margin-left: 60rpx;margin-right: 2%;padding-top: 5%; padding-bottom: 2%;">
+      <view style="display: flex;flex-direction: row; ">
+        <view style="display: flex;flex-direction: column;margin-left: 4px;margin-top: 7px;max-width: 139px;align-items: center;justify-content: center;">
+          <view>
+            <view>
+              <view style="height: 108px;">
+                <view style="display: flex;flex-direction: row; align-items: center;justify-content: center;align-content: center;width: 139px; margin-top: 0;">
+                  <view style="font-size: 14px;font-weight: bold;width: 139px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp:3;overflow: hidden;word-break: break-all;" class="sk-transparent sk-text-14-2857-477 sk-text">变形金刚：火种源争</view>
+                </view>
+                <view style="height: 25rpx;"></view>
+                <view style="display: flex;flex-direction: column;font-size: 10px;width: 100%;margin-top: 4px;width: 139px;">
+                  <view>
+                    <view style="width: 139px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp:4;overflow: hidden;word-break: break-all;" class="sk-transparent sk-text-14-2857-33 sk-text">坐上EVAC，打败威震天，与擎天柱一起保护火种源🔥小心别把手机甩出</view>
+                  </view>
+                </view>
+                <view></view>
+              </view>
+              <view class="other_info">
+                <view style="display: flex;justify-content: center;align-items: center; ">
+                  <image data-item="45782" style="width: 16px;height: 16px; border-radius: 8px;" class="sk-image"></image>
+                  <text style="margin-left: 4px;font-size: 9px;max-width: 48px;white-space:nowrap;text-overflow:ellipsis;-webkit-text-overflow:ellipsis;overflow:hidden;color: #FBE087;" class="sk-transparent sk-text-14-2857-348 sk-text">稀有卡</text>
+                </view>
+                <view style="display: flex;justify-content: center;align-items: center; ">
+                  <text style="font-size: 9px; color: #FBE087;" class="sk-transparent sk-text-14-2857-166 sk-text">10-21</text>
+                </view>
+              </view>
+              <!-- <view class="other_info">
+                <view style="display: flex;justify-content: center;align-items: center; justify-content: center;align-content: center;height:10px;">
+                  <image style="width: 10px; height: 10px; " class="sk-image"></image>
+                  <text style=" font-size: 9px;color: #33A3DE;margin-left: 1px;margin-right: 2px;line-height: 9px;width: 126px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp:1;overflow: hidden;word-break: break-all;" class="sk-transparent sk-text-0-0000-857 sk-text">变形金刚:火种争夺战</text>
+                </view>
+              </view> -->
+            </view>
+          </view>
+        </view>
+        <view style="height:336;width: 196px;display: flex;flex-direction: row;">
+          <view style="display: flex;flex-direction: column-reverse;width: 7px;">
+
+          </view>
+          <swiper current="0" style="height:160px;width: 100%;margin-left: -12px;" vertical="true" autoplay="false">
+            <swiper-item style="display: flex; place-content: center; align-items: center; position: absolute; width: 100%; height: 100%; transform: translate(0px, 0%) translateZ(0px);">
+              <view data-id="345">
+                <view style="display: flex;flex-direction: row;width: 100%;">
+                  <view style="position: absolute; left: 16px;top: 16px;bottom:0;z-index: 100;height: 140px;width: 105px;border-radius: 4px;">
+                    <image class="vertical_imge_bg sk-image" mode="aspectFill" style="height: 289rpx;width: 215rpx;border-radius: 4px;margin-top: 1px;margin-left: 1px;"></image>
+                  </view>
+
+                  <view style="position: absolute; right: 0;bottom: 15rpx;z-index: 50;">
+                        <view style="display: flex;flex-direction: column;">
+                          <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; border-radius: 0 10rpx 10rpx 0;background-color: #EEEEEE;width: 130rpx;height: 48rpx;">
+                      
+                          </view>
+                          <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; border-radius: 0 10rpx 10rpx 0;background-color: #EEEEEE;width: 130rpx;height: 48rpx;margin-top: 10rpx;">
+                          
+                          </view>
+                          <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; border-radius: 0 10rpx 10rpx 0;background-color: #EEEEEE;width: 130rpx;height: 48rpx;margin-top: 10rpx;">
+                            
+                          </view>
+                        </view>
+                      </view>
+                </view>
+              </view>
+            </swiper-item>
+          </swiper>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

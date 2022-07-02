@@ -1,0 +1,32 @@
+{
+  "pages": [
+    "pages/explore_metaverse/explore_metaverse",
+    "pages/map/map",
+    "pages/my/my",
+    "pages/card_detail/card_detail",
+    "pages/add_card/add_card",
+    "pages/badge_card/badge_card",
+    "pages/play_video/play_video",
+    "pages/account_rank/account_rank",
+    "pages/setting/setting",
+    "pages/feed_back/feed_back",
+    "pages/hot_up/hot_up",
+    "pages/excahnge_card/exchange_card",
+    "pages/protocol/protocol",
+    "pages/card_code/card_code",
+    "pages/other_me/other_me"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "匹卡",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "仅用于发现您身边的高价值卡片"
+    }
+  }
+}

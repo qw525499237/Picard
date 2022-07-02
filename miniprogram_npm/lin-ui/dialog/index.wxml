@@ -1,0 +1,36 @@
+<l-popup show="{{show}}" animation="show" contentAlign="center" locked="{{true}}" bind:lintap="onDialogTap" l-bg-class="l-bg-class" z-index="{{zIndex}}">
+  <view class="dialog-container l-class" style="margin-bottom:{{distance}}px">
+    <view class="dialog-title l-title-class" style="color:{{titleColor}}" wx:if="{{showTitle}}">{{title}}</view>
+    <view class="dialog-content l-content-class" style="color:{{contentColor}}">
+      <slot />
+      {{content}}
+    </view>
+    <view class="dialog-content-mid l-content-class" style="color:{{contentColor}}">
+      {{content2}}
+    </view>
+    <view class="dialog-content-mid l-content-class" style="color:{{contentColor}}">
+      {{content3}}
+    </view>
+    <view class="dialog-content-bottom l-content-class" style="color:{{contentColor}}">
+      {{content4}}
+    </view>
+
+    <view class="dialog-content-bottom2 l-content-class" wx:if="{{bottomInfo.show}}">
+      <view style="display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;font-size: 24rpx;">
+        <view style="color: #f46563;">多数首发成功的宇宙碎片价值：</view>
+        <view style="line-height: 30rpx;color: #E4C383;">{{bottomInfo.min}}<span style="vertical-align: middle;display: inline;">
+            <image style="width: 30rpx;height: 30rpx;" src="/pages/images/c_info_point.png"></image>
+          </span><span style="color:{{contentColor}}"> 至 </span> {{bottomInfo.max}}<span style="vertical-align: middle;display: inline;">
+            <image style="width: 30rpx;height: 30rpx;" src="/pages/images/c_info_point.png"></image>
+          </span></view>
+      </view>
+
+    </view>
+
+
+    <view class="dialog-btn-group">
+      <view class="dialog-btn-cancel l-cancel-class" style="color: {{cancelColor}}" catchtap="onCancelTap" hover-class="{{isHover?'group-hover':''}}" wx:if="{{type==='confirm'}}">{{cancelText}}</view>
+      <view class="dialog-btn-confirm l-confirm-class" style="color: {{confirmColor}}" hover-class="{{isHover?'group-hover':''}}" catchtap="onConfirmTap">{{confirmText}}</view>
+    </view>
+  </view>
+</l-popup>

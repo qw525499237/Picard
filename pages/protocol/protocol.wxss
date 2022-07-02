@@ -1,0 +1,10 @@
+/* pages/protocol/protocol.wxss */
+.text_desc{
+  font-family: Microsoft YaHei;
+  font-size: 16px;
+  margin-top: 22px;
+  white-space:pre-wrap;
+  text-align: justify;
+  color: #808080;
+  font-weight: 500;
+}

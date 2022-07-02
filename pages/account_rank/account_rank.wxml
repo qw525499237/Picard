@@ -1,0 +1,132 @@
+<image style="position: fixed;top: 0;left: 0;width: 750rpx;height: 389rpx;" src="https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/rank_top_bc3.png"></image>
+<view style="position: fixed;top: {{menuButtonToTop}}px;width: 100vw; z-index: 98;left: 25rpx;">
+  <image style="height:{{menuButtonHeight}}px;width: {{menuButtonHeight}}px;" src="/pages/images/back3.png" bindtap="backLastPage"></image>
+</view>
+
+<view style="position: fixed;top: {{389-50}}rpx;right: 0rpx; z-index: 99;background-color: #FF663B;width: 200rpx;height: 50rpx;" wx:if="{{change_show}}">
+</view>
+
+
+<view style="display: flex;margin-top: 389rpx;display: flex; width: 100vw; flex-direction: column;">
+  <block wx:for="{{items}}">
+    <view style="width: 750rpx;height: 101rpx;" wx:key="{{item.id}}" data-item="{{item}}" data-id="{{item.id}}">
+      <view style="display: flex;width: 100%;flex-direction: row;align-content: center;align-items: center;height: 100rpx;">
+        <image style="width: 44rpx;height: 44rpx;margin-left: 43rpx;" src="/pages/images/first.png" wx:if="{{item.rank==1}}"></image>
+        <image style="width: 44rpx;height: 44rpx;margin-left: 43rpx;" src="/pages/images/second.png" wx:if="{{item.rank==2}}"></image>
+        <image style="width: 44rpx;height: 44rpx;margin-left: 43rpx;" src="/pages/images/third.png" wx:if="{{item.rank==3}}"></image>
+        <view style="width: 44rpx;height: 44rpx;margin-left: 43rpx;font-size: 35rpx;display: flex;justify-content: center;align-items: center;align-content: center;font-weight: bold;" wx:if="{{item.rank>3}}">
+          <view>{{item.rank}}</view>
+        </view>
+        <image style="width: 77rpx;height: 77rpx;margin-left: 53rpx;border-radius: 38rpx;" src="{{item.account_icon}}" data-item="{{item.account_id}}" bindtap="toAccountInfo">
+        </image>
+        <view style="margin-left: 5rpx;width: 138rpx;height: 100%;align-content: center;align-items: center;font-size: 25rpx;display: flex;">
+          <view style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.account_name}}</view>
+        </view>
+        <view style="width: 166rpx;height: 100%;display: flex;justify-content: center;align-content: center;align-items: center;font-size: 25rpx;margin-left: 0rpx;color: {{item.rank<4?'#FF673A':'#000000'}};font-weight: bold;flex-direction: row;">
+          <view>{{item.have_card_num}}块</view>
+        </view>
+        <view style="height: 100%;justify-content: center;align-content: center;align-items: center;font-size: 25rpx;margin-left: 47rpx;display: flex;color: {{item.rank<4?'#FF673A':'#000000'}};font-weight: bold;display: flex;flex-direction: row;width: 180rpx;">
+          <view>{{item.get_cp}}</view>
+          <image style="width: 30rpx;height: 30rpx;margin-left: 5rpx;" src="/pages/images/c_info_point.png"></image>
+        </view>
+      </view>
+      <view style="width: 100vw;height: 1rpx;background-color: rgba(0, 0, 0, 0.247);"></view>
+    </view>
+  </block>
+
+  <view style="display: flex;justify-content: center;align-items: center;align-content: center;width: 100vw;margin-top: 15rpx;font-size: 25rpx;color: #6B6B6B;" wx:if="{{card_type=='FUNCATION'&&!change_show}}">
+    功能碎片只显示Top20持有人
+  </view>
+  <view style="display: flex;justify-content: center;align-items: center;align-content: center;width: 100vw;margin-top: 15rpx;font-size: 25rpx;color: #6B6B6B;" wx:else>
+    到底了~
+  </view>
+</view>
+<l-mask show="{{show_mask2}}" opacity="0.7">
+  <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+    <toast_info data="{{toast_data}}" bind:clickAffirm="clickAffirm"></toast_info>
+  </view>
+</l-mask>
+
+
+<wxs module="filter">
+  function format(ts, option) {
+    var date = getDate(ts)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var week = date.getDay()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+
+    //获取 年月日
+    if (option == 'YY-MM-DD') return [year, month, day].map(formatNumber).join('-')
+
+    //获取 年月
+    if (option == 'YY-MM') return [year, month].map(formatNumber).join('-')
+
+    //获取 年
+    if (option == 'YY') return [year].map(formatNumber).toString()
+
+    //获取 月
+    if (option == 'MM') return [mont].map(formatNumber).toString()
+
+    //获取 日
+    if (option == 'DD') return [day].map(formatNumber).toString()
+
+    //获取 年月日 周一 至 周日
+    if (option == 'YY-MM-DD Week') return [year, month, day].map(formatNumber).join('-') + ' ' + getWeek(week)
+
+    //获取 月日 周一 至 周日
+    if (option == 'MM-DD Week') return [month, day].map(formatNumber).join('-') + ' ' + getWeek(week)
+
+    //获取 周一 至 周日
+    if (option == 'Week') return getWeek(week)
+
+    //获取 时分秒
+    if (option == 'hh-mm-ss') return [hour, minute, second].map(formatNumber).join(':')
+
+    //获取 时分
+    if (option == 'hh-mm') return [hour, minute].map(formatNumber).join(':')
+
+    //获取 分秒
+    if (option == 'mm-dd') return [minute, second].map(formatNumber).join(':')
+
+    //获取 时
+    if (option == 'hh') return [hour].map(formatNumber).toString()
+
+    //获取 分
+    if (option == 'mm') return [minute].map(formatNumber).toString()
+
+    //获取 秒
+    if (option == 'ss') return [second].map(formatNumber).toString()
+
+    //默认 时分秒 年月日
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  }
+
+  function formatNumber(n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+  }
+
+  function getWeek(n) {
+    switch (n) {
+      case 1:
+        return '星期一'
+      case 2:
+        return '星期二'
+      case 3:
+        return '星期三'
+      case 4:
+        return '星期四'
+      case 5:
+        return '星期五'
+      case 6:
+        return '星期六'
+      case 7:
+        return '星期日'
+    }
+  }
+  module.exports.format = format;
+</wxs>

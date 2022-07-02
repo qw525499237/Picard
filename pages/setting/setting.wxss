@@ -1,0 +1,13 @@
+/* pages/setting/setting.wxss */
+
+.list_item_bg{
+  background-color: white;
+}
+
+.list_item_text{
+  margin-left: 25rpx;
+}
+
+.list_item_icon{
+  margin-right: 25rpx;
+}

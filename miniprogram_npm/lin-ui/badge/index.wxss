@@ -1,0 +1,158 @@
+.l-badge {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  /* vertical-align: middle */
+}
+
+.l-badge-content {
+  max-width: 650rpx;
+  left: 70%;
+  background-color: #ff474b;
+  color: #fff;
+  position: absolute;
+  font-size: 20rpx;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 10;
+  letter-spacing: .5rpx
+}
+
+.l-badge-content-horn {
+  height: 28rpx;
+  min-width: 54rpx;
+  padding: 0 8rpx;
+  border-radius: 14rpx 14rpx 14rpx 0rpx;
+  line-height: 28rpx;
+  top: -10rpx
+}
+
+.l-badge-content-circle {
+  height: 32rpx;
+  min-width: 32rpx;
+  padding: 0 10rpx;
+  border-radius: 16rpx;
+  line-height: 32rpx;
+  top: -10rpx
+}
+
+.l-badge-content-circle2 {
+  height: 32rpx;
+  min-width: 32rpx;
+  padding: 0 10rpx;
+  border-radius: 16rpx;
+  line-height: 32rpx;
+  left: 75rpx;
+  top: -35rpx
+}
+
+.l-badge-content-circle3 {
+  height: 32rpx;
+  min-width: 40rpx;
+  padding: 0 5rpx;
+  border-radius: 16rpx;
+  line-height: 32rpx;
+  top: -1rpx;
+  right: -10rpx;
+}
+
+.l-badge-content-square {
+  height: 23rpx;
+  min-width: 30rpx;
+  padding: 1rpx 6rpx;
+  border-radius: 5rpx;
+  line-height: 20rpx;
+  top: -15rpx;
+  left: -35%;
+  font-size: 20rpx;
+  background-color: #27A2DF;
+}
+
+.l-badge-content-bottomleft {
+  height: 45rpx;
+  min-width: 100rpx;
+  padding: 5rpx 15rpx;
+  border-radius: 0 15rpx 0 15rpx;
+  line-height: 35rpx;
+  bottom: 0rpx;
+  left: -1rpx;
+  font-size: 25rpx;
+  background-color: #F46563;
+}
+
+.l-badge-content-topright {
+  min-width: 50rpx;
+  padding-left: 3rpx;
+  padding-right: 3rpx;
+  border-radius: 10rpx 10rpx 10rpx 10rpx;
+  line-height: 35rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  top: -10rpx;
+  left: 70%;
+  font-size: 20rpx;
+  background-color: #F46563;
+}
+
+.l-badge-content-midid {
+  height: 45rpx;
+  width: 320rpx;
+  padding: 5rpx 15rpx;
+  border-radius: 0 15rpx 0 15rpx;
+  line-height: 45rpx;
+  top: 12rpx;
+  left: 225rpx;
+  font-size: 25rpx;
+  background-color: #E5C383;
+}
+
+.l-badge-content-midid2 {
+  top: 0;
+  left:0;
+  font-size: 20rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 290rpx;
+  background-color: #e5c38300;
+}
+
+.l-badge-content-midid3 {
+  top: 0;
+  left:0;
+  font-size: 25rpx;
+  height: 100%;
+  line-height: 25rpx;
+  width:100%;
+  text-align: center;
+  background-color: #e5c38300;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.l-badge-content-midid4 {
+  top: 0;
+  left:0;
+  font-size: 25rpx;
+  height: 100%;
+  line-height: 50rpx;
+  width:100%;
+  text-align: center;
+  background-color: #e5c38300;
+}
+
+.l-badge-dot {
+  height: 20rpx;
+  width: 20rpx;
+  transform: translateX(50%);
+  border-radius: 50%;
+  background-color: #ff474b;
+  position: absolute;
+  top: 4rpx;
+  right: 16rpx
+}

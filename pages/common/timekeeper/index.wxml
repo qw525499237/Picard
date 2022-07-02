@@ -1,0 +1,1 @@
+<view style="font-size: {{font_size}}rpx;color: {{font_color}};display: flex;align-content: center;justify-content: center;justify-items: center;width: 100%;line-height: {{font_size}}rpx;"> {{content}} </view>

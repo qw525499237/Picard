@@ -1,0 +1,26 @@
+<view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;flex-direction: column;" catchtap="preventPenetrate">
+  <view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;background-color: #E4C383;border-radius: 15rpx 15rpx 0 0;flex-direction: column;align-items: center;justify-content: center;align-content: center;">
+    <image style="width: 80rpx ;height: 80rpx;margin-top: 15rpx;" src="/pages/images/buy_square_white.png">
+    </image>
+    <view style="margin-top: {{15-10}}rpx;font-size: 28rpx;font-weight: bold;color: white;margin-bottom: 20rpx;display: flex; flex-direction: row;justify-content: center;align-content: center;align-items: center;">
+      <text space="ensp">购买宇宙地盘</text>
+    </view>
+  </view>
+  <view style="background-color: white;border-radius: 0 0 15rpx 15rpx;width: 500rpx;margin-left: 50rpx;margin-right: 50rpx;">
+    <view style="margin-top: 45rpx;font-size: 22rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      注：您仅有<span style="color: #F46563;">1次机会</span>为该地盘命名！
+    </view>
+    <textarea style="height: 60rpx;font-size: 26rpx;margin-left: 50rpx;margin-right: 50rpx;margin-top: 30rpx;width: 400rpx;line-height: 26rpx;" placeholder="地盘名称" name="" id="" cols="30" rows="1" maxlength="20" bindinput="titleInput" value=""></textarea>
+    <view style="height: 1rpx;background-color: rgba(128, 128, 128, 0.199);margin-left: 50rpx;margin-right: 50rpx;"></view>
+    <scroll-view scroll-y style="height: 180rpx;margin-top: 35rpx;font-size: 22rpx;margin-left: 50rpx;margin-right: 50rpx;width: 400rpx;">
+      <textarea style="font-size: 22rpx;width: 400rpx;min-height: 180rpx;"  placeholder="作为宇宙中的新地主，说点什么吧！" name="" id="" cols="30" rows="10" maxlength="1500" 	auto-height bindinput="contentInput" value="{{content_value}}"></textarea>
+    </scroll-view>
+    
+
+    <view style="display: flex;margin-top:40rpx;align-items: center;align-content: center;justify-content: center;margin-bottom: 40rpx;font-size: 28rpx;">
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #E4C383;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-right: 15rpx;" bindtap="clickAffirm">确认</view>
+
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #AEAEAE;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-left: 15rpx;" bindtap="clickCancel">取消</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,483 @@
+<!-- <image src='{{item}}' style="width: 100%;" mode='widthFix' class='img' /> -->
+<wxs module="ant">
+  var isChange = false
+  module.exports = {
+    wxsFunction: function (event, ownerInstance) {
+      console.log('prop observer', "111111111")
+    },
+    propObserver: function (newValue, oldValue, ownerInstance, instance) {
+      instance.setStyle({
+        "opacity": 1 // 支持rpx
+      })
+      instance.setStyle({
+        "opacity": 0 // 支持rpx
+      })
+    }
+  }
+</wxs>
+<view style="position: fixed;top: 500px;left: 0px;width: 100vw;height: 1px;" change:data-item="{{ant.propObserver}}" data-item="{{show_cover}}"></view>
+
+<view wx:if="{{item}}">
+  <view id="{{item.card_id}}" style="width: {{0.56*get_card_height}}rpx; height: {{get_card_height}}rpx; background-color: white;border-radius: 15rpx;">
+    <view style="width: 100%;flex-direction: column;display: flex;justify-content: center;align-content:center;align-items: center; ">
+      <view style="width: {{0.538*get_card_height+4}}rpx;height: {{0.73*get_card_height+4}}rpx;margin-top: {{0.010*get_card_height}}rpx;border-radius: 15rpx;box-shadow: 2px 2px 3px #777777;display: flex;justify-content: center;align-content:center;align-items: center;background-color: black;z-index:100;">
+
+        <!-- <cover-image style="width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;border-radius: 15rpx;z-index: 1200;" src="{{item.images[0].image_url}}" mode="aspectFill" wx:if="{{item.images[0].type=='video'&&show_cover}}" binderror="imgError" data-item="{{item}}">
+        </cover-image> -->
+
+
+        <view style="background-image: url('https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/pick_logo2.png');background-size:100% 100%;width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;border-radius: 15rpx;display: flex;" wx:if="{{item.images[0].type=='video'}}" hidden="{{currentShowItem.card_id!=item.card_id}}">
+          <video id="myVideo" style="width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;border-radius: 15rpx;z-index: 101;" src="{{item.images[0].video_url}}" muted="{{currentShowItem.card_id!=item.card_id?true:mute}}" controls="{{false}}" loop="{{true}}" enable-progress-gesture="{{false}}" object-fit="{{item.images[0].vertical?'cover':''}}" wx:if="{{item.images[0].vertical}}" data-item="{{item.card_id}}" bindwaiting="videoWaiting" binderror="videoError" bindtimeupdate="videoloadedmetadata" data-item="{{item}}">
+            <!-- binderror="videoerror" bindwaiting="videoWaiting" custom-cache="true" bindloadedmetadata="videoLoaded" bindpause="pausepause" -->
+            <image style="width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;position: absolute;top: 0;left: 0;background-color: black;" mode="aspectFill" src="{{item.images[0].image_url}}" wx:if="{{show_cover}}"></image>
+
+            <!-- <image style="width: {{0.09*get_card_height}}rpx;height: {{0.09*get_card_height}}rpx;position: absolute;top: {{(0.73-0.09)*get_card_height/2}}rpx;left: {{(0.538-0.09)*get_card_height/2}}rpx;" mode="aspectFill" src="/pages/images/loading.gif" wx:if="{{show_cover}}"></image> -->
+
+
+            <view style="width: {{0.11*get_card_height}}rpx;height: {{0.045*get_card_height}}rpx;background-color: #F46563;position: absolute;top: {{0.73*get_card_height-0.045*get_card_height}}rpx; border-radius: 0 15rpx 0 15rpx; font-size: {{0.022*get_card_height}}rpx; z-index: 9999;">
+              <view style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;color: white;">
+                <view>拥有:{{item.have_card_num}}块</view>
+              </view>
+            </view>
+
+            <view style="height: {{0.053*get_card_height}}rpx;background-color: #0000007c;position: absolute;top: {{0.73*get_card_height-0.045*get_card_height-0.053*get_card_height-25}}rpx;  border-radius: 0 15rpx 15rpx 0; font-size: {{0.0165*get_card_height}}rpx; z-index: 9999;border: 1.5px solid #ffffffc7;border-style:solid solid solid none;" catchtap="toAnotherAccountPage">
+              <view style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;color: white;flex-direction: row;">
+                <view style="width: 20rpx;"> </view>
+                <image style="width: {{0.033*get_card_height}}rpx;;height: {{0.033*get_card_height}}rpx;border-radius: {{0.033*get_card_height/2}}rpx;" src="{{item.account_icon}}"></image>
+                <view style="width: 17rpx;"> </view>
+                <view style="font-weight: bold;">{{item.account_name}}</view>
+                <view style="width: 20rpx;"> </view>
+              </view>
+            </view>
+
+
+            <view class="btn_bg" style="width: {{0.11*get_card_height}}rpx;height: {{0.045*get_card_height}}rpx;position: absolute;top: 0rpx; border-radius: 0 15rpx 0 15rpx; font-size: {{0.022*get_card_height}}rpx; z-index: 9999;right: 0;" catchtap="showAssessResult" wx:if="{{!item.assessing&&item.card_type!='SQUARE'&&!change_show}}">
+              <view style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;color: white;">
+                <view>首发报告</view>
+              </view>
+            </view>
+
+            <view style="width: {{0.045*get_card_height}}rpx;height: {{0.045*get_card_height}}rpx;position: absolute;top: {{0.73*get_card_height-0.045*get_card_height-15}}rpx;right:{{15}}rpx;z-index: 100;" catchtap="changeMuteTap">
+              <view style="width: {{0.045*get_card_height}}rpx;height: {{0.045*get_card_height}}rpx;border-radius: {{0.045*get_card_height/2}}rpx;background-color: #212121;display: flex;justify-content: center;align-content:center;align-items: center;">
+                <image style="width: 70%;height: 70%;" src="/pages/images/mute.png" wx:if="{{mute}}">
+                </image>
+                <image style="width: 70%;height: 70%;" src="/pages/images/unmute.png" wx:else>
+                </image>
+              </view>
+            </view>
+          </video>
+
+          <video id="myVideo" style="width: {{0.538*get_card_height}}rpx;height: {{0.538*get_card_height*(item.images[0].height/item.images[0].width)}}rpx;display: flex;margin-top: {{(0.73*get_card_height-0.538*get_card_height*(item.images[0].height/item.images[0].width))/2}}rpx;z-index:1" src="{{item.images[0].video_url}}" muted="{{currentShowItem.card_id!=item.card_id?true:mute}}" controls="{{false}}" loop="{{true}}" enable-progress-gesture="{{false}}" object-fit="{{item.images[0].vertical?'cover':''}}" poster="{{item.images[0].image_url}}" binderror="videoerror" bindwaiting="videoWaiting" custom-cache="true" bindloadedmetadata="videoLoaded" wx:else>
+          </video>
+        </view>
+
+        <image style="width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;border-radius: 15rpx;background-image: url('https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/pick_logo2.png');background-size:100% 100%;" wx:elif="{{item.images[0].type=='img'}}" src="{{item.card_type=='SQUARE'&&change_show?'https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/bulletin16365514400360_7265536201930709319.jpg':item.images[0].image_url}}" mode="{{item.images[0].vertical?'aspectFill':'aspectFit'}}" data-item="{{item}}">
+        </image>
+
+        <view style="position: absolute;margin-top:  {{0.538*get_card_height}}rpx;left: 0rpx;right: 0rpx;margin: auto;height:{{45*4.5}}rpx;width: {{48*4.5}}rpx;opacity: 0;z-index: 1000;" bindlongpress="pickCardLongTap" bindtouchend="pickTouchEnd" animation="{{pick_toast_ant}}" wx:if="{{!change_show}}">
+          <image style="height:{{45*5.5}}rpx;width: {{48*5.5}}rpx;" src="/pages/images/pick_toast.png">
+          </image>
+        </view>
+
+        <!-- <view wx:elif="{{item.images[0].type=='img'&&show_first_img}}" style="position:relative;width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;">
+          
+
+          <image style="width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;border-radius: 15rpx;background-image: url('https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/pick_logo2.png');background-size:100% 100%;position: absolute;top: 0;left: 0%;z-index: 98;" src="{{item.images[0].image_url}}" mode="{{item.images[0].vertical?'aspectFill':'aspectFit'}}" bindload="loadedImg" binderror="imgError" data-item="{{item}}">
+          </image>
+        </view> -->
+
+        <!-- <block wx:elif="{{item.images[0].type=='img'}}">
+          <image style="width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;border-radius: 15rpx;background-image: url('https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/pick_logo2.png');background-size:100% 100%;display: {{show_image_cover?:'none':'flex'}};" src="{{item.images[0].image_url}}" mode="{{item.images[0].vertical?'aspectFill':'aspectFit'}}" bindload="loadedImg" binderror="imgError" data-item="{{item}}">
+          </image>
+
+          <image style="width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;border-radius: 15rpx;background-image: url('https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/pick_logo2.png');background-size:100% 100%;display: {{show_image_cover?:'flex':'none'}};" src="{{item.images[0].image_url}}" mode="{{item.images[0].vertical?'aspectFill':'aspectFit'}}" binderror="imgError" data-item="{{item}}">
+          </image>
+        </block> -->
+
+
+
+
+
+      </view>
+      <view style="width: {{0.13*get_card_height}}rpx;height: {{0.13*get_card_height}}rpx;position: absolute;top: {{0.295*get_card_height}}rpx;left:{{(725-(0.11*get_card_height))/2}}rpx;" wx:if="{{item.card_type=='FUNCATION'}}">
+        <image style="width: {{0.13*get_card_height}}rpx;height: {{0.13*get_card_height}}rpx;" src="{{item.function_icon_url}}"></image>
+      </view>
+
+      <block wx:if="{{item.images[0].type=='video'&&!item.images[0].vertical}}">
+        <view style="width: {{0.11*get_card_height}}rpx;height: {{0.045*get_card_height}}rpx;background-color: #F46563;position: absolute;top: {{platform=='iOS'?(0.697*get_card_height-0.8+card_to_top+1):(0.697*get_card_height-0.8+card_to_top)}}rpx;left:{{(750-(0.538*get_card_height-3))/2}}rpx; border-radius: 0 15rpx 0 15rpx; font-size: {{0.022*get_card_height}}rpx; z-index: 9999;">
+          <view style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;color: white;">
+            <view>拥有:{{item.have_card_num}}块</view>
+          </view>
+        </view>
+
+        <view style="height: {{0.053*get_card_height}}rpx;background-color: #0000007c;position: absolute;top: {{(0.697*get_card_height-0.8+card_to_top)-0.053*get_card_height-25}}rpx;  border-radius: 0 15rpx 15rpx 0; font-size: {{0.0165*get_card_height}}rpx; z-index: 9999;border: 1.5px solid #ffffff7e;border-style:solid solid solid none;left:{{(750-(0.538*get_card_height-3))/2}}rpx;" catchtap="toAnotherAccountPage" wx:if="{{item.card_type!='SQUARE'}}">
+          <view style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;color: white;flex-direction: row;">
+            <view style="width: 20rpx;"> </view>
+            <image style="width: {{0.033*get_card_height}}rpx;;height: {{0.033*get_card_height}}rpx;border-radius: {{0.033*get_card_height/2}}rpx;" src="{{item.account_icon}}"></image>
+            <view style="width: 17rpx;"> </view>
+            <view style="font-weight: bold;">{{item.account_name}}</view>
+            <view style="width: 20rpx;"> </view>
+          </view>
+        </view>
+      </block>
+
+
+      <block wx:elif="{{item.images[0].type!='video'}}">
+        <view style="width: {{0.11*get_card_height}}rpx;height: {{0.045*get_card_height}}rpx;background-color: #F46563;position: absolute;top: {{platform=='iOS'?(0.697*get_card_height-0.8+card_to_top+1):(0.697*get_card_height-0.8+card_to_top)}}rpx;left:{{(750-(0.538*get_card_height-3))/2}}rpx; border-radius: 0 15rpx 0 15rpx; font-size: {{0.022*get_card_height}}rpx; z-index: 9999;">
+          <view style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;color: white;">
+            <view>拥有:{{item.have_card_num}}块</view>
+          </view>
+        </view>
+
+        <view style="height: {{0.053*get_card_height}}rpx;background-color: #0000007c;position: absolute;top: {{(0.697*get_card_height-0.8+card_to_top)-0.053*get_card_height-25}}rpx;  border-radius: 0 15rpx 15rpx 0; font-size: {{0.0165*get_card_height}}rpx; z-index: 9999;border: 1.5px solid #ffffff7e;border-style:solid solid solid none;left:{{(750-(0.538*get_card_height-3))/2}}rpx;" catchtap="toAnotherAccountPage" wx:if="{{item.card_type!='SQUARE'}}">
+          <view style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;color: white;flex-direction: row;">
+            <view style="width: 20rpx;"> </view>
+            <image style="width: {{0.033*get_card_height}}rpx;;height: {{0.033*get_card_height}}rpx;border-radius: {{0.033*get_card_height/2}}rpx;" src="{{item.account_icon}}"></image>
+            <view style="width: 17rpx;"> </view>
+            <view style="font-weight: bold;">{{item.account_name}}</view>
+            <view style="width: 20rpx;"> </view>
+          </view>
+        </view>
+      </block>
+
+
+      <!-- top  {{(0.01)*get_card_height+card_to_top+2}}rpx -->
+      <!-- left   {{(750-(0.538*get_card_height-3))/2}}rpx -->
+      <view wx:if="{{item.card_type=='SQUARE'&&!change_show}}" style="z-index: 9999;">
+        <image style="width: {{0.149*get_card_height}}rpx;height: {{0.149*get_card_height}}rpx;position: absolute;top:{{(0.01)*get_card_height+card_to_top+2+0.144*get_card_height}}rpx;left: {{(750-(0.538*get_card_height-3))/2+((0.538-0.149)*get_card_height)/2}}rpx;" src="/pages/images/square_blue.png"></image>
+
+        <image style="width: {{0.123*get_card_height}}rpx;height: {{0.123*get_card_height}}rpx;position: absolute;top:{{(0.01)*get_card_height+card_to_top+2+0.400*get_card_height}}rpx;left: {{(750-(0.538*get_card_height-3))/2+((0.538-0.123)*get_card_height)/2}}rpx;" src="/pages/images/square_btn.png" catchtap="toMap"></image>
+
+        <!-- <image style="width: {{0.042*get_card_height}}rpx;height: {{0.042*get_card_height}}rpx;position: absolute;top:{{(0.01)*get_card_height+card_to_top+2+0.144*get_card_height}}rpx;left: {{(750-(0.538*get_card_height-3))/2+((0.538-0.149)*get_card_height)/2}}rpx;" src="{{item.account_icon}}"></image> -->
+
+        <view style="position: absolute;top:{{(0.01)*get_card_height+card_to_top+2+0.144*get_card_height+0.094*(0.149*get_card_height)}}rpx;left: {{(750-(0.538*get_card_height-3))/2+((0.538-0.149)*get_card_height)/2+0.094*(0.149*get_card_height)}}rpx;">
+          <view style="width: {{(0.149*get_card_height)*0.812}}rpx;height: {{(0.149*get_card_height)*0.812}}rpx;display: flex;justify-content: center;align-content: center;align-items: center;flex-direction: column;">
+            <view style="display: flex; flex-direction: column;height: {{(0.149*get_card_height)*0.812*0.99}}rpx;width: {{(0.149*get_card_height)*0.812*0.99}}rpx;align-items: center;align-content: center;">
+              <!-- <view style="display: flex;flex-direction: row;margin-top: 3rpx; align-content: center;align-items: center;">
+                
+                <view style="display: flex;flex-direction: column;margin-left: 5rpx;font-size: {{(0.149*get_card_height)*0.812*0.105}}rpx;color: white;font-weight: bold;">
+                  
+                  <view style="width: {{(0.149*get_card_height)*0.812*(0.99-0.282)-5}}rpx;">{{item.card_show_id}}</view>
+                </view>
+              </view> -->
+              <image style="width:{{(0.058*get_card_height)}}rpx;height:{{(0.058*get_card_height)}}rpx;border-radius: {{(0.058*get_card_height)/2}}rpx;border:1px white solid;" src="{{item.account_icon}}"></image>
+              <view style="width: {{(0.149*get_card_height)*0.812-5}}rpx;word-break: break-all;text-overflow: ellipsis;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;text-align: center;color: white;margin-top:  {{(0.008*get_card_height)}}rpx;font-size: {{(0.02*get_card_height)}}rpx;">{{item.account_name}}</view>
+              <view style="display: flex;justify-content: center;align-content: center;align-items: center;width: 100%;margin-bottom: 3rpx;margin-top:  {{(0.008*get_card_height)}}rpx;">
+                <view style="font-size: {{(0.149*get_card_height)*0.812*0.105}}rpx;color: white;font-weight: bold;width: 100%;text-align:center">购于 {{filter.format(item.createtime,'YY-MM-DD')}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view style="position: absolute;font-size: {{(0.027*get_card_height)}}rpx;color: #E4C383;left: {{(750-(0.538*get_card_height-3))/2+0.254*get_card_height}}rpx;;top: {{(0.01)*get_card_height+card_to_top+2+0.605*get_card_height}}rpx;">{{item.card_show_id}}</view>
+        <!-- top  {{(0.01)*get_card_height+card_to_top+2}}rpx -->
+        <!-- left   {{(750-(0.538*get_card_height-3))/2}}rpx -->
+
+        <view style="color: white;position: absolute;font-size: {{0.022*get_card_height}}rpx;top: {{(0.01)*get_card_height+card_to_top+2+0.225*get_card_height}}rpx;left: {{(750-(0.538*get_card_height-3))/2+0.03*get_card_height}}rpx;">{{item.city_name}}</view>
+
+        <view style="color: white;position: absolute;font-size: {{0.022*get_card_height}}rpx;top: {{(0.01)*get_card_height+card_to_top+2+0.225*get_card_height}}rpx;right: {{(750-(0.538*get_card_height-3))/2+0.03*get_card_height}}rpx;" wx:if="{{item.deal_num==0||item.deal_num==1}}">初次购买</view>
+        <view style="color: white;position: absolute;font-size: {{0.022*get_card_height}}rpx;top: {{(0.01)*get_card_height+card_to_top+2+0.225*get_card_height}}rpx;right: {{(750-(0.538*get_card_height-3))/2+0.03*get_card_height}}rpx;" wx:else>交易{{item.deal_num}}次</view>
+
+        <view style="color: white;position: absolute;font-size: {{0.027*get_card_height}}rpx;top: {{(0.01)*get_card_height+card_to_top+2+0.302*get_card_height}}rpx;left: {{(750-(0.538*get_card_height-3))/2+0.075*get_card_height}}rpx;">{{item.area_name}}</view>
+        <view style="color: white;position: absolute;font-size: {{0.027*get_card_height}}rpx;top: {{(0.01)*get_card_height+card_to_top+2+0.302*get_card_height}}rpx;right: {{(750-(0.538*get_card_height-3))/2+0.075*get_card_height}}rpx;">第{{item.square_num}}块</view>
+
+      </view>
+
+
+      <view class="btn_bg" style="width: {{0.11*get_card_height}}rpx;height: {{0.045*get_card_height}}rpx;position: absolute;top: {{platform=='iOS'?((0.01)*get_card_height+card_to_top):((0.01)*get_card_height+card_to_top+2)}}rpx;right:{{(750-(0.538*get_card_height-3))/2}}rpx; border-radius: 0 15rpx 0 15rpx; font-size: {{0.022*get_card_height}}rpx; z-index: 9999;" wx:if="{{item.images[0].type=='video'&&!item.images[0].vertical&&!item.assessing&&item.card_type!='SQUARE'&&!change_show}}" catchtap="showAssessResult">
+        <view style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;color: white;">
+          <view>首发报告</view>
+        </view>
+      </view>
+
+      <view class="btn_bg" style="width: {{0.11*get_card_height}}rpx;height: {{0.045*get_card_height}}rpx;position: absolute;top: {{platform=='iOS'?((0.01)*get_card_height+card_to_top):((0.01)*get_card_height+card_to_top+2)}}rpx;right:{{(750-(0.538*get_card_height-3))/2}}rpx; border-radius: 0 15rpx 0 15rpx; font-size: {{0.022*get_card_height}}rpx; z-index: 9999;" wx:elif="{{item.images[0].type!='video'&&!item.assessing&&item.card_type!='SQUARE'&&!change_show}}" catchtap="showAssessResult">
+        <view style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;color: white;">
+          <view>首发报告</view>
+        </view>
+      </view>
+
+
+      <view style="width: {{0.045*get_card_height}}rpx;height: {{0.045*get_card_height}}rpx;position: absolute;top: {{0.697*get_card_height-0.8-15}}rpx;right:{{(750-(0.538*get_card_height-3))/2+15}}rpx; border-radius: 0 15rpx 0 15rpx; font-size: {{0.022*get_card_height}}rpx; z-index: 100;" wx:if="{{item.images[0].type=='video'&&!item.images[0].vertical}}">
+        <image style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;" src="/pages/images/play.png">
+
+        </image>
+      </view>
+
+
+      <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center; z-index: 1;">
+        <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; border-radius:0 0 0 10rpx;background-color: #848DC8;width: {{0.154*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" catchtap="showCardNum">
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/ssr.png" wx:if="{{item.card_type=='SSR'}}">
+          </image>
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/ssr.png" wx:if="{{item.card_type=='BONUS'}}">
+          </image>
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/sr.png" wx:if="{{item.card_type=='SR'}}">
+          </image>
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;margin-left: -10rpx;" src="/pages/images/square.png" wx:if="{{item.card_type=='SQUARE'}}">
+          </image>
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/function.png" wx:if="{{item.card_type=='FUNCATION'}}">
+          </image>
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:if="{{item.card_type=='FUNCATION'}}">
+          </image>
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:elif="{{item.card_type=='BONUS'}}">
+          </image>
+
+          <view style="font-size: {{0.025*get_card_height}}rpx;color: white;margin-left: -5rpx;font-weight: {{item.card_type=='FUNCATION'?'bold':'400'}};line-height: {{item.card_type=='FUNCATION'?0.025*2*get_card_height:0.025*get_card_height}}rpx;" wx:elif="{{item.card_type!='FUNCATION'}}">
+            {{item.surplus_card_num}}/{{item.total_card_num}}</view>
+        </view>
+        <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; background-color: #58B8B7;width: {{0.154*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" catchtap="showCardLv">
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/c_info_lv.png" wx:if="{{item.card_type=='SQUARE'}}"></image>
+          <image style="height: {{0.054*get_card_height*(2/3)}}rpx;width: {{0.054*get_card_height*(2/3)*2}}rpx;" src="/pages/images/pick.png" wx:elif="{{item.card_type!='SQUARE'}}"></image>
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:elif="{{item.card_type=='FUNCATION'}}"></image>
+
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:if="{{item.card_type=='BONUS'}}"></image>
+          <view style="font-size: {{item.card_type=='FUNCATION'?0.025*2*get_card_height:0.025*get_card_height}}rpx;line-height: {{item.card_type=='FUNCATION'?0.025*2*get_card_height:0.025*get_card_height}}rpx;color: white;;display: flex;justify-content: center;align-content:center;align-items: center;margin-left: 5rpx;" wx:elif="{{item.card_type!='FUNCATION'}}">
+            <view wx:if="{{item.card_type!='SQUARE'}}">{{item.pick_num}}</view>
+            <view wx:else="">{{card_id==item.card_id?pick:item.card_lv}}</view>
+          </view>
+        </view>
+        <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; border-radius: 0 0 10rpx 0;background-color: #E4C383;width: {{0.154*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;" catchtap="showCardCPoint">
+          <image style="height: {{0.05*get_card_height}}rpx;width: {{0.05*get_card_height}}rpx;" src="{{item.assessing?'/pages/images/assess_white.png':'/pages/images/c_info_point.png'}}"></image>
+          <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:if="{{item.card_type=='FUNCATION'||item.card_type=='SQUARE'}}"></image>
+          <view style="font-size: {{item.card_type=='FUNCATION'?0.025*2*get_card_height:0.025*get_card_height}}rpx;line-height: {{item.card_type=='FUNCATION'?0.025*2*get_card_height:0.025*get_card_height}}rpx;color: white;;display: flex;justify-content: center;align-content:center;align-items: center;margin-left: 5rpx;" wx:elif="{{item.card_type!='FUNCATION'}}">
+            <view wx:if="{{!item.assessing}}">{{card_id==item.card_id?cp:item.card_cpoint}}</view>
+            <view wx:if="{{item.assessing}}" style="font-size:{{0.022*get_card_height}}rpx;font-weight: bold;white-space:nowrap;line-height: {{0.022*get_card_height}}rpx;;">{{change_show?'初次发布':'宇宙首发'}}</view>
+          </view>
+        </view>
+      </view>
+
+
+      <view style="width: {{0.154*3*get_card_height}}rpx;display: flex;flex-direction: row;justify-content:left;align-content:center;align-items: center;margin-top: {{0.017*get_card_height}}rpx;" catchtap="test">
+
+
+        <view style="max-width: {{0.154*3*get_card_height}}rpx;font-size: {{0.027*get_card_height}}rpx;font-weight: bold; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" wx:if="{{item.title.length>0}}">
+          {{item.title}}</view>
+        <view style="max-width: {{0.154*3*get_card_height}}rpx;font-size: {{0.027*get_card_height}}rpx;font-weight: bold; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" wx:elif="{{item.content.length>0}}">
+          {{item.content}}</view>
+
+        <view style="display: flex;flex-direction: row;font-size:  {{0.018*get_card_height}}rpx;border-radius: 7rpx;border: 2rpx solid #E4C383;width:{{0.064*get_card_height}}rpx;height:{{0.023*get_card_height}}rpx;justify-content: center;align-content:center;align-items: center;margin-left: 3rpx;color: #E4C383;font-weight: bold;margin-left: 15rpx;" wx:if="{{item.card_type=='FUNCATION'}}">
+          <view>功能卡</view>
+        </view>
+      </view>
+
+      <view style="width: {{0.154*3*get_card_height}}rpx;display: flex;flex-direction: row;justify-content:left;align-content:center;align-items: center;margin-top: {{0.017*get_card_height}}rpx;" wx:if="{{item.card_type=='FUNCATION'}}">
+        <view style="max-width: {{0.154*3*get_card_height}}rpx;font-size: {{0.020*get_card_height}}rpx;">
+          {{item.content}}</view>
+      </view>
+
+      <view style="width: {{0.154*3*get_card_height}}rpx;;display: flex;flex-direction: column;justify-content:center;align-content:center;align-items: center;margin-top: {{item.title.length<=0&&item.content.length<=0?'':'0.017*get_card_height'}}rpx;">
+
+        <view style=" text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;width: 100%;font-size: {{0.021*get_card_height}}rpx;margin-top: {{0.017*get_card_height}}rpx;min-height: {{item.content.length>0?(0.042*get_card_height):0}}rpx;" wx:if="{{item.title.length>0&&!item.have_inscription&&item.card_type!='FUNCATION'}}"> {{item.content}}
+        </view>
+
+
+        <!-- <view wx:if="{{platform=='iOS'}}" style="margin-top: {{(!(item.title.length>0&&!item.have_inscription&&item.card_type!='FUNCATION')&&item.content.length>0)?15:0}}rpx;">
+          <l-badge value="{{item.card_show_id}}" show="{{true}}" shape="midid4" style="display: flex;" wx:if="{{(!item.have_inscription&&!(item.title.length>0&&item.content.length>0))||(item.have_inscription&&item.title.length<=0&&item.content.length<=0)}}">
+            <view style="width: {{0.154*3*get_card_height}}rpx;;justify-content: center;align-items: center;align-content: center;display: flex;">
+              <image style="width: {{0.154*3*get_card_height}}rpx;height: {{0.154*3*get_card_height*0.12}}rpx;" src="/pages/images/id_bar.png">
+              </image>
+            </view>
+          </l-badge>
+        </view> -->
+        <view style="margin-top: {{(!(item.title.length>0&&!item.have_inscription&&item.card_type!='FUNCATION')&&item.content.length>0)?15:0}}rpx;">
+          <l-badge value="{{item.card_show_id}}" show="{{true}}" shape="midid3" style="display: flex;" wx:if="{{(!item.have_inscription&&!(item.title.length>0&&item.content.length>0))||(item.have_inscription&&item.title.length<=0&&item.content.length<=0)}}">
+            <view style="width: {{0.154*3*get_card_height}}rpx;;justify-content: center;align-items: center;align-content: center;display: flex;">
+              <image style="width: {{0.154*3*get_card_height}}rpx;height: {{0.154*3*get_card_height*0.12}}rpx;" src="/pages/images/id_bar.png">
+              </image>
+            </view>
+          </l-badge>
+        </view>
+
+        <view style=" margin-top: 15rpx; display: flex;flex-direction: row;justify-content: space-between;width: 100%;" wx:if="{{!item.have_inscription&&item.title.length<=0&&item.content.length<=0}}">
+          <view style="display: flex;justify-content: center;align-items: center; " catchtap="toOtherAccountInfo" data-item="{{item.account_id}}">
+            <image style="width:{{0.05*get_card_height}}rpx;height: {{0.05*get_card_height}}rpx;border-radius: {{0.05*get_card_height/2}}rpx;" src="{{item.account_icon}}"></image>
+            <text style="margin-left: 10rpx;font-size:  {{0.018*get_card_height}}rpx;max-width: 200rpx;white-space:nowrap;text-overflow:ellipsis;-webkit-text-overflow:ellipsis;overflow:hidden;">{{item.account_name}}</text>
+          </view>
+          <view style="display: flex;justify-content: center;align-items: center; ">
+            <image style="width: {{0.018*get_card_height}}rpx; height: {{0.018*get_card_height}}rpx; margin-top: 2rpx;line-height: {{0.018*get_card_height}}rpx;" src="/pages/images/location1.png" wx:if="{{item.place_name.length>0}}"></image>
+            <text style=" font-size:  {{0.018*get_card_height}}rpx;color: #33A3DE;margin-left: 4rpx;margin-right: 5rpx;max-width: 150rpx;white-space:nowrap;text-overflow:ellipsis;-webkit-text-overflow:ellipsis;overflow:hidden;">{{item.place_name}}</text>
+            <text style="font-size: {{0.018*get_card_height}}rpx; color: #8D8D8D;">{{filter.format(item.createtime,'MM-DD')}}</text>
+          </view>
+        </view>
+      </view>
+
+
+      <view style="margin-top: {{0.017*get_card_height}}rpx;width: {{0.54*get_card_height}}rpx;height: {{0.055*get_card_height}}rpx;display: flex;flex-direction: row;" wx:if="{{item.have_inscription}}">
+        <image style="width:{{0.05*get_card_height}}rpx;height: {{0.05*get_card_height}}rpx;border-radius: {{0.05*get_card_height/2}}rpx;" src="{{item.inscriptions[0].account_icon}}" wx:if="{{item.card_type!='FUNCATION'}}" catchtap="toOtherAccountInfo" data-item="{{item.inscriptions[0].account_id}}"></image>
+
+        <view style="display: flex;flex-direction: column;margin-left: {{0.01*get_card_height}}rpx;width:{{0.48*get_card_height}}rpx;">
+          <view style="display: flex;flex-direction: row;font-size:  {{0.018*get_card_height}}rpx;color: #A0A0A0;align-content:center;align-items: center;" wx:if="{{item.card_type!='FUNCATION'}}">
+            <view style="display: flex;flex-direction: row;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width: 80rpx;" catchtap="toOtherAccountInfo" data-item="{{item.inscriptions[0].account_id}}">
+              {{item.inscriptions[0].name}}</view>
+            <view style="display: flex;flex-direction: row;font-size:  {{0.015*get_card_height}}rpx;border-radius: 7rpx;border: 2rpx solid #E4C383;width:{{0.044*get_card_height}}rpx;height:{{0.02*get_card_height}}rpx;justify-content: center;align-content:center;align-items: center;margin-left: 3rpx;color: #E4C383;font-weight: bold;">
+              <view>题词</view>
+            </view>
+            <view style="display: flex;flex-direction: row;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-left: 25rpx;">
+              {{filter.format2(item.inscriptions[0].owned_card_time)}}</view>
+          </view>
+          <view style="width:{{item.card_type=='FUNCATION'?0.48*get_card_height:0.48*get_card_height}}rpx;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:  {{item.card_type=='FUNCATION'?0.024*get_card_height:0.021*get_card_height}}rpx;margin-left: {{item.card_type=='FUNCATION'?0.027*get_card_height:0}}rpx;">
+            {{item.inscriptions[0].content}}</view>
+        </view>
+      </view>
+      <view style="align-content:center;align-items: center;margin-top: {{platform=='iOS'?0.020*get_card_height:0.025*get_card_height}}rpx;width: {{0.52*get_card_height}}rpx;display: flex;flex-direction: row-reverse;font-size:  {{0.022*get_card_height}}rpx;color: #545454;line-height: {{0.022*get_card_height}}rpx;">
+
+        <view style="align-content:center;align-items: center;display: flex;flex-direction: row-reverse;height: {{0.03*get_card_height+5}}rpx;" catchtap="showComment">
+          <view style="width: 55rpx;display: flex;justify-content: center;align-content:center;align-items: center;height: {{0.03*get_card_height}}rpx;">
+            <view style="line-height: {{0.022*get_card_height}}rpx;">{{item.comment_num}}</view>
+          </view>
+          <image style="width: {{0.03*get_card_height}}rpx;height: {{0.03*get_card_height}}rpx;margin-right: 8rpx;" src="/pages/images/comment2.png"></image>
+        </view>
+
+        <view style="width: 35rpx;display: flex;justify-content: center;align-content:center;align-items: center">
+          <view></view>
+        </view>
+
+        <view style="align-content:center;align-items: center;display: flex;flex-direction: row-reverse;height: {{0.03*get_card_height+5}}rpx;" catchtap="wantCard">
+          <view style="width: 55rpx;display: flex;justify-content: center;align-content:center;align-items: center;height: {{0.03*get_card_height}}rpx;">
+            <view style="line-height: {{0.022*get_card_height}}rpx;">{{item.want_num}}</view>
+          </view>
+          <image style="width: {{0.03*get_card_height}}rpx;height: {{0.03*get_card_height}}rpx;margin-right: 8rpx;" src="/pages/images/start_btn_selected.png" wx:if="{{card_id==item.card_id&&like!=-1}}"></image>
+          <image style="width: {{0.03*get_card_height}}rpx;height: {{0.03*get_card_height}}rpx;margin-right: 8rpx;" src="/pages/images/start3.png" wx:elif="{{!item.wanted}}"></image>
+          <image style="width: {{0.03*get_card_height}}rpx;height: {{0.03*get_card_height}}rpx;margin-right: 8rpx;" src="/pages/images/start_btn_selected.png" wx:elif="{{item.wanted}}"></image>
+        </view>
+
+        <view style="width: 35rpx;display: flex;justify-content: center;align-content:center;align-items: center">
+          <view></view>
+        </view>
+
+        <view style="align-content:center;align-items: center;display: flex;flex-direction: row-reverse;height: {{0.03*get_card_height+5}}rpx;" catchtap="likeCard">
+          <view style="width: 55rpx;display: flex;justify-content: center;align-content:center;align-items: center;height: {{0.03*get_card_height}}rpx;">
+            <view style="line-height: {{0.022*get_card_height}}rpx;">{{item.like_num}}</view>
+          </view>
+          <image style="width: {{0.03*get_card_height}}rpx;height: {{0.03*get_card_height}}rpx;margin-right: 8rpx;" src="/pages/images/heart2.png" wx:if="{{!item.liked}}"></image>
+          <image style="width: {{0.03*get_card_height}}rpx;height: {{0.03*get_card_height}}rpx;margin-right: 8rpx;" src="/pages/images/heart_btn_selected.png" wx:if="{{item.liked}}"></image>
+        </view>
+
+
+        <view style="display: flex;flex-direction: row;align-content:center;align-items: center;" wx:if="{{item.place_name.length>0}}" catchtap="toMap">
+          <image style="width: {{0.03*get_card_height}}rpx;height: {{0.03*get_card_height}}rpx;" src="/pages/images/location3_blue.png"></image>
+          <view style="width: {{0.52*get_card_height-0.03*get_card_height*3-80*3-0.03*get_card_height}}rpx;margin-left: 10rpx;color: #3ca4dd; word-break: break-all;text-overflow: ellipsis;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;line-height: {{0.022*get_card_height}}rpx;height: {{0.022*get_card_height}}rpx;">{{item.place_name}}</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+
+
+<!-- 时间格式化 -->
+<wxs module="filter">
+  function format2(ts) {
+    var timestamp = getDate();
+    var nowYear = timestamp.getFullYear()
+    var nowMonth = timestamp.getMonth() + 1
+    var nowDay = timestamp.getDate()
+
+
+    var date = getDate(ts)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+
+
+
+    if (nowYear != year) {
+      return year + '-' + month + '-' + day + '获得此碎片'
+    }
+    if (nowMonth != month) {
+      return month + '-' + day + '获得此碎片'
+    }
+    if (nowDay != day) {
+      var days = nowDay - day
+      return days + '天前获得此碎片'
+    } else {
+      return '今天获得此碎片'
+    }
+
+  }
+
+  function format(ts, option) {
+    var date = getDate(ts)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var week = date.getDay()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+
+    //获取 年月日
+    if (option == 'YY-MM-DD') return [year, month, day].map(formatNumber).join('-')
+
+    //获取 年月
+    if (option == 'YY-MM') return [year, month].map(formatNumber).join('-')
+
+    //获取 年
+    if (option == 'YY') return [year].map(formatNumber).toString()
+
+    //获取 月
+    if (option == 'MM') return [mont].map(formatNumber).toString()
+
+    //获取 日
+    if (option == 'DD') return [day].map(formatNumber).toString()
+
+    //获取 年月日 周一 至 周日
+    if (option == 'YY-MM-DD Week') return [year, month, day].map(formatNumber).join('-') + ' ' + getWeek(week)
+
+    //获取 月日
+    if (option == 'MM-DD') return [month, day].map(formatNumber).join('-')
+
+    //获取 月日 周一 至 周日
+    if (option == 'MM-DD Week') return [month, day].map(formatNumber).join('-') + ' ' + getWeek(week)
+
+    //获取 周一 至 周日
+    if (option == 'Week') return getWeek(week)
+
+    //获取 时分秒
+    if (option == 'hh-mm-ss') return [hour, minute, second].map(formatNumber).join(':')
+
+    //获取 时分
+    if (option == 'hh-mm') return [hour, minute].map(formatNumber).join(':')
+
+    //获取 分秒
+    if (option == 'mm-dd') return [minute, second].map(formatNumber).join(':')
+
+    //获取 时
+    if (option == 'hh') return [hour].map(formatNumber).toString()
+
+    //获取 分
+    if (option == 'mm') return [minute].map(formatNumber).toString()
+
+    //获取 秒
+    if (option == 'ss') return [second].map(formatNumber).toString()
+
+    //默认 时分秒 年月日
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  }
+
+  function formatNumber(n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+  }
+
+  function getWeek(n) {
+    switch (n) {
+      case 1:
+        return '星期一'
+      case 2:
+        return '星期二'
+      case 3:
+        return '星期三'
+      case 4:
+        return '星期四'
+      case 5:
+        return '星期五'
+      case 6:
+        return '星期六'
+      case 7:
+        return '星期日'
+    }
+  }
+  module.exports.format = format;
+  module.exports.format2 = format2;
+</wxs>

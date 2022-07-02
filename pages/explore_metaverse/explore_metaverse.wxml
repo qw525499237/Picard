@@ -1,0 +1,1107 @@
+<page data-item="{{current_show_item}}" change:data-item="{{ant.currentItemFunction}}">
+  <!--pages/explore_metaverse/explore_metaverse.wxml-->
+  <image style="width: 100vw;height: 100vh;position: fixed;top: 0;left: 0;z-index: 1;" mode="aspectFill" src="/pages/images/explore_metaverse_bg.png"></image>
+  <view style="height: 100vh;width: 750rpx;position: fixed;top: 0;left: 0; z-index: 100;">
+    <view class="top-function-bar" style="top: {{top_status_bar_height+0.1*menu_button_height}}px;z-index: 100;">
+      <view class="line" wx:if="{{!wait_change_show_request}}">
+        <l-badge dot="true" show="{{true_card_list.length>0}}" class="control-btn">
+          <image class="control-btn" style=" height: {{menu_button_height*1.2}}px;width: {{menu_button_height*1.2}}px;" src="/pages/images/get_ture_card2.png" bindtap="showAllTrueCard"></image>
+        </l-badge>
+
+        <image class="control-btn" style=" height: {{menu_button_height*1.2}}px;width: {{menu_button_height*1.2}}px;" src="/pages/images/hot_up_btn.png" bindtap="toHotUpPage" wx:if="{{!change_show}}"></image>
+        <image class="control-btn" style=" height: {{menu_button_height*1.2}}px;width: {{menu_button_height*1.2}}px;" src="/pages/images/exchange_btn.png" bindtap="toExchageCard" wx:if="{{!change_show}}"></image>
+        <image class="control-btn" style=" height: {{menu_button_height*1.2}}px;width: {{menu_button_height*1.2}}px;" src="/pages/images/me1.png" bindtap="toMy"></image>
+      </view>
+    </view>
+
+    <view class="top-function-bar" style="top: {{top_status_bar_height+0.1*menu_button_height+menu_button_height*1.2}}px;z-index: 100;color: white;height: {{top_account_info_height}}px;" wx:if="{{!change_show&&!wait_change_show_request}}">
+      <view style="margin-right: 30rpx;width: 100vw;display: flex;flex-direction: row-reverse;align-items: center;align-content: center;height: 100%;">
+
+
+        <view style="display: flex;flex-direction: row-reverse;align-items: center;align-content: center;height: 100%;" bindtap="showSquareNumToast">
+          <image style=" height: {{top_account_info_height*0.34}}px;width: {{top_account_info_height*0.34}}px;margin-right: 15rpx;margin-right: 50rpx;" src="/pages/images/plus.png"></image>
+          <view style="font-size: {{top_account_info_height*0.3}}px;line-height: {{top_account_info_height*0.3}}px;margin-right: 5rpx;">{{account_info.square_num}}块</view>
+          <image style=" height: {{top_account_info_height*0.5}}px;width: {{top_account_info_height*0.5}}px;margin-right: 15rpx;" src="/pages/images/have_square.png"></image>
+        </view>
+
+        <view style="display: flex;flex-direction: row-reverse;align-items: center;align-content: center;height: 100%;" bindtap="showCardCpToast">
+          <image style=" height: {{top_account_info_height*0.34}}px;width: {{top_account_info_height*0.34}}px;margin-right: 15rpx;margin-right: 50rpx;" src="/pages/images/plus.png"></image>
+          <view style="font-size: {{top_account_info_height*0.3}}px;line-height: {{top_account_info_height*0.3}}px;margin-right: 5rpx;">{{account_info.total_card_cp}}</view>
+          <image style=" height: {{top_account_info_height*0.5}}px;width: {{top_account_info_height*0.5}}px;margin-right: 15rpx;" src="/pages/images/have_cp.png"></image>
+        </view>
+
+        <view style="display: flex;flex-direction: row-reverse;align-items: center;align-content: center;height: 100%;" bindtap="showHaveCpToast">
+          <image style=" height: {{top_account_info_height*0.34}}px;width: {{top_account_info_height*0.34}}px;margin-right: 15rpx;margin-right: 40rpx;" src="/pages/images/plus.png"></image>
+          <view style="font-size: {{top_account_info_height*0.3}}px;line-height: {{top_account_info_height*0.3}}px;margin-right:5rpx;">{{account_info.cpoint}}</view>
+          <image style=" height: {{top_account_info_height*0.5}}px;width: {{top_account_info_height*0.5}}px;margin-right: 15rpx;" src="/pages/images/c_info_point.png"></image>
+        </view>
+
+      </view>
+    </view>
+
+    <view style="z-index: 9999;position: fixed;top: 300rpx;display: {{refrshView?'block':'none'}};"></view>
+
+    <swiper-limited-load id="swiper" generic:item-view="card_swiper_item" swiperHeight="100vh" list="{{card_list}}" change:list="{{ant.showMetaList}}" change_show="{{change_show}}" get_card_height="{{get_card_height}}" card_to_top="{{card_to_top}}" swipreCanMove="{{swipre_can_move}}" showPickInfo="{{show_select_card_loading}}" bind:metaSwiperLongTap="metaSwiperLongTap" bind:metaSwiperTouchEnd="metaSwiperTouchEnd" bind:swiperChangeToReq="swiperChangeToReq" bind:showCardNum="showCardNum" bind:showCardLv="showCardLv" bind:showCardCPoint="showCardCPoint" bind:showAllInfo="showAllInfo" bind:wantCard="wantCard" bind:likeCard="likeCard" bind:showAssessResult="showAssessResult" bind:metaSwiperTap="metaSwiperTap" bind:showComment="showComment" style="position: absolute;top: 2000px;height: 100vh;width: 100vw;">
+    </swiper-limited-load>
+    f
+    <!-- <swiper style="height:100vh;width: 750rpx;top: 0px;position: fixed;left: 0;" bindchange="swiperChange" vertical="true" bindanimationfinish="endAnt" bindtransition="startMove">
+    <swiper-item style="display: flex;justify-content: center;align-content:center;align-items: center; margin-top: 15rpx;height:100vh;" wx:for="{{card_list}}" bindtap="metaSwiperTap" bindlongpress="metaSwiperLongTap" catchtouchmove="{{swipreCanMove?'':'stopTouchMove'}}" bindtouchend="metaSwiperTouchEnd" >
+      <card_swiper_item item="{{item}}" get_card_height="{{get_card_height}}"></card_swiper_item>
+    </swiper-item>
+  </swiper> -->
+
+    <view class="top-function-bar" style="top: {{notification_top - notification_move_top_rpx}}rpx;width: {{0.507*get_card_height}}rpx;left: {{(750-0.507*get_card_height)/2}}rpx;opacity: {{notification_opacity}};" animation='{{notification_animation}}' wx:if="{{show_notigication&&!change_show}}" catchtap="toDetail">
+      <view style="width:{{0.507*get_card_height}}rpx;font-size: {{0.021*get_card_height}}rpx;background-color: #6699FFCC;color: white;display: flex;flex-direction: row;align-content: center;align-items: center;border-radius: {{0.048*get_card_height*0.2}}rpx;padding-top: 10rpx;padding-bottom: 10rpx;">
+        <image style="width: {{0.048*get_card_height*0.8}}rpx;height: {{0.048*get_card_height*0.8}}rpx;margin-left: 15rpx;display: flex;" src="/pages/images/notification.png"></image>
+        <text style="margin-left: 10rpx;display: flex;width: {{0.507*get_card_height-0.048*get_card_height*0.8-25-15}}rpx; word-break: break-all;text-overflow: ellipsis;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">{{now_show_content.content}}</text>
+      </view>
+    </view>
+    <!-- show_select_card_loading -->
+    <view wx:if="{{show_select_card_loading}}">
+      <view style="position: absolute;bottom: 0;left: 0;height: {{0.1*get_card_height}}rpx; background-color: #999999; width: 750rpx;display: flex;justify-content: center;align-items: center;align-content: center;flex-direction: row;" wx:if="{{show_pick_card_first_loading}}">
+        <view style="color: white; z-index: 100;line-height: 30rpx;">花费10 </view>
+        <image style="width: 35rpx;height:35rpx ;z-index: 100;margin-left: 5rpx;" src="/pages/images/c_info_point.png"></image>
+        <view style="color: white; z-index: 100;line-height: 30rpx;"> ，Pick{{change_show?'卡片':'宇宙碎片'}}...</view>
+      </view>
+      <view style="position: absolute;bottom: 0;left: 0;height: {{0.1*get_card_height}}rpx; background-color: #999999; width: 750rpx;display: flex;justify-content: center;align-items: center;align-content: center;" wx:else>
+        <view style="color: white; z-index: 100;">{{show_get_card_animation?'Pick中....':get_card_bottom_content}}</view>
+      </view>
+      <image style="width: {{0.05*get_card_height}}rpx;height:{{0.05*get_card_height}}rpx;position: absolute;bottom:{{0.025*get_card_height}}rpx;left: 230rpx;" src="https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/loading.gif" hidden="{{!show_get_card_animation}}"></image>
+      <view style="position: absolute;bottom: 0;left: 0;height: {{0.1*get_card_height}}rpx; background-color: {{loading_color}}; width: 0rpx;display: flex;justify-content: center;align-items: center;align-content: center;z-index: 99;" animation="{{get_card_loading_animation}}" wx:if="{{show_select_card_loading}}">
+      </view>
+    </view>
+
+    <view class="top-function-bar" style="bottom: {{0.047*get_card_height}}rpx;width: 84vw;left: 8vw;opacity: {{show_select_card_loading?'0':'1'}};" wx:elif="{{get_card_height!=0}}">
+      <view class="bottom-line" style=" height: {{0.068*get_card_height}}rpx;display: flex;flex-direction: row;justify-content: space-between;">
+
+        <view class="bottom-btn" style="background-color: #f46563;width: 282rpx;" bindtap="toAddCard">
+          <image src="/pages/images/add.png" style="width: {{0.038*get_card_height*1.15}}rpx;height: {{0.038*get_card_height*1.15}}rpx;"></image>
+          <view style="color: white;font-weight: bold;font-size: {{0.0214*get_card_height}}rpx;line-height: {{0.0214*get_card_height}}rpx;margin-left: 15rpx;">创造</view>
+        </view>
+        <view class="bottom-btn" style="background-color: #ffdf88;width: 282rpx;" bindtap="toHandBook">
+          <image class="un-ant" src="/pages/images/universe.png" style="width: {{0.038*get_card_height}}rpx;height: {{0.038*get_card_height}}rpx;animation: remindMessage 5s linear infinite;" animation="{{universe_ant}}"></image>
+          <view style="color: #662c02;font-weight: bold;font-size: {{0.0214*get_card_height}}rpx;line-height: {{0.0214*get_card_height}}rpx;margin-left: 15rpx;">{{change_show?'地图':'宇宙'}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <view style="position: absolute;top: {{notification_top-20+get_card_height*0.73-50}}rpx;left: {{(750-110)/2}}rpx;height: 40rpx;color: white;font-size: 20rpx;font-weight: bold; z-index: 1000;" wx:if="{{show_fail_pick_ant}}" animation="{{fail_pick_ant}}">
+    <view style="display: flex;width: 100%;height: 100%;justify-content: center;align-items: center;align-content: center;font-size: 30rpx;font-weight: bold;flex-direction: row;">
+      <image style="width: 80rpx;height: 40rpx;" src="/pages/images/pick.png"></image>
+      <view style="margin-left: 10rpx;">+1</view>
+    </view>
+  </view>
+  <view style="position: absolute;top: {{notification_top-20+get_card_height*0.73-50}}rpx;left: {{(750-60)/2+0.154*get_card_height}}rpx;height: 40rpx;color: white;font-size: 20rpx;font-weight: bold; z-index: 1000;" wx:if="{{show_fail_pick_ant}}" animation="{{fail_pick_ant}}">
+    <view style="display: flex;width: 100%;height: 100%;justify-content: center;align-items: center;align-content: center;font-size: 30rpx;font-weight: bold;flex-direction: row;">
+      <image style="width: 40rpx;height: 40rpx;" src="/pages/images/c_point.png"></image>
+      <view style="margin-left: 10rpx;">+3</view>
+
+    </view>
+  </view>
+
+
+  <l-mask wx:if="{{login_mask}}" show="{{login_mask}}" opacity="0.7" z-index="5500">
+    <view style="width: 750rpx;height: 100vh;display: flex;justify-content: center;align-items: center;align-content: center;">
+      <card_toast7 bind:clickAffirm="affirmToLogIn"></card_toast7>
+    </view>
+  </l-mask>
+
+
+
+  <l-mask show="{{true}}" opacity="0.7" wx:if="{{show_login_loading}}" z-index="5500">
+    <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;">
+      <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;height: 235rpx;background-color: white;border-radius: 15rpx;">
+        <view style="height: 15rpx;"></view>
+        <l-loading l-container-class="l-container" bg-color="#f3f3f3" z-index="776" show="{{true}}" type="circle" style="margin-left: 25rpx;margin-right: 25rpx;">
+        </l-loading>
+        <view style="height: 25rpx;"></view>
+        <view style="margin-top: 20rpx;color: black;margin-left: 25rpx;margin-right: 25rpx;">登陆中.....</view>
+      </view>
+    </view>
+  </l-mask>
+
+  <l-mask wx:if="{{show_pick_second_loading}}" show="{{show_pick_second_loading}}" opacity="0" z-index="1000">
+    <image style="position: absolute;height: 200rpx;width: 200rpx;top: {{(window_height_rpx-200)/2}}rpx;left: 275rpx;z-index: 1000;" src="https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/loading.gif"></image>
+  </l-mask>
+
+
+  <l-mask wx:if="{{unenough_cp_toast}}" show="{{unenough_cp_toast}}" opacity="0.7" z-index="1000">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+      <unenough_cp_toast data="{{account_info}}" content="{{toast_content}}" bind:affirm="sellCard" bind:cancel="backList"></unenough_cp_toast>
+    </view>
+  </l-mask>
+
+
+
+  <cover-view style="position: fixed;height: 100vh;width: 100vw;top: 0rpx;left: 0rpx;z-index: 2000;" wx:if="{{no_touch}}">
+
+  </cover-view>
+  <l-mask wx:if="{{show_pick_second_loading}}" show="{{show_pick_second_loading}}" opacity="0" z-index="1000">
+    <image style="position: absolute;height: 200rpx;width: 200rpx;top: {{(window_height_rpx-200)/2}}rpx;left: 275rpx;z-index: 1000;" src="https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/loading.gif"></image>
+  </l-mask>
+
+  <!-- show_have_cp_toast -->
+  <l-mask wx:if="{{show_have_cp_toast}}" show="{{show_have_cp_toast}}" opacity="0.7" z-index="1000">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+      <now_have_cp_toast data="{{account_info}}" bind:affirm="sellCard" type="0"></now_have_cp_toast>
+    </view>
+  </l-mask>
+
+  <l-mask wx:if="{{show_square_num_toast}}" show="{{show_square_num_toast}}" opacity="0.7" z-index="1000">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+      <now_square_num_toast data="{{account_info}}" bind:affirm="toBuySquare" bind:affirm2="toMySquare"></now_square_num_toast>
+    </view>
+  </l-mask>
+
+  <l-mask wx:if="{{show_card_cp_toast}}" show="{{show_card_cp_toast}}" opacity="0.7" z-index="1000">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+      <now_card_cp_toast data="{{account_info}}" bind:affirm="toAddCard"></now_card_cp_toast>
+    </view>
+  </l-mask>
+
+  <l-mask wx:if="{{no_cp_toast}}" show="{{no_cp_toast}}" opacity="0.7" z-index="1000">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+      <no_cp_toast data="{{account_info}}" bind:clickAffirm="sellCard" bind:clickCancel="toAddCard" show_type="0"></no_cp_toast>
+    </view>
+  </l-mask>
+
+  <l-mask wx:if="{{show_card_info_mask}}" show="{{show_card_info_mask}}" opacity="0.7" z-index="1000">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+      <card_info data="{{contents}}"></card_info>
+    </view>
+  </l-mask>
+
+
+  <l-mask wx:if="{{show_new_account_toast}}" show="{{show_new_account_toast}}" opacity="0.7" z-index="1001">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+      <new_account_toast data="{{account_info}}" bind:clickAffirm="sellCard2" bind:clickCancel="backList"></new_account_toast>
+    </view>
+  </l-mask>
+
+  <l-mask wx:if="{{first_open_toast}}" show="{{first_open_toast}}" opacity="0.7" z-index="1001">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+      <first_open_toast bind:clickAffirm="affirmToLogIn" bind:clickCancel="backList"></first_open_toast>
+    </view>
+  </l-mask>
+
+
+  <l-mask wx:if="{{show_img_card}}" show="{{show_img_card}}" opacity="0.7" z-index="1500">
+
+    <view style="position: fixed;top: {{get_card_height*(0.98+0.13)}}rpx;width: 750rpx; " wx:if="{{show_img_card_point}}">
+      <view style="display: flex;flex-direction: row;  margin-top: 10rpx;width: 750rpx;" wx:if="{{true_card_show_list_in_bar.length>1}}">
+        <view class="dots3">
+          <block wx:for="{{true_card_show_list_in_bar}}" wx:for-index="index" wx:key="*this">
+            <view class="{{current3==index?'active':''}}"></view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 实体碎片 -->
+    <view style="height: 100vh;width: 750rpx;">
+      <l-transition>
+        <swiper current="{{current3}}" style="height:100vh;width: 750rpx;position: absolute;top: 1500px;left: 0;" bindchange="swiperChange3" animation='{{show_img_card_animationData}}'>
+          <swiper-item style="display: flex;justify-content: center;align-content:center;align-items: center; " wx:for="{{true_card_show_list_in_bar}}" catchtouchmove="{{swiperCanMove?'':'stopTouchMove'}}">
+            <view style="height: 100vh;width: 750rpx;display: flex;justify-content: center;;">
+              <view wx:if="{{true_card_wait}}">
+                <view style="position: fixed;top: 0;left: 0;width: 750rpx;height: {{0.13*get_card_height}}rpx;" bindtap="cancelDownloadTrueCard"></view>
+                <view style="position: fixed;top: {{get_card_height*(0.98+0.13)}}rpx;left: 0;width: 750rpx;height: {{0.13*get_card_height*4}}rpx;" bindtap="cancelDownloadTrueCard"></view>
+              </view>
+              <view wx:if="{{!true_card_wait&&!true_card_downloading}}">
+                <view style="position: fixed;top: 0;left: 0;width: 750rpx;height: {{0.13*get_card_height}}rpx;" bindtap="endDownload"></view>
+                <view style="position: fixed;top: {{get_card_height*(0.98+0.13)}}rpx;left: 0;width: 750rpx;height: {{0.13*get_card_height*4}}rpx;" bindtap="endDownload"></view>
+              </view>
+
+
+              <view id="{{item.card_id}}" style="width: {{0.56*get_card_height}}rpx; height: {{get_card_height*0.98}}rpx; background-color: white;border-radius: 15rpx;margin-top: {{0.13*get_card_height}}rpx;">
+                <view style="width: 100%;flex-direction: column;display: flex;justify-content: center;align-content:center;align-items: center; ">
+                  <view style="width: {{0.538*get_card_height+4}}rpx;height: {{0.73*get_card_height+4}}rpx;margin-top: {{0.010*get_card_height}}rpx;border-radius: 15rpx;box-shadow: 2px 2px 3px #777777;display: flex;justify-content: center;align-content:center;align-items: center;background-color: black;z-index:100;">
+                    <video style="height:{{0.73*get_card_height}}rpx;width: {{0.538*get_card_height}}rpx;" autoplay="{{true}}" controls="{{false}}" loop="{{true}}" muted="{{true}}" src="{{true_card_url}}" object-fit="cover" wx:if="{{show_true_card_video}}">
+                    </video>
+                    <image style="width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;border-radius: 15rpx;" src="{{true_card_url}}" mode="{{aspectFill}}" wx:elif="{{show_true_card_img}}">
+                    </image>
+                    <view style="background-image: url('https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/pick_logo.png');background-size:100% 100%;width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;border-radius: 15rpx;" wx:else bindtap="toCardDertail2" data-item="{{item}}">
+                      <image style="width: {{0.538*get_card_height}}rpx;height: {{0.73*get_card_height}}rpx;border-radius: 15rpx;" src="{{item.card_info.images[0].image_url}}" mode="{{item.card_info.images[0].vertical?'aspectFill':'aspectFit'}}">
+                      </image>
+                    </view>
+
+                    <image style="width: 60rpx;height: 60rpx;position: fixed;top: {{0.87*get_card_height-60-10}}rpx;right: {{(750-0.538*get_card_height)/2+10}}rpx;" src="/pages/images/play.png" wx:if="{{item.card_info.images[0].type=='video'&&(true_card_wait||true_card_downloading)&&item.card_info.images[0].vertical}}" bindtap="toCardDertail2" data-item="{{item}}">
+                    </image>
+                    <image style="width: 60rpx;height: 60rpx;position: fixed;top: {{0.73*get_card_height/2+((item.card_info.images[0].height/item.card_info.images[0].width)*0.538*get_card_height)/2-70+0.13*get_card_height+0.010*get_card_height}}rpx;right: {{(750-0.538*get_card_height)/2+10}}rpx;" src="/pages/images/play.png" wx:if="{{item.card_info.images[0].type=='video'&&(true_card_wait||true_card_downloading)&&!item.card_info.images[0].vertical}}" bindtap="toCardDertail2" data-item="{{item}}">
+                    </image>
+                  </view>
+                  <view style="position: absolute;top: {{0.14*get_card_height-4}}rpx;left:375rpx; z-index: 100;">
+                    <view style="width: 0rpx;height: {{0.011*get_card_height}}rpx;background-color: #FFE670;" animation="{{progress_animation1}}"></view>
+                  </view>
+                  <view style="position: absolute;top: {{0.14*get_card_height+0.011*get_card_height-2-4}}rpx;right:{{(750-(0.538*get_card_height+4))/2}}rpx; z-index: 100;">
+                    <view style="width: {{0.011*get_card_height}}rpx;height: 0rpx;background-color: #FFE670;" animation="{{progress_animation2}}"></view>
+                  </view>
+                  <view style="position: absolute;top: {{0.14*get_card_height+0.73*get_card_height-0.011*get_card_height+4}}rpx;right:{{(750-(0.538*get_card_height+4))/2+0.010*get_card_height}}rpx; z-index: 100;">
+                    <view style="width: 0rpx;height: {{0.011*get_card_height}}rpx;background-color: #FFE670;" animation="{{progress_animation3}}"></view>
+                  </view>
+                  <view style="position: absolute;top: {{0.14*get_card_height+2-4-2}}rpx;left:{{(750-(0.538*get_card_height+4))/2}}rpx; z-index: 100;height: {{0.73*get_card_height-0.011*get_card_height+4+4+2}}rpx;">
+                    <view style="display: flex;flex-direction: column-reverse;height: {{0.73*get_card_height-0.011*get_card_height+4+4+2}}rpx;">
+                      <view style="width: {{0.011*get_card_height}}rpx;height: 0rpx;background-color: #FFE670;" animation="{{progress_animation4}}"></view>
+                    </view>
+                  </view>
+                  <view style="position: absolute;top: {{0.14*get_card_height-4}}rpx;left:{{(750-(0.538*get_card_height+4))/2+0.010*get_card_height}}rpx; z-index: 100;">
+                    <view style="width: 0rpx;height: {{0.011*get_card_height}}rpx;background-color: #FFE670;" animation="{{progress_animation5}}"></view>
+                  </view>
+                  <!-- <view style="width: {{0.13*get_card_height}}rpx;height: {{0.13*get_card_height}}rpx;position: absolute;top: {{0.295*get_card_height}}rpx;left:{{(725-(0.11*get_card_height))/2}}rpx;" wx:if="{{data.card_type=='FUNCATION'}}">
+        <image style="width: {{0.13*get_card_height}}rpx;height: {{0.13*get_card_height}}rpx;" src="{{data.function_icon_url}}"></image>
+      </view> -->
+
+                  <!-- <view style="width: {{0.045*get_card_height}}rpx;height: {{0.045*get_card_height}}rpx;position: absolute;top: {{0.827*get_card_height-0.8-15}}rpx;right:{{(750-(0.538*get_card_height-3))/2+15}}rpx; border-radius: 0 15rpx 0 15rpx; font-size: {{0.022*get_card_height}}rpx; z-index: 100;" wx:if="{{data.images[0].type=='video'}}">
+        <image style="display: flex;justify-content: center;align-content:center;align-items: center;width: 100%;height: 100%;" src="/pages/images/play.png">
+        </image>
+      </view> -->
+                  <view wx:if="{{true_card_wait}}">
+                    <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center; z-index: 1;">
+                      <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; border-radius:0 0 0 10rpx;background-color: #848DC8;width: {{0.154*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;">
+                        <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/ssr.png" wx:if="{{item.card_info.card_type=='SSR'}}">
+                        </image>
+                        <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/sr.png" wx:if="{{item.card_info.card_type=='SR'}}">
+                        </image>
+                        <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/function.png" wx:if="{{item.card_info.card_type=='FUNCATION'}}">
+                        </image>
+                        <view style="font-size: {{0.025*get_card_height}}rpx;color: white;margin-left: -5rpx;font-weight: {{data.card_type=='FUNCATION'?'bold':'400'}};">
+                          {{item.card_info.surplus_card_num}}/{{item.card_info.total_card_num}}</view>
+                      </view>
+                      <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; background-color: #58B8B7;width: {{0.154*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;">
+                        <image style="height: {{0.054*get_card_height*(2/3)}}rpx;width: {{0.054*get_card_height*(2/3)*2}}rpx;" src="/pages/images/pick.png"></image>
+                        <!-- <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/c_info_lv.png"></image> -->
+                        <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:if="{{item.card_info.card_type=='FUNCATION'}}"></image>
+                        <view style="font-size: {{item.card_info.card_type=='FUNCATION'?0.025*2*get_card_height:0.025*get_card_height}}rpx;color: white;;display: flex;justify-content: center;align-content:center;align-items: center;margin-left: 5rpx;" wx:if="{{item.card_info.card_type!='FUNCATION'}}">
+                          <view>{{item.card_info.card_lv}}</view>
+                        </view>
+                      </view>
+                      <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; border-radius: 0 0 10rpx 0;background-color: #E4C383;width: {{0.154*get_card_height}}rpx;height: {{0.06*get_card_height}}rpx;">
+                        <image style="height: {{0.05*get_card_height}}rpx;width: {{0.05*get_card_height}}rpx;" src="/pages/images/c_info_point.png"></image>
+                        <image style="height: {{0.054*get_card_height}}rpx;width: {{0.054*get_card_height}}rpx;" src="/pages/images/infiniteness.png" wx:if="{{item.card_info.card_type=='FUNCATION'}}"></image>
+                        <view style="font-size: {{item.card_info.card_type=='FUNCATION'?0.025*2*get_card_height:0.025*get_card_height}}rpx;color: white;;display: flex;justify-content: center;align-content:center;align-items: center;margin-left: 5rpx;" wx:if="{{item.card_info.card_type!='FUNCATION'}}">
+                          <view>{{item.card_info.card_cpoint}}</view>
+                        </view>
+                      </view>
+                    </view>
+
+
+                    <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center; z-index: 1;margin-top:  {{0.036*get_card_height}}rpx;">
+                      <view style="width: {{0.288*get_card_height}}rpx;height: {{0.085*get_card_height}}rpx;border-radius: {{0.144*get_card_height}}rpx 0 0 {{0.144*get_card_height}}rpx;background-color: #E5C383;display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center;" bindtap="createTrueCard" data-item="{{item}}">
+                        <image style="width: {{0.0355*get_card_height}}rpx;height: {{0.0355*get_card_height}}rpx;" src="/pages/images/get_ture_card3.png"></image>
+                        <view style="width: 20rpx;"></view>
+                        <view style="color: #560B01;font-size:  {{0.0258*get_card_height}}rpx;font-weight: bold;padding-bottom: 5rpx;">生成[实体{{change_show?'卡片':'碎片'}}]</view>
+                      </view>
+                      <view style="width: {{0.115*get_card_height}}rpx;height: {{0.085*get_card_height}}rpx;border-radius:  0 {{0.144*get_card_height}}rpx {{0.144*get_card_height}}rpx 0;background-color: #000000;display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center;" bindtap="hideTrueCard" data-item="{{item}}">
+                        <view style="color: white;font-size:  {{0.0258*get_card_height}}rpx;font-weight: bold;">取消</view>
+                      </view>
+                    </view>
+
+                    <view style="position: absolute;top: {{0.955*get_card_height-0.8-15}}rpx;left:{{(750-(0.238*get_card_height-3))/2+15}}rpx;  z-index: 100;">
+                      <view style="display: flex;flex-direction: column;">
+                        <view style="height: {{0.035*get_card_height}}rpx;border-radius: {{0.012*get_card_height}}rpx;font-size: {{0.016*get_card_height}}rpx;display: flex;align-content: center;align-items: center;justify-content: center;color: white;background-color: #FF673A;padding-left:20rpx;padding-right:20rpx;line-height: {{0.035*get_card_height}}rpx;">
+                          <view>分享{{change_show?'卡片':'碎片'}} 一起升值</view>
+                        </view>
+                        <image style="width: {{0.017*get_card_height}}rpx;height: {{0.017*get_card_height}}rpx;margin-left: 15rpx;" src="/pages/images/triangle.png"></image>
+                      </view>
+                    </view>
+                    <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center; z-index: 1;margin-top:  {{0.020*get_card_height}}rpx;" bindtap="noQccode">
+                      <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center;width: {{0.016*get_card_height}}rpx;height: {{0.016*get_card_height}}rpx;border-radius: {{0.016*get_card_height}}rpx;border:1px solid #6B6B6B ;">
+                        <view style="width: {{0.010*get_card_height}}rpx;height: {{0.010*get_card_height}}rpx;border-radius: {{0.010*get_card_height}}rpx;background-color: #6B6B6B;" wx:if="{{no_qccode}}"></view>
+                      </view>
+                      <view style="width: 7rpx;"></view>
+                      <view style="color: #6B6B6B;font-size:{{0.018*get_card_height}}rpx;font-weight: bold;padding-bottom: 5rpx;padding-bottom: -16rpx;">无二维码版本</view>
+                    </view>
+                  </view>
+                  <view wx:elif="{{true_card_downloading}}">
+                    <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center; z-index: 1;margin-top:  {{0.054*get_card_height}}rpx;">
+                      <view style="width: {{0.403*get_card_height}}rpx;height: {{0.085*get_card_height}}rpx;border-radius: {{0.144*get_card_height}}rpx;background-color: #E5C383;display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center;">
+                        <view style="color: white;font-size:  {{0.0258*get_card_height}}rpx;font-weight: bold;padding-bottom: 5rpx;">正在生成</view>
+                        <view style="color: #560B01;font-size:  {{0.0258*get_card_height}}rpx;font-weight: bold;padding-bottom: 5rpx;">[实体{{change_show?'卡片':'碎片'}}]</view>
+                      </view>
+                      <!-- <view style="width: {{0.115*get_card_height}}rpx;height: {{0.085*get_card_height}}rpx;border-radius:  0 {{0.144*get_card_height}}rpx {{0.144*get_card_height}}rpx 0;background-color: #000000;display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center;">
+            <view style="color: white;font-size:  {{0.0258*get_card_height}}rpx;font-weight: bold;">取消</view>
+          </view> -->
+                    </view>
+
+                    <view style="position: absolute;top: {{0.910*get_card_height-0.8-15}}rpx;left:{{(750-(0.233*get_card_height-3))/2+15}}rpx;  z-index: 100;">
+                      <view style="display: flex;flex-direction: column;">
+                        <view style="height: {{0.035*get_card_height}}rpx;border-radius: {{0.012*get_card_height}}rpx;font-size: {{0.016*get_card_height}}rpx;display: flex;align-content: center;align-items: center;justify-content: center;color: white;background-color: #FF673A;padding-left:20rpx;padding-right:20rpx;line-height: {{0.035*get_card_height}}rpx;">
+                          <view>生成中...</view>
+                        </view>
+                        <image style="width: {{0.017*get_card_height}}rpx;height: {{0.017*get_card_height}}rpx;margin-left: 15rpx;" src="/pages/images/triangle.png"></image>
+                      </view>
+                    </view>
+                    <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center; z-index: 1;margin-top:  {{0.026*get_card_height}}rpx;line-height: {{0.018*get_card_height}}rpx;" wx:if="{{!make_ture_card_timeout}}">
+                      <image style="width: {{0.027*get_card_height}}rpx;height: {{0.027*get_card_height}}rpx;" src="/pages/images/get_ture_card4.png"></image>
+                      <view style="width: 10rpx;"></view>
+                      <view style="color: #6B6B6B;font-size:{{0.018*get_card_height}}rpx;padding-bottom: 5rpx;padding-bottom: -16rpx;">即将生成</view>
+                      <view style="color: #FF673A;font-size:{{0.018*get_card_height}}rpx;padding-bottom: 5rpx;padding-bottom: -16rpx;">[实体{{change_show?'卡片':'碎片'}}]</view>
+                      <!-- <view style="color: #6B6B6B;font-size:{{0.018*get_card_height}}rpx;padding-bottom: 5rpx;padding-bottom: -16rpx;">和</view>
+          <view style="color: #FF673A;font-size:{{0.018*get_card_height}}rpx;padding-bottom: 5rpx;padding-bottom: -16rpx;">[视频碎片]</view> -->
+                      <view style="width: 20rpx;"></view>
+                      <view style="color: #6B6B6B;font-size:{{0.018*get_card_height}}rpx;padding-bottom: 5rpx;padding-bottom: -16rpx;"> 分享后可以快速升值</view>
+                    </view>
+
+                    <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center; z-index: 1;margin-top:  {{0.026*get_card_height}}rpx;" wx:if="{{make_ture_card_timeout}}">
+                      <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; z-index: 1;width: {{0.176*get_card_height}}rpx;height: {{0.055*get_card_height}}rpx;border-radius: 20rpx;background-color: black;color: white;" bindtap="endDownload" data-item="{{item}}">
+                        <view style="font-style: {{0.021*get_card_height}}rpx;font-weight: bold;">返回</view>
+                      </view>
+                    </view>
+                  </view>
+                  <view wx:else>
+                    <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center; z-index: 1;margin-top:  {{0.054*get_card_height}}rpx;">
+                      <view style="width: {{0.403*get_card_height}}rpx;height: {{0.085*get_card_height}}rpx;border-radius: {{0.144*get_card_height}}rpx;background-color: #E5C383;display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center;" data-item="{{item}}" bindtap="showMakedImgCardToast">
+                        <!-- <view style="color: white;font-size:  {{0.0258*get_card_height}}rpx;font-weight: bold;padding-bottom: 5rpx;">继续生成</view> -->
+                        <view style="color: #560B01;font-size:  {{0.0258*get_card_height}}rpx;font-weight: bold;padding-bottom: 5rpx;">[实体{{change_show?'卡片':'碎片'}}]已生成 分享后加速升值</view>
+                      </view>
+                      <!-- <view style="width: {{0.115*get_card_height}}rpx;height: {{0.085*get_card_height}}rpx;border-radius:  0 {{0.144*get_card_height}}rpx {{0.144*get_card_height}}rpx 0;background-color: #000000;display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center;">
+            <view style="color: white;font-size:  {{0.0258*get_card_height}}rpx;font-weight: bold;">取消</view>
+          </view> -->
+                    </view>
+
+                    <view style="position: absolute;top: {{0.910*get_card_height-0.8-15}}rpx;left:{{(750-(0.233*get_card_height-3))/2+15}}rpx;  z-index: 100;">
+                      <view style="display: flex;flex-direction: column;">
+                        <view style="height: {{0.035*get_card_height}}rpx;border-radius: {{0.012*get_card_height}}rpx;font-size: {{0.016*get_card_height}}rpx;display: flex;align-content: center;align-items: center;justify-content: center;color: white;background-color: #FF673A;padding-left:20rpx;padding-right:20rpx;line-height: {{0.035*get_card_height}}rpx;">
+                          <view>已存入手机相册</view>
+                        </view>
+                        <image style="width: {{0.017*get_card_height}}rpx;height: {{0.017*get_card_height}}rpx;margin-left: 15rpx;" src="/pages/images/triangle.png"></image>
+                      </view>
+                    </view>
+
+                    <view style="display: flex;flex-direction: row;width: 100%;justify-content: center;align-content:center;align-items: center; z-index: 1;margin-top:  {{0.026*get_card_height}}rpx;">
+                      <view style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center; z-index: 1;width: {{0.176*get_card_height}}rpx;height: {{0.055*get_card_height}}rpx;border-radius: 20rpx;background-color: black;color: white;" bindtap="endDownload" data-item="{{item}}">
+                        <view style="font-style: {{0.021*get_card_height}}rpx;font-weight: bold;">返回</view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </swiper-item>
+        </swiper>
+      </l-transition>
+    </view>
+  </l-mask>
+  <block wx:if="{{window_height_rpx>0&&!change_show}}">
+    <view id="assess_pop" class="pop_bg" style="position: absolute;top: {{window_height_rpx}}rpx;left: -4vw;height: 108Vw;width: 108Vw;z-index: 1000;background-size: 100% 100%; " change:data-item="{{ant.changeShowAssessComment}}" data-item="{{show_assess_comment}}" wx:if="{{window_height_rpx>0&&!change_show}}">
+      <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;width: 100%;">
+        <view style="height: {{0.06*get_card_height}}rpx;">
+          <view style="height: {{0.04*get_card_height}}rpx;"></view>
+          <view style="display: flex;width: 80vw;">
+            <image wx:if="{{show_assess_comment.show}}" catchtap="backInitalAssess" style="height: {{0.04*get_card_height}}rpx;width: {{0.04*get_card_height}}rpx;border-radius: {{0.043/2*get_card_height}}rpx;bottom: -{{0.02*get_card_height}}rpx;" src="/pages/images/back_white.png"></image>
+          </view>
+        </view>
+        <view style="font-size: {{0.027*get_card_height}}rpx;line-height: {{0.027*get_card_height}}rpx;font-weight: bold;color: white;display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;">
+          <image style="height: {{0.043*get_card_height}}rpx;width: {{0.043*get_card_height}}rpx;border-radius: {{0.043/2*get_card_height}}rpx;" src="{{current_show_item.account_icon}}" catchtap="toTheOtherMyPage"></image>
+          <view style="margin-left: 15rpx;">{{current_show_item.account_name}}</view>
+        </view>
+
+        <view style="font-size: {{0.0202*get_card_height}}rpx;line-height: {{0.0202*get_card_height}}rpx;color: white;display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;margin-top: {{0.0225*get_card_height}}rpx;">
+          <view>ta创造的第<span style="color: #E4C383;">{{current_show_item.card_no}}</span>块碎片，正在进行宇宙首发，是否认购？</view>
+        </view>
+
+        <view style="display: flex;flex-direction: row;font-size: {{0.0157*get_card_height}}rpx; line-height: {{0.0157*get_card_height}}rpx;color: white;margin-top: {{0.0225*get_card_height}}rpx;">
+          <view>首发价值：<span style="font-size: {{0.055*get_card_height}}rpx; line-height: {{0.055*get_card_height}}rpx;color: #E4C383;">{{current_show_item.initial_cp}}</span></view>
+          <image style="height: {{0.06*get_card_height}}rpx;width: {{0.06*get_card_height}}rpx;margin-left: 15rpx;" src="/pages/images/c_info_point.png"></image>
+          <view style="width: 15rpx;"></view>
+          <image style="height: {{0.032*get_card_height}}rpx;width: {{0.032*get_card_height}}rpx;top: 0;bottom: 0;margin: auto;" src="/pages/images/save_num_toast_icon_white.png" bindtap="saveCardToast"></image>
+        </view>
+
+        <view style="margin-top: {{0.023*get_card_height}}rpx; display: {{show_assess_comment.show?'none':'flex'}};flex-direction: row;justify-content: space-between;align-items: center;align-content: center;font-size: {{0.0253*get_card_height}}rpx;align-content: center;justify-content: center;justify-items: center;">
+
+          <view style="display: flex;flex-direction: row;align-content: center;justify-content: center;justify-items: center;width: {{0.0281*get_card_height+0.0202*get_card_height*3}}rpx;">
+            <image style="height: {{0.0281*get_card_height}}rpx;width: {{0.0281*get_card_height}}rpx;" src="/pages/images/sand_clock.png"></image>
+            <timekeeper style="height: {{0.0202*get_card_height}}rpx;top: 0;bottom: 0;left: 0;right: 0;margin: auto;" font_size="{{0.0202*get_card_height}}" font_color="#FFFFFF" calculate_seconds="{{seconds}}"></timekeeper>
+          </view>
+          <view style="width: 15rpx;"></view>
+
+          <view style="display: flex;flex-direction: row;border-radius: {{0.073*get_card_height/2+4}}rpx;border: 4rpx solid white;align-content: center;justify-content: center;justify-items: center;" wx:if="{{current_show_item.show_ipoed}}">
+            <view style="width: {{0.322*get_card_height}}rpx;color: #E4C383;background-color: #E4C383;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;height: 100%;border-radius:{{(0.073*get_card_height)/2}}rpx;height: {{0.073*get_card_height}}rpx;" bindtap="showIPOToast">
+              <view style="display:  flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;">
+                <image style="height: {{0.0383*get_card_height}}rpx;width: {{0.0383*get_card_height}}rpx;" src="/pages/images/assess_white.png"></image>
+                <view style="font-weight: bolder;color: white;margin-left: 5rpx;line-height: {{0.0253*get_card_height}}rpx;font-size: {{0.0253*get_card_height}}rpx;">已认购</view>
+              </view>
+              <view style="font-size: {{0.0124*get_card_height}}rpx;color: white;">剩余可认购: {{current_show_item.assess_surplus_card_num}}</view>
+            </view>
+          </view>
+
+          <view style="display: flex;flex-direction: row;border-radius: {{0.073*get_card_height/2+4}}rpx;border: 4rpx solid white;align-content: center;justify-content: center;justify-items: center;" wx:else>
+            <view style="width: {{0.322*get_card_height}}rpx;color: #E4C383;background-color: #F46563;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;height: 100%;border-radius:{{(0.073*get_card_height)/2}}rpx;height: {{0.073*get_card_height}}rpx;" bindtap="showIPOToast">
+              <view style="display:  flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;">
+                <image style="height: {{0.0383*get_card_height}}rpx;width: {{0.0383*get_card_height}}rpx;" src="/pages/images/assess_white.png"></image>
+                <view style="font-weight: bolder;color: white;margin-left: 5rpx;line-height: {{0.0253*get_card_height}}rpx;">首发认购</view>
+              </view>
+              <view style="font-size: {{0.0124*get_card_height}}rpx;color: white;">剩余可认购: {{current_show_item.assess_surplus_card_num}}</view>
+            </view>
+          </view>
+
+          <view style="width: 15rpx;"></view>
+
+          <view>
+            <image style="height: {{0.055*get_card_height}}rpx;width: {{0.055*1.5*get_card_height}}rpx;" src="/pages/images/comment3.png" catchtap="sentAssessComment"></image>
+          </view>
+
+        </view>
+
+        <view style="margin-top: {{0.012*get_card_height}}rpx; display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;font-size: {{0.021*get_card_height}}rpx;width:68%;" wx:if="{{show_assess_comment.show}}">
+          <!-- #8c258f -->
+          <view style="width: 100%;height: {{0.14*get_card_height}}rpx;background-color: #DD4FC4;border: 5rpx solid #8c258f;border-radius: 15rpx;" bindtap="showInputBox">
+            <scroll-view style="width: 100%;height: {{0.14*get_card_height-10}}rpx;width: 94%;margin-left: 3%;margin-top: 5rpx;margin-bottom: 5rpx;" scroll-y>
+              <view style="word-wrap: break-word;color: {{assess_content.length>0?'#FFFFFF':'#edeaea'}};font-size: {{0.025*get_card_height}}rpx;">{{assess_content.length>0?assess_content:'发布吐槽 & 彩虹屁，获得10CP'}}</view>
+            </scroll-view>
+          </view>
+
+          <view style="width: {{0.162*get_card_height}}rpx;color: #E4C383;background-color: #F46563;display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;height: 100%;border-radius:{{(0.052*get_card_height)/2}}rpx;height: {{0.052*get_card_height}}rpx;margin-top: 25rpx;border: 4rpx solid white;" bindtap="sendAssess">
+            <image style="height: {{0.03*get_card_height}}rpx;width: {{0.03*get_card_height}}rpx;" src="/pages/images/assess_white.png"></image>
+            <view style="font-weight: bolder;color: white;margin-left: 5rpx;">提交评论</view>
+          </view>
+        </view>
+
+
+      </view>
+    </view>
+
+    <!-- <view style="width: 100vw;height: 100vh;position: fixed;top: 0;left: 0;z-index: 999;" catchtap="hideAssessResultPop" wx:if="{{show_assess_pop}}"></view> -->
+
+    <view id="assess_result_pop" class="pop_bg" style="position: absolute;top: {{window_height_rpx}}rpx;left: -4vw;height: 108Vw;width: 108Vw;z-index: 1001;background-size: 100% 100%;" change:data-item="{{ant.changeAssessResult}}" data-item="{{show_assess_result_pop}}" wx:if=" {{window_height_rpx>0&&!change_show}}">
+      <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;width: 100%;">
+        <view style="height: {{0.069*get_card_height}}rpx;"></view>
+        <scroll-view style="height: {{0.483*get_card_height}}rpx;width: 100%;" scroll-y scroll-top="{{assess_pop_result_top}}">
+          <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;width: 100%;">
+            <view style="font-size: {{0.033*get_card_height}}rpx;line-height: {{0.033*get_card_height}}rpx;font-weight: bold;color: white;display: flex;">宇宙首发报告</view>
+            <view style="font-size: {{0.0165*get_card_height}}rpx;line-height: {{0.0165*get_card_height}}rpx;font-weight: bold;color: white;display: flex;margin-top: {{0.023*get_card_height}}rpx;">{{filter.format(current_assess_result_show_item.assess_time,'YY-MM-DD')}}</view>
+
+            <view style="font-size: {{0.026*get_card_height}}rpx;line-height: {{0.026*get_card_height}}rpx;font-weight: bold;color: white;display: flex;margin-top: {{0.029*get_card_height}}rpx;">经过<span style="color: #E4C383;">{{current_assess_result_show_item.total_assess_num}}</span>位宇宙成员的首发认购</view>
+            <view style="font-size: {{0.026*get_card_height}}rpx;line-height: {{0.026*get_card_height}}rpx;font-weight: bold;color: white;display: flex;margin-top: {{0.029*get_card_height}}rpx;">初始[交易价值]为：</view>
+
+
+            <view style="display: flex;flex-direction: row;font-size: {{0.055*get_card_height}}rpx; line-height: {{0.055*get_card_height}}rpx;color: #E4C383;margin-top: {{0.023*get_card_height}}rpx;">
+              <view>{{current_assess_result_show_item.initial_cp_result}}</view>
+              <image style="height: {{0.06*get_card_height}}rpx;width: {{0.06*get_card_height}}rpx;margin-left: 15rpx;" src="/pages/images/c_info_point.png"></image>
+            </view>
+            <view style="font-size: {{0.026*get_card_height}}rpx;line-height: {{0.026*get_card_height}}rpx;font-weight: bold;color: white;display: flex;margin-top: {{0.029*get_card_height}}rpx;">高于<span style="color: #E4C383;">{{current_assess_result_show_item.assess_percent}}%</span>的宇宙碎片</view>
+
+            <view style="display: flex;flex-direction: row;font-size: {{0.026*get_card_height}}rpx; line-height: {{0.026*get_card_height}}rpx;color: white;margin-top: {{0.023*get_card_height}}rpx;font-weight: bold;">
+              <view>相比<span style="color: #E4C383;">{{current_assess_result_show_item.initial_cp}}</span></view>
+              <image style="height: {{0.027*get_card_height}}rpx;width: {{0.027*get_card_height}}rpx;margin-left: 5rpx;" src="/pages/images/c_info_point.png"></image>
+              <view>的[首发价值]</view>
+            </view>
+
+            <view style="font-size: {{0.05*get_card_height}}rpx;line-height: {{0.05*get_card_height}}rpx;color: #F46563;display: flex;margin-top: {{0.029*get_card_height}}rpx;font-weight: bold;" wx:if="{{current_assess_result_show_item.initial_cp_percent>=0}}">上涨 +{{current_assess_result_show_item.initial_cp_percent}}%</view>
+            <view style="font-size: {{0.05*get_card_height}}rpx;line-height: {{0.05*get_card_height}}rpx;color: #33CC66;display: flex;margin-top: {{0.029*get_card_height}}rpx;font-weight: bold;" wx:else>下降 {{current_assess_result_show_item.initial_cp_percent}}%</view>
+
+
+            <view style="color: white;display: flex;margin-top: {{0.032*get_card_height}}rpx;height: {{0.002*get_card_height}}rpx;width: 60%;background-color: white;"></view>
+            <view style="height: {{0.015*get_card_height}}rpx;"></view>
+            <view style="display: flex;flex-direction: column;margin-top: {{0.015*get_card_height}}rpx;justify-content: center;align-content: center;align-items: center;">
+
+              <block wx:for="{{current_assess_result_show_item.card_assesses}}">
+                <!-- 每个cell -->
+                <view class='item' style="margin-bottom: {{0.028*get_card_height}}rpx;" wx:key="{{item.id}}" data-item="{{item}}" data-id="{{item.id}}">
+                  <view class="item_account_info">
+                    <view style="width: {{0.038*get_card_height}}rpx;height: {{0.038*get_card_height}}rpx;">
+                      <image style="width: {{0.038*get_card_height}}rpx;height: {{0.038*get_card_height}}rpx;border-radius: {{0.038*get_card_height/2}}rpx;" src="{{item.account_icon}}" bindtap="toAccountInfo" data-item="{{item.account_id}}"></image>
+                    </view>
+                    <view class="item_account_name" style="margin-left: {{0.01*get_card_height}}rpx;width: 540rpx;color: white;font-size:  23rpx;">
+                      <view style="display: flex;flex-direction: row;">
+                        <view style="display: flex;flex-direction: column;" data-item="{{item}}" data-id="{{item.id}}">
+                          <view style="display: flex; flex-direction: row;align-items: center;justify-items: center;">
+                            <view>{{item.account_name}}</view>
+
+                            <view wx:if="{{item.ipo}}" style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center;margin-left:{{0.021*get_card_height}}rpx;border: 1px solid  #E4C383;border-radius: {{0.005*get_card_height}}rpx;height: {{0.0157*get_card_height+5}}rpx;">
+                              <view style="width: 5rpx;"></view>
+                              <view style="line-height: {{0.0150*get_card_height}}rpx;color: #E4C383;font-size: {{0.0150*get_card_height}}rpx;">已认购</view>
+                              <view style="width: 5rpx;"></view>
+                            </view>
+
+                            <view wx:else style="display: flex;flex-direction: row;justify-content: center;align-content:center;align-items: center;margin-left:{{0.021*get_card_height}}rpx;border: 1px solid  white;border-radius: {{0.005*get_card_height}}rpx;height: {{0.0157*get_card_height+5}}rpx;">
+                              <view style="width: 5rpx;"></view>
+                              <view style="line-height: {{0.0150*get_card_height}}rpx;color: white;font-size: {{0.0150*get_card_height}}rpx;">未认购</view>
+                              <view style="width: 5rpx;"></view>
+                            </view>
+                          </view>
+
+                          <text style="font-size:27rpx ;margin-top: 5rpx;width: 540rpx;">{{item.content}}</text>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </scroll-view>
+        <view style="display: flex;flex-direction: row;margin-top: {{0.01*get_card_height}}rpx;justify-content: left;align-content: center;align-items: center;">
+          <view style="width: {{(600-0.2*get_card_height)/2}}rpx;"> </view>
+          <view style="width: {{0.2*get_card_height}}rpx;color: #E4C383;background-color: #F46563;display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;height: 100%;border-radius:{{(0.052*get_card_height)/2}}rpx;height: {{0.052*get_card_height}}rpx;border: 4rpx solid white;" bindtap="toAddCard">
+            <image style="height: {{0.025*get_card_height}}rpx;width: {{0.025*get_card_height}}rpx;" src="/pages/images/add.png"></image>
+            <view style="font-weight: bolder;color: white;margin-left: 5rpx;font-size:  {{0.021*get_card_height}}rpx;line-height:  {{0.021*get_card_height}}rpx;">创造更多{{change_show?'卡片':'碎片'}}</view>
+          </view>
+          <view style="width: {{(600-0.2*get_card_height)/2-0.048*get_card_height}}rpx;"> </view>
+          <image style="width: {{0.048*get_card_height}}rpx;height: {{0.048*get_card_height}}rpx;" src="/pages/images/share_btn1_white.png"></image>
+        </view>
+        <button open-type="share" plain='true' form-type="submit" style="position: absolute; width: 100rpx;height:100rpx;border:none;top: {{0.543*get_card_height}}rpx;right: 60rpx;" data-id="{{popup_data.type}}"></button>
+      </view>
+    </view>
+  </block>
+
+
+  <l-toast show="{{show_toast}}" title="{{toast_content}}" duration="{{toast_duration}}" />
+
+
+  <l-mask wx:if="{{get_photo_mask}}" show="{{get_photo_mask}}" opacity="0.7" z-index="1501">
+    <view style="width: 750rpx;height: 100vh;display: flex;justify-content: center;align-items: center;align-content: center;">
+      <card_toast6 bind:clickAffirm="affirmToGetPhoto" data-item="{{card_data}}"></card_toast6>
+    </view>
+  </l-mask>
+
+  <l-mask wx:if="{{get_photo_again_mask}}" show="{{get_photo_again_mask}}" opacity="0.7" z-index="1501">
+    <view style="width: 750rpx;height: 100vh;display: flex;justify-content: center;align-items: center;align-content: center;">
+      <card_toast6_save_again bind:clickAffirm="affirmToGetPhoto" data-item="{{card_data}}"></card_toast6_save_again>
+    </view>
+  </l-mask>
+
+  <l-mask wx:if="{{show_inital_buy_toast}}" show="{{show_inital_buy_toast}}" opacity="0.7" z-index="1501">
+    <view style="width: 750rpx;height: 100vh;display: flex;justify-content: center;align-items: center;align-content: center;" bindtap="backList">
+      <inital_buy_toast bind:clickAffirm="leftInitalBuy" bind:clickCancel="rightInitalBuy" data="{{current_show_item}}" show_type="{{initial_cp_show_type}}"></inital_buy_toast>
+    </view>
+  </l-mask>
+
+
+
+
+
+  <canvas type="2d" id="canvas" style="width: 540px; height: 720px;position:fixed;left:11110px;top: 0;"></canvas>
+
+  <canvas type="2d" id="canvas2" style="width: 250px; height: 200px;border: 1px solid black;position:fixed;left:11110px;top: 0;"></canvas>
+
+
+
+  <view id="ctInput" class="ct-input" wx:if="{{ showComtBox }}" style="top: {{ ctInput_top }}px;z-index: 2000;">
+    <textarea placeholder="{{input_place_holder}}" focus="{{ showComtBox }}" bindblur="comtBlur" maxlength="200" auto-height bindfocus="ctFocus" bindlinechange="ctLineChange" bindinput="codeInput" bindconfirm="doneTap" show-confirm-bar="{{ false }}" confirm-type="send" adjust-position="{{ false }}" value="{{assess_content_for_input}}" style="background-color: #F6F3F7; border-radius: 33rpx; padding: 15rpx 20rpx;min-height: 37rpx;">
+  </textarea>
+  </view>
+
+
+  <view id="commentInput" class="ct-input" wx:if="{{ showCommentBox }}" style="top: {{ ctInput_top }}px;z-index: 888;">
+    <textarea placeholder="{{input_place_holder}}" focus="{{ showCommentBox }}" bindblur="commentBlur" maxlength="-1" auto-height bindfocus="commentInputFocus" bindlinechange="commentInputLineChange" bindinput="codeInput" bindconfirm="sentComment" show-confirm-bar="{{ false }}" confirm-type="send" adjust-position="{{ false }}" style="background-color: #F6F3F7; border-radius: 33rpx; padding: 15rpx 20rpx;">
+  </textarea>
+    <!-- <image src="../../assets/icon/icon_zpxq_@@2x.png"></image>  -->
+  </view>
+
+  <l-popup wx:if="{{show_comment}}" show="{{show_comment}}" content-align="bottom">
+    <view style="height: 900rpx;background-color: white;border-radius: 40rpx 40rpx 0 0;">
+      <view style="display: flex;justify-content: center;align-content: center;align-items: center;height: 80rpx;">
+        <view style="font-size: 26rpx;">共{{totalCommentNum}}条评论</view>
+      </view>
+      <view style="height: 1rpx;width: 100vw;background-color: rgba(128, 128, 128, 0.171);"></view>
+      <scroll-view scroll-y="true" style="height: 700rpx;top: 100rpx;" enable-flex>
+        <view class='giftListView'>
+          <block wx:for="{{comments}}">
+            <view class='item' wx:key="{{item.id}}" data-item="{{item}}" data-id="{{item.id}}">
+              <view class="item_account_info">
+                <image style="width: 60rpx;height: 60rpx;border-radius: 30rpx;" src="{{item.account_icon}}"></image>
+                <view class="item_account_name">
+                  <view style="display: flex;flex-direction: row;">
+                    <view style="display: flex;flex-direction: column;" bindtap='mainCommentAction' data-item="{{item}}" data-id="{{item.id}}">
+                      <view style="display: flex; flex-direction: row;align-items: center;justify-items: center;">
+                        <view style="font-size: 22rpx;color: black;">{{item.account_name}}</view>
+                        <view style="display: flex;flex-direction: row;font-size:  15rpx;border-radius: 7rpx;border: 2rpx solid #E4C383;height:25rpx;justify-content: center;align-content:center;align-items: center;margin-left: 5rpx;color: #E4C383;font-weight: bold;" wx:if="{{item.owner_inscription}}">
+                          <view style="margin-left: 5rpx;margin-right: 5rpx;">拥有者题词</view>
+                        </view>
+                      </view>
+                      <text style="font-size:19rpx ;color: #9E9E9E; margin-top: 5rpx;">{{filter.format(item.create_time,
+                        'YY-MM-DD hh-mm')}}</text>
+                      <text style="font-size:27rpx ;margin-top: 5rpx;width: 540rpx;">{{item.content}}</text>
+                    </view>
+                    <view style="display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;height: 65rpx;width: 65rpx;margin-left: 10rpx;" data-item="{{item}}" bindtap="commentLike">
+                      <image style="width: 40rpx;height: 40rpx;" src="/pages/images/heart_btn_selected.png" wx:if="{{item.like}}"></image>
+                      <image style="width: 40rpx;height: 40rpx;" src="/pages/images/heart2.png" wx:if="{{!item.like}}">
+                      </image>
+                      <view style="color: #555555;font-size: 19rpx;">{{item.like_count}}</view>
+                    </view>
+                  </view>
+
+
+                  <view class='giftListView'>
+                    <block wx:for="{{item.reply_comment}}" wx:for-item="c_item">
+                      <!-- 每个cell -->
+                      <view class='child_item' wx:key="{{c_item.id}}" bindtap='replyCommentAction' data-item="{{c_item}}" data-id="{{c_item.id}}">
+                        <view class="child_item_account_info">
+                          <image style="width: 45rpx;height: 45rpx;border-radius: 22rpx;" src="{{c_item.reply_account_icon}}" bindtap="toAccountInfo" data-item="{{c_item.reply_account_id}}">
+                          </image>
+                          <view class="child_item_account_name">
+                            <view style="display: flex;flex-direction: row;">
+                              <view style="display: flex;flex-direction: column;">
+                                <view style="display: flex; flex-direction: row;align-items: center;justify-items: center;">
+                                  <text style="font-size: 22rpx;color: black;">{{c_item.reply_account_name}}</text>
+                                  <!-- <view
+                                style="background-color: #F5F5F5; border-radius: 13rpx;color: #676767;height: 25rpx;font-size: 18rpx;margin-left: 10rpx;"
+                                wx:if="{{c_item.owner}}">
+                                <view style="margin-left: 10rpx;margin-right: 10rpx;">拥有者</view>
+                              </view> -->
+                                </view>
+                                <text style="font-size:19rpx ;color: #9E9E9E; margin-top: 5rpx;">{{filter.format(c_item.create_time,
+                                  'YY-MM-DD hh-mm')}}</text>
+                                <text style="font-size:27rpx ;margin-top: 5rpx;width: 482rpx;">{{c_item.content}}</text>
+                              </view>
+                              <view style="display: flex;flex-direction: column;align-items: center;align-content: center;width: 65rpx;margin-left: 10rpx;" data-item="{{c_item}}" bindtap="commentLike">
+                                <image style="width: 40rpx;height: 40rpx;" src="/pages/images/heart_btn_selected.png" wx:if="{{c_item.like}}"></image>
+                                <image style="width: 40rpx;height: 40rpx;" src="/pages/images/heart2.png" wx:if="{{!c_item.like}}"></image>
+                                <view style="color: #555555;font-size: 19rpx;margin-top: -5rpx;">{{c_item.like_count}}
+                                </view>
+                              </view>
+                            </view>
+                          </view>
+                        </view>
+                      </view>
+                    </block>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view class="list_toast" wx:if="{{totalCommentNum==0}}" bindtap="showComtBox">
+          <image style="width: 139rpx;height: 90rpx;" src="/pages/images/hava_card.png"></image>
+          <text style="margin-top: 15rpx; color: #979797;margin-bottom: 25rpx;font-size: 29rpx;">该{{change_show?'卡片':'碎片'}}暂未有题词及评论，快来发送你的评论吧！</text>
+        </view>
+      </scroll-view>
+      <view style="height: 1rpx;width: 100vw;background-color: rgba(128, 128, 128, 0.171);"></view>
+      <view class="inscription" bindtap="showComtBox">
+        <view style="display: flex;flex-direction: row;width:100%;border-radius: {{data.have_card?33:30}}rpx;margin-right: 1rpx;height: 60rpx;background-color: #F6F7F6;justify-content: center;align-content:center;align-items: center;">
+          <view style="display: flex;flex-direction: row;width: 100%;">
+            <text style="font-size: 23rpx;color: #9A9A9A;margin-left: 25rpx;">{{''}}{{change_show?'发条评论带给卡片神秘力量~':'发条评论带给碎片神秘力量~'}}</text>
+            <!-- <text style="font-size: 23rpx;color: #E5C383;width: 46rpx;" wx:if="{{data.have_card}}">题词</text>
+        <text style="font-size: 23rpx;color: #9A9A9A;width: 100%;width: 46rpx;" wx:if="{{data.have_card}}">呦~</text> -->
+          </view>
+        </view>
+      </view>
+    </view>
+  </l-popup>
+
+
+  <l-dialog wx:if="{{show_dialog}}" style="z-index: 1501;" show="{{show_dialog}}" type="alert" title="宇宙首发" content="宇宙碎片创造者，可以设定[首发价值]，以该价值对其他用户进行初次发售。" content2="您可决定是否认购该碎片，最后根据整体认购情况，生成碎片的[交易价值]。" content3="[交易价值]可既可能高于，也可能低于[首发价值]；认购者越多，[交易价值]也越高。" content4="相信自己的眼光，先人一步，认购高潜力碎片吧。让你的宇宙有意思，让你的眼光有价值！" />
+
+</page>
+
+
+<wxs module="filter">
+  function format(ts, option) {
+    if (ts == null) {
+      return
+    }
+    if (ts.lenght <= 0) {
+      return ''
+    }
+    var date = getDate(ts)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var week = date.getDay()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+
+    //获取 年月日
+    if (option == 'YY-MM-DD') return [year, month, day].map(formatNumber).join('-')
+
+    //获取 年月
+    if (option == 'YY-MM') return [year, month].map(formatNumber).join('-')
+
+    //获取 年
+    if (option == 'YY') return [year].map(formatNumber).toString()
+
+    //获取 月
+    if (option == 'MM') return [mont].map(formatNumber).toString()
+
+    //获取 日
+    if (option == 'DD') return [day].map(formatNumber).toString()
+
+    //获取 年月日 周一 至 周日
+    if (option == 'YY-MM-DD Week') return [year, month, day].map(formatNumber).join('-') + ' ' + getWeek(week)
+
+    //获取 月日 周一 至 周日
+    if (option == 'MM-DD Week') return [month, day].map(formatNumber).join('-') + ' ' + getWeek(week)
+
+    //获取 月日 
+    if (option == 'MM-DD') {
+      // if (year != day.getFullYear()) {
+      //   return [year, month, day].map(formatNumber).join('-')
+      // }
+      return [month, day].map(formatNumber).join('-')
+    }
+
+    //获取 周一 至 周日
+    if (option == 'Week') return getWeek(week)
+
+    //获取 时分秒
+    if (option == 'hh-mm-ss') return [hour, minute, second].map(formatNumber).join(':')
+
+    //获取 时分
+    if (option == 'hh-mm') return [hour, minute].map(formatNumber).join(':')
+
+    //获取 分秒
+    if (option == 'mm-dd') return [minute, second].map(formatNumber).join(':')
+
+    //获取 时
+    if (option == 'hh') return [hour].map(formatNumber).toString()
+
+    //获取 分
+    if (option == 'mm') return [minute].map(formatNumber).toString()
+
+    //获取 秒
+    if (option == 'ss') return [second].map(formatNumber).toString()
+
+    //默认 时分秒 年月日
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  }
+
+  function formatNumber(n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+  }
+
+  function getWeek(n) {
+    switch (n) {
+      case 1:
+        return '星期一'
+      case 2:
+        return '星期二'
+      case 3:
+        return '星期三'
+      case 4:
+        return '星期四'
+      case 5:
+        return '星期五'
+      case 6:
+        return '星期六'
+      case 7:
+        return '星期日'
+    }
+  }
+  module.exports.format = format;
+</wxs>
+
+
+
+<wxs module="ant">
+  var timeout = "";
+  var show_assess = false;
+  var show_assess_comment = false;
+  var show_assess_result = false;
+  var listIsShow = false;
+
+  var swiperComponent = null;
+  var assessComponent = null;
+  var assessResultComponent = null;
+
+  var listTopHeight = 0;
+  var listIsDown = true;
+  var assessHeightRpx = 0;
+  var assessCommentHeightRpx = 0;
+  var windowHeightpx = 0;
+  var assessResultHeightRpx = 0;
+  function initData(newValue, ownerInstance) {
+    if (swiperComponent == null || assessComponent == null || assessResultComponent == null) {
+      swiperComponent = ownerInstance.selectAllComponents("#swiper")
+      assessComponent = ownerInstance.selectAllComponents("#assess_pop")
+      assessResultComponent = ownerInstance.selectAllComponents("#assess_result_pop")
+      swiperComponent = swiperComponent[0]
+      assessComponent = assessComponent[0]
+      assessResultComponent = assessResultComponent[0]
+    }
+    if (assessHeightRpx == 0) {
+      assessHeightRpx = newValue.getCardHeight * (0.027 + 0.03 + 0.052) + 35 * 4 + 25 + 50 + 25 + 35 + 20
+      if (newValue.platform == 'iOS') {
+        assessHeightRpx = assessHeightRpx * (0.88)
+      }
+    }
+    if (assessCommentHeightRpx == 0) {
+      assessCommentHeightRpx = newValue.getCardHeight * (0.14) - 20
+      if (newValue.platform == 'iOS') {
+        assessCommentHeightRpx = assessCommentHeightRpx * (0.9)
+      }
+    }
+    if (windowHeightpx == 0) {
+      windowHeightpx = newValue.windowHeightpx
+    }
+    if (listTopHeight == 0) {
+      listTopHeight = newValue.getCardHeight * (0.027 + 0.03 + 0.052) + 35 * 4 + 25 + 50 + 25 + 35 + 20 + 20
+      if (newValue.platform == 'iOS') {
+        listTopHeight = (listTopHeight + 30) * (0.88)
+      }
+      listTopHeight = (listTopHeight + 20) * 0.32
+    }
+
+    if (assessResultHeightRpx == 0) {
+      assessResultHeightRpx = newValue.getCardHeight * (0.622)
+    }
+  }
+  function currentItemFunction(newValue, oldValue, ownerInstance, instance) {
+    if (newValue == '') {
+      hideAssessPop()
+      hideAssessResultPop()
+      downList()
+      return
+    }
+    initData(newValue, ownerInstance)
+
+    if (newValue.show_assess_pop) {
+      hideAssessResultPop()
+      showAssessPop()
+      upList()
+    } else if (newValue.show_assess_result_pop) {
+
+    } else {
+      hideAssessPop()
+      hideAssessResultPop()
+      downList()
+    }
+  }
+
+  function upList() {
+    if (!listIsDown) {
+      return
+    }
+    var num = 1
+
+    listIsDown = false
+    function step() {
+      var top = num * (listTopHeight / 10)
+
+      if (top > listTopHeight) {
+        swiperComponent.setStyle({
+          "top": -listTopHeight + 'rpx' // 支持rpx
+        })
+      } else {
+        swiperComponent.setStyle({
+          "top": (-top) + 'rpx'  // 支持rpx
+        })
+        num++
+        swiperComponent.requestAnimationFrame(step);
+      }
+    }
+    swiperComponent.requestAnimationFrame(step);
+  }
+  function downList() {
+    if (listIsDown) {
+      return
+    }
+    listIsDown = true
+    var num = 1
+    function step() {
+      var top = listTopHeight - num * (listTopHeight / 10)
+
+      if (top < 0) {
+        swiperComponent.setStyle({
+          "top": 0 + 'rpx' // 支持rpx
+        })
+      } else {
+        swiperComponent.setStyle({
+          "top": (-top) + 'rpx'  // 支持rpx
+        })
+        num++
+        swiperComponent.requestAnimationFrame(step);
+      }
+    }
+    swiperComponent.requestAnimationFrame(step);
+  }
+
+  function showAssessPop() {
+    if (show_assess) {
+      return
+    }
+    var num = 1
+    show_assess = true
+    function step() {
+      var top = windowHeightpx - num * (assessHeightRpx / 10)
+      if (top < windowHeightpx - assessHeightRpx) {
+        assessComponent.setStyle({
+          "top": (windowHeightpx - assessHeightRpx) + 'rpx' // 支持rpx
+        })
+      } else {
+        assessComponent.setStyle({
+          "top": top + 'rpx'  // 支持rpx
+        })
+        num++
+        assessComponent.requestAnimationFrame(step);
+      }
+    }
+    assessComponent.requestAnimationFrame(step);
+  }
+  function showAssessResultPop() {
+    if (show_assess_result) {
+      return
+    }
+    var num = 1
+    show_assess_result = true
+    function step() {
+      var top = windowHeightpx - num * (assessResultHeightRpx / 10)
+      if (top < windowHeightpx - assessResultHeightRpx) {
+        assessResultComponent.setStyle({
+          "top": (windowHeightpx - assessResultHeightRpx) + 'rpx' // 支持rpx
+        })
+      } else {
+        assessResultComponent.setStyle({
+          "top": top + 'rpx'  // 支持rpx
+        })
+        num++
+        assessResultComponent.requestAnimationFrame(step);
+      }
+    }
+    assessResultComponent.requestAnimationFrame(step);
+  }
+  function hideAssessPop() {
+    if (!show_assess) {
+      return
+    }
+    var num = 1
+    show_assess = false
+    show_assess_comment = false
+    var fromTop = windowHeightpx - assessHeightRpx
+    var moveDistance = assessHeightRpx
+    if (show_assess_comment) {
+      fromTop = fromTop - assessCommentHeightRpx
+      moveDistance = moveDistance + assessCommentHeightRpx
+    }
+    function step() {
+      var top = fromTop + num * (moveDistance / 10)
+      if (top > windowHeightpx) {
+        assessComponent.setStyle({
+          "top": windowHeightpx + 'rpx' // 支持rpx
+        })
+      } else {
+        assessComponent.setStyle({
+          "top": top + 'rpx'  // 支持rpx
+        })
+        num++
+        assessComponent.requestAnimationFrame(step);
+      }
+    }
+    assessComponent.requestAnimationFrame(step);
+  }
+  function hideAssessResultPop() {
+    if (!show_assess_result) {
+      return
+    }
+    var num = 1
+    show_assess_result = false
+    function step() {
+      var top = (windowHeightpx - assessResultHeightRpx) + num * (assessResultHeightRpx / 10)
+      if (top > windowHeightpx) {
+        assessResultComponent.setStyle({
+          "top": windowHeightpx + 'rpx' // 支持rpx
+        })
+      } else {
+        assessResultComponent.setStyle({
+          "top": top + 'rpx'  // 支持rpx
+        })
+        num++
+        assessResultComponent.requestAnimationFrame(step);
+      }
+    }
+    assessResultComponent.requestAnimationFrame(step);
+  }
+  function showMetaList(newValue, oldValue, ownerInstance, instance) {
+    if (newValue == '') {
+      return
+    }
+    if (listIsShow) {
+      return
+    }
+    listIsShow = true
+    var num = 1
+    function step() {
+      var top = 2000 - num * 25
+      if (top < 0) {
+        instance.setStyle({
+          "top": 0  // 支持rpx
+        })
+      } else {
+        instance.setStyle({
+          "top": top + 'px'  // 支持rpx
+        })
+        num++
+        instance.requestAnimationFrame(step);
+      }
+    }
+    instance.requestAnimationFrame(step);
+  }
+
+  function changeAssessResult(newValue, oldValue, ownerInstance, instance) {
+    if (newValue == '') {
+      return
+    }
+    if (newValue.show) {
+      showAssessResultPop()
+    } else {
+      hideAssessResultPop()
+    }
+  }
+
+  function changeShowAssessComment(newValue, oldValue, ownerInstance, instance) {
+    if (newValue == '') {
+      return
+    }
+    if (newValue.show) {
+      showAssessCommentPop()
+    } else {
+      hideAssessCommentPop()
+    }
+  }
+
+  function showAssessCommentPop() {
+    if (show_assess_comment) {
+      return
+    }
+    var num = 1
+    show_assess_comment = true
+    function step() {
+      var top = windowHeightpx - assessHeightRpx - num * (assessCommentHeightRpx / 10)
+      if (top < windowHeightpx - assessHeightRpx - assessCommentHeightRpx) {
+        assessComponent.setStyle({
+          "top": (windowHeightpx - assessHeightRpx - assessCommentHeightRpx) + 'rpx' // 支持rpx
+        })
+      } else {
+        assessComponent.setStyle({
+          "top": top + 'rpx'  // 支持rpx
+        })
+        num++
+        assessComponent.requestAnimationFrame(step);
+      }
+    }
+    assessComponent.requestAnimationFrame(step);
+  }
+
+  function hideAssessCommentPop() {
+    if (!show_assess_comment) {
+      return
+    }
+    var num = 1
+    show_assess_comment = false
+    function step() {
+      var top = (windowHeightpx - assessHeightRpx - assessCommentHeightRpx) + num * (assessCommentHeightRpx / 10)
+      if (top > windowHeightpx - assessHeightRpx) {
+        assessComponent.setStyle({
+          "top": (windowHeightpx - assessHeightRpx) + 'rpx' // 支持rpx
+        })
+      } else {
+        assessComponent.setStyle({
+          "top": top + 'rpx'  // 支持rpx
+        })
+        num++
+        assessComponent.requestAnimationFrame(step);
+      }
+    }
+    assessComponent.requestAnimationFrame(step);
+  }
+
+  module.exports.currentItemFunction = currentItemFunction
+  module.exports.showMetaList = showMetaList
+  module.exports.hideAssessResultPop = hideAssessResultPop
+  module.exports.changeAssessResult = changeAssessResult
+  module.exports.changeShowAssessComment = changeShowAssessComment
+</wxs>

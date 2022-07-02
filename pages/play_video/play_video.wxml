@@ -1,0 +1,302 @@
+<view style="position: fixed;top: {{menuButtonToTop}}px;width: 100vw; z-index: 105;left: 25rpx;">
+  <image style="height:{{menuButtonHeight}}px;width: {{menuButtonHeight}}px;" src="/pages/images/back3.png" bindtap="backLastPage"></image>
+</view>
+
+<view style="height: 100vh;width: 100vw;background-color: black;z-index: 90;" bindtap="multipleTap">
+  <video id='myVideo' style="height: {{window_height-100}}rpx;width: 750rpx;top: 0rpx;" autoplay="{{true}}"
+    show-progress="{{true}}" loop="{{true}}" muted="{{video_muted}}" src="{{data.images[0].video_url}}"
+    show-play-btn="{{false}}" show-center-play-btn="{{false}}" show-fullscreen-btn="{{false}}" show-progress="{{true}}"
+    object-fit="{{video_fill?'cover':'contain'}}"></video>
+</view>
+
+<view style="position: fixed;height: {{window_height-200}}rpx;width: 750rpx;top: {{0*window_height}}rpx;z-index: 100;"
+  bindtap="multipleTap"></view>
+<!-- controls="{{false}}"  -->
+<image
+  style="position: fixed;width: 100rpx;height: 100rpx;top: 50%;margin-top: -50rpx;left: 325rpx;opacity: 0.5;z-index: 110;"
+  src="/pages/images/play2.png" bindtap="playVideo" wx:if="{{!video_playing}}">
+</image>
+
+<view style="width: 50rpx;height: 50rpx; position: absolute; bottom: 190rpx;left: 35rpx;z-index: 110;border-radius: 25rpx;background-color: #212121;"  wx:if="{{data.images[0].type=='video'}}" bindtap="changeMute">
+  <view style="width: 50rpx;height: 50rpx;display: flex;justify-content: center;align-items: center;align-content: center;">
+    <image style="width: 30rpx;height: 30rpx;"
+    src="{{video_muted_icon}}">
+  </image></view>
+</view>
+
+
+<view class="bottom_bar" style="z-index: 99;">
+  <view class="bottom_bar_btn_layout">
+    <view class="bottom_bar_btn1" bindtap="shareBtn">
+      <image style=" width: 50rpx;height: 50rpx;" src="/pages/images/share_btn1_white.png"></image>
+      <view style="margin-left: 15rpx;background-color: #F46563;border-radius: 10rpx;width: 150rpx;height: 45rpx;font-size: 25rpx;display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;color: white;font-weight: bold;">
+        <view>Pick次数+1</view>
+      </view>
+    </view>
+    <view class="bottom_bar_btn" bindtap="heartBtn">
+      <image style=" width: 55rpx;height: 55rpx;" src="{{heart_btn_url}}"></image>
+      <text style="margin-left: 10rpx;font-size: 27rpx;font-weight: bold;color: white;" wx:if="{{data.like_num==0}}">点赞</text>
+      <text style="margin-left: 10rpx;font-size: 27rpx;font-weight: bold;color: white;" wx:if="{{data.like_num!=0}}">{{data.like_num}}</text>
+    </view>
+    <view class="bottom_bar_btn" bindtap="starBtn">
+      <image style=" width: 55rpx;height: 55rpx;" src="{{star_btn_url}}"></image>
+      <text style="margin-left: 10rpx;font-size: 27rpx;font-weight: bold;color: white;" wx:if="{{data.want_num==0}}">想要</text>
+      <text style="margin-left: 10rpx;font-size: 27rpx;font-weight: bold;color: white;" wx:if="{{data.want_num!=0}}">{{data.want_num}}</text>
+     
+    </view>
+    <view class="bottom_bar_btn" bindtap="showAllComment">
+      <image style=" width: 55rpx;height: 55rpx;" src="/pages/images/comment_btn_white.png"></image>
+      <text style="margin-left: 10rpx;font-size: 27rpx;font-weight: bold;color: white;" wx:if="{{totalCommentNum==0}}">评论</text>
+      <text style="margin-left: 10rpx;font-size: 27rpx;font-weight: bold;color: white;" wx:if="{{totalCommentNum!=0}}">{{totalCommentNum}}</text>
+    </view>
+  </view>
+
+</view>
+
+
+<view id="ctInput" class="ct-input" wx:if="{{ showComtBox }}" style="top: {{ ctInput_top }}px;z-index: 888;">
+  <textarea placeholder="{{input_place_holder}}" focus="{{ showComtBox }}" bindblur="comtBlur" maxlength="-1"
+    auto-height bindfocus="ctFocus" bindlinechange="ctLineChange" bindinput="" bindconfirm="sentComment"
+    show-confirm-bar="{{ false }}" confirm-type="send" adjust-position="{{ false }}"
+    style="background-color: #F6F3F7; border-radius: 33rpx; padding: 15rpx 20rpx;">
+  </textarea>
+  <!-- <image src="../../assets/icon/icon_zpxq_@@2x.png"></image>  -->
+</view>
+
+
+<l-popup show="{{show_comment}}" content-align="bottom">
+  <view style="height: 900rpx;background-color: white;border-radius: 40rpx 40rpx 0 0;">
+    <view style="display: flex;justify-content: center;align-content: center;align-items: center;height: 80rpx;">
+      <view style="font-size: 26rpx;">共{{totalCommentNum}}条评论</view>
+    </view>
+    <view style="height: 1rpx;width: 100vw;background-color: rgba(128, 128, 128, 0.171);"></view>
+    <scroll-view scroll-y="true" style="height: 700rpx;top: 100rpx;" enable-flex>
+      <view class='giftListView'>
+        <block wx:for="{{items}}">
+          <view class='item' wx:key="{{item.id}}" data-item="{{item}}"
+            data-id="{{item.id}}">
+            <view class="item_account_info">
+              <image style="width: 60rpx;height: 60rpx;border-radius: 30rpx;" src="{{item.account_icon}}"></image>
+              <view class="item_account_name">
+                <view style="display: flex;flex-direction: row;">
+                <view style="display: flex;flex-direction: column;" bindtap='mainCommentAction' data-item="{{item}}" data-id="{{item.id}}">
+                  <view style="display: flex; flex-direction: row;align-items: center;justify-items: center;">
+                    <view style="font-size: 22rpx;color: black;">{{item.account_name}}</view>
+                    <view style="display: flex;flex-direction: row;font-size:  15rpx;border-radius: 7rpx;border: 2rpx solid #E4C383;height:25rpx;justify-content: center;align-content:center;align-items: center;margin-left: 5rpx;color: #E4C383;font-weight: bold;" wx:if="{{item.owner_inscription}}">
+                      <view style="margin-left: 5rpx;margin-right: 5rpx;">拥有者题词</view>
+                    </view>
+                  </view>
+                  <text style="font-size:19rpx ;color: #9E9E9E; margin-top: 5rpx;">{{filter.format(item.create_time,
+                    'YY-MM-DD hh-mm')}}</text>
+                  <text style="font-size:27rpx ;margin-top: 5rpx;width: 540rpx;">{{item.content}}</text>
+                </view>
+                <view style="display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;height: 65rpx;width: 65rpx;margin-left: 10rpx;" data-item="{{item}}" bindtap="commentLike">
+                  <image style="width: 40rpx;height: 40rpx;" src="/pages/images/heart_btn_selected.png" wx:if="{{item.like}}"></image>
+                  <image style="width: 40rpx;height: 40rpx;" src="/pages/images/heart2.png" wx:if="{{!item.like}}">
+                  </image>
+                  <view style="color: #555555;font-size: 19rpx;">{{item.like_count}}</view>
+                </view>
+              </view>
+               
+               
+              <view class='giftListView'>
+                <block wx:for="{{item.reply_comment}}" wx:for-item="c_item">
+                  <!-- 每个cell -->
+                  <view class='child_item' wx:key="{{c_item.id}}" bindtap='replyCommentAction' data-item="{{c_item}}" data-id="{{c_item.id}}">
+                    <view class="child_item_account_info">
+                      <image style="width: 45rpx;height: 45rpx;border-radius: 22rpx;" src="{{c_item.reply_account_icon}}" bindtap="toAccountInfo" data-item="{{c_item.reply_account_id}}">
+                      </image>
+                      <view class="child_item_account_name">
+                        <view style="display: flex;flex-direction: row;">
+                          <view style="display: flex;flex-direction: column;">
+                            <view style="display: flex; flex-direction: row;align-items: center;justify-items: center;">
+                              <text style="font-size: 22rpx;color: black;">{{c_item.reply_account_name}}</text>
+                              <!-- <view
+                                style="background-color: #F5F5F5; border-radius: 13rpx;color: #676767;height: 25rpx;font-size: 18rpx;margin-left: 10rpx;"
+                                wx:if="{{c_item.owner}}">
+                                <view style="margin-left: 10rpx;margin-right: 10rpx;">拥有者</view>
+                              </view> -->
+                            </view>
+                            <text style="font-size:19rpx ;color: #9E9E9E; margin-top: 5rpx;">{{filter.format(c_item.create_time,
+                              'YY-MM-DD hh-mm')}}</text>
+                            <text style="font-size:27rpx ;margin-top: 5rpx;width: 482rpx;">{{c_item.content}}</text>
+                          </view>
+                          <view style="display: flex;flex-direction: column;align-items: center;align-content: center;width: 65rpx;margin-left: 10rpx;" data-item="{{c_item}}" bindtap="commentLike">
+                            <image style="width: 40rpx;height: 40rpx;" src="/pages/images/heart_btn_selected.png" wx:if="{{c_item.like}}"></image>
+                            <image style="width: 40rpx;height: 40rpx;" src="/pages/images/heart2.png" wx:if="{{!c_item.like}}"></image>
+                            <view style="color: #555555;font-size: 19rpx;margin-top: -5rpx;">{{c_item.like_count}}
+                            </view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </block>
+              </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="list_toast" wx:if="{{totalCommentNum==0}}" bindtap="showComtBox">
+      <image style="width: 90rpx;height: 90rpx;" src="/pages/images/hava_card.png"></image>
+      <text
+        style="margin-top: 15rpx; color: #979797;margin-bottom: 25rpx;font-size: 29rpx;">该碎片暂未有题词及评论，快来发送你的评论吧！</text>
+    </view>
+    </scroll-view >
+    <view style="height: 1rpx;width: 100vw;background-color: rgba(128, 128, 128, 0.171);"></view>
+    <view class="inscription" bindtap="showComtBox">
+    <view
+      style="display: flex;flex-direction: row;width:100%;border-radius: {{data.have_card?33:30}}rpx;margin-right: 1rpx;height: 60rpx;background-color: #F6F7F6;justify-content: center;align-content:center;align-items: center;">
+      <view style="display: flex;flex-direction: row;width: 100%;">
+        <text
+          style="font-size: 23rpx;color: #9A9A9A;margin-left: 25rpx;">{{'发条评论带给碎片神秘力量~'}}</text>
+        <!-- <text style="font-size: 23rpx;color: #E5C383;width: 46rpx;" wx:if="{{data.have_card}}">题词</text>
+        <text style="font-size: 23rpx;color: #9A9A9A;width: 100%;width: 46rpx;" wx:if="{{data.have_card}}">呦~</text> -->
+      </view>
+    </view>
+  </view>
+    
+  </view>
+</l-popup>
+
+<l-mask show="{{login_mask}}" opacity="0.7" style="z-index: 1000;">
+  <view style="width: 750rpx;height: 100vh;display: flex;justify-content: center;align-items: center;align-content: center;">
+    <card_toast7 bind:clickAffirm="affirmToLogIn"></card_toast7>
+  </view>
+</l-mask>
+
+<canvas type="2d" id="canvas" style="width: 250px; height: 200px;border: 1px solid black;position:fixed;left:11110px;top: 0;"></canvas>
+
+
+<l-popup show="{{show_bottom_pop}}" content-align="bottom">
+  <view style=" border-radius: 25rpx 25rpx 0 0;background-color: #F5F5F5;height: 350rpx;display: flex;flex-direction: column;justify-content: center;align-items: center;align-content: center;">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;margin-bottom: {{popup_data.type==4?'10':'35'}}rpx;">
+      <image style="width: 60rpx;height: 60rpx;" src="{{popup_data.type_icon}}" wx:if="{{popup_data.type==1}}"></image>
+      <image style="width: 70rpx;height: 70rpx;" src="{{popup_data.type_icon}}" wx:if="{{popup_data.type!=1}}"></image>
+      <view style="margin-left: 15rpx;font-weight: bold;font-size: 40rpx;">{{popup_data.title}}</view>
+    </view>
+    <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;margin-bottom: 20rpx;" wx:if="{{popup_data.type==4}}">
+      <view style="font-size: 20rpx;color: #F46563;">需消耗碎片价值的1.25倍C-point</view>
+    </view>
+    <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;margin-bottom: {{popup_data.show_have_c_point?10:100}}rpx;">
+      <view style="font-size: 30rpx;color: #686868;">{{popup_data.content1}}</view>
+      <view style="font-size: 30rpx;color: #F46563;" wx:if="{{popup_data.type==3}}">{{popup_data.content2}}</view>
+      <view style="font-size: 30rpx;color: #E4C383;" wx:else>{{popup_data.content2}}</view>
+      <image style="height: 33rpx;width: 33rpx;" src="/pages/images/c_info_point.png" wx:if="{{popup_data.show_icon1}}"></image>
+      <view style="font-size: 30rpx;color: #686868;">{{popup_data.content3}}</view>
+      <view style="font-size: 30rpx;color: #E4C383;" wx:if="{{popup_data.type==3}}">{{popup_data.content4}}</view>
+      <view style="font-size: 30rpx;color: #F46563;" wx:else>{{popup_data.content4}}</view>
+      <image style="height: 33rpx;width: 33rpx;" src="/pages/images/c_info_point.png" wx:if="{{popup_data.show_icon2}}"></image>
+      <view style="font-size: 30rpx;color: #686868;">{{popup_data.content5}}</view>
+    </view>
+    <view style="display: flex;flex-direction: row;justify-content: center;align-items: center;align-content: center;margin-bottom: 77rpx;" wx:if="{{popup_data.show_have_c_point}}">
+      <view style="font-size: 30rpx;color: black;">现有: <span style="color: #E4C383;">{{popup_data.content6}}</span></view>
+      <image style="height: 33rpx;width: 33rpx;" src="/pages/images/c_info_point.png"></image>
+    </view>
+    <view style="display: flex;flex-direction: row;background-color: white;position: absolute;bottom: 0;">
+      <button open-type="share" plain='true' form-type="submit" style="position: absolute; width: 375rpx;height:  100rpx;border:none;bottom: 0;left: 0;" wx:if="{{popup_data.type==1||popup_data.type==2}}" data-id="{{popup_data.type}}"></button>
+      <view style="display: flex;flex-direction: row;height: 100rpx;width: 374rpx;justify-content: center;align-items: center;align-content: center;" data-id="{{popup_data.type}}" bindtap="affirm">
+        <view style="color: #686868;font-size: 30rpx;">确认</view>
+      </view>
+      <view style="width: 2rpx;background-color: #F5F5F5;height: 100rpx;"></view>
+      <view style="display: flex;flex-direction: row;height: 100rpx;width: 374rpx;justify-content: center;align-items: center;align-content: center;" bindtap="cancel">
+        <view style="color: #686868;font-size: 30rpx;">取消</view>
+      </view>
+    </view>
+  </view>
+</l-popup>
+
+<wxs module="filter">
+  function format(ts, option) {
+    if (ts.lenght <= 0) {
+      return ''
+    }
+    var date = getDate(ts)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var week = date.getDay()
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+
+    //获取 年月日
+    if (option == 'YY-MM-DD') return [year, month, day].map(formatNumber).join('-')
+
+    //获取 年月
+    if (option == 'YY-MM') return [year, month].map(formatNumber).join('-')
+
+    //获取 年
+    if (option == 'YY') return [year].map(formatNumber).toString()
+
+    //获取 月
+    if (option == 'MM') return [mont].map(formatNumber).toString()
+
+    //获取 日
+    if (option == 'DD') return [day].map(formatNumber).toString()
+
+    //获取 年月日 周一 至 周日
+    if (option == 'YY-MM-DD Week') return [year, month, day].map(formatNumber).join('-') + ' ' + getWeek(week)
+
+    //获取 月日 周一 至 周日
+    if (option == 'MM-DD Week') return [month, day].map(formatNumber).join('-') + ' ' + getWeek(week)
+
+    //获取 月日 
+    if (option == 'MM-DD') {
+      // if (year != day.getFullYear()) {
+      //   return [year, month, day].map(formatNumber).join('-')
+      // }
+      return [month, day].map(formatNumber).join('-')
+    }
+
+    //获取 周一 至 周日
+    if (option == 'Week') return getWeek(week)
+
+    //获取 时分秒
+    if (option == 'hh-mm-ss') return [hour, minute, second].map(formatNumber).join(':')
+
+    //获取 时分
+    if (option == 'hh-mm') return [hour, minute].map(formatNumber).join(':')
+
+    //获取 分秒
+    if (option == 'mm-dd') return [minute, second].map(formatNumber).join(':')
+
+    //获取 时
+    if (option == 'hh') return [hour].map(formatNumber).toString()
+
+    //获取 分
+    if (option == 'mm') return [minute].map(formatNumber).toString()
+
+    //获取 秒
+    if (option == 'ss') return [second].map(formatNumber).toString()
+
+    //默认 时分秒 年月日
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  }
+
+  function formatNumber(n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+  }
+
+  function getWeek(n) {
+    switch (n) {
+      case 1:
+        return '星期一'
+      case 2:
+        return '星期二'
+      case 3:
+        return '星期三'
+      case 4:
+        return '星期四'
+      case 5:
+        return '星期五'
+      case 6:
+        return '星期六'
+      case 7:
+        return '星期日'
+    }
+  }
+  module.exports.format = format;
+</wxs>

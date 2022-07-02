@@ -1,0 +1,56 @@
+<view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;flex-direction: column;" catchtap="cantjump">
+  <view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;background-color: #E4C383;border-radius: 15rpx 15rpx 0 0;flex-direction: column;align-items: center;justify-content: center;align-content: center;">
+    <image style="width: 80rpx ;height: 80rpx;margin-top: 15rpx;" src="/pages/images/c_info_point.png">
+    </image>
+    <view style="margin-top: {{15-10}}rpx;font-size: 28rpx;font-weight: bold;color: white;margin-bottom: 20rpx;display: flex; flex-direction: row;justify-content: center;align-content: center;align-items: center;">
+      <text space="ensp">C-point: {{data.cpoint}}</text>
+    </view>
+  </view>
+
+
+  <view style="background-color: white;border-radius: 0 0 15rpx 15rpx;width: 500rpx;margin-left: 50rpx;margin-right: 50rpx;" wx:if="{{show_type==0}}">
+    <view style="margin-top: 45rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      C-point：宇宙点，简称CP。
+    </view>
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;margin-top: 45rpx;">
+      用于[Pick]或[购买]各种宇宙碎片
+    </view>
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;display: flex;flex-direction: row;align-items: center;align-content: center;line-height:26rpx;margin-top: 15rpx;">
+      <view>（碎片详情页右下角的</view>
+      <image style="width: 30rpx;height: 30rpx;" src="/pages/images/c_point.png"></image>
+      <view>按钮）。</view>
+    </view>
+    <view style="margin-top: 45rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      可通过[售出]宇宙碎片获得。
+    </view>
+    <view style="width: 100%;;margin-top: 30rpx;margin-bottom: 35rpx;display: flex;justify-content: center;align-content: center;align-items: center;">
+      <view style="font-size: 26rpx;color: #52515A;background-color: #E4C383;width: 200rpx;height: 55rpx;border-radius: 15rpx;display: flex;justify-content: center;align-content: center;align-items: center;font-weight: bold;color: white;" catchtap="affirm">
+        售出碎片
+      </view>
+    </view>
+  </view>
+
+  <view style="background-color: white;border-radius: 0 0 15rpx 15rpx;width: 500rpx;margin-left: 50rpx;margin-right: 50rpx;" wx:if="{{show_type==1}}">
+    <view style="margin-top: 45rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      C-point：宇宙点，简称CP。
+    </view>
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;margin-top: 45rpx;">
+      用于[购买]宇宙地盘
+    </view>
+    <!-- <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;display: flex;flex-direction: row;align-items: center;align-content: center;line-height:26rpx;margin-top: 15rpx;">
+      <view>详情页右下角的</view>
+      <image style="width: 30rpx;height: 30rpx;" src="/pages/images/c_point.png"></image>
+      <view>按钮）。</view>
+    </view> -->
+    <view style="margin-top: 45rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      可通过[售出]宇宙碎片获得。
+    </view>
+    <cover-view style="width: 100%;;margin-top: 30rpx;margin-bottom: 35rpx;display: flex;justify-content: center;align-content: center;align-items: center;">
+      <cover-view style="font-size: 26rpx;color: #52515A;background-color: #E4C383;width: 200rpx;height: 55rpx;border-radius: 15rpx;display: flex;justify-content: center;align-content: center;align-items: center;font-weight: bold;color: white;" catchtap="affirm">
+        <cover-view style="top: 0;bottom: 0;left: 0;right: 0;margin: auto;">售出碎片 </cover-view>
+      </cover-view>
+    </cover-view>
+  </view>
+
+
+</view>

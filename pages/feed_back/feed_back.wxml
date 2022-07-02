@@ -1,0 +1,14 @@
+<page-meta>
+  <navigation-bar title="联系反馈"  />
+</page-meta>
+<view style="height: 100vh;width: 100vw;background-color: #F6F7F9;">
+  <view style="width: 100vw;background-color: white;">
+    <textarea style="margin-left: 12rpx;width: 726rpx;height: 250rpx;margin-top: 15rpx;font-size: 25rpx;background-color: white;" placeholder="写下您的功能建议或者想对我们说的话，会有专人查看哟，感谢！" name="" id=""
+    cols="30" rows="10" bindinput="contentInput" value="{{content_value}}"></textarea>
+  </view>
+</view>
+<view style="position: fixed;bottom: 0;left: 0;width: 100vw;height: 100rpx; background-color: #FF2742;" bindtap="createFeedBack">
+  <view style="display: flex;justify-content: center;align-items: center;align-content: center;width: 100%;height: 100%;color: white;font-size: 36rpx;">
+    <view>提交反馈</view>
+  </view>
+</view>

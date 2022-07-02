@@ -1,0 +1,70 @@
+<view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;flex-direction: column;">
+  <view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;background-color: #E4C383;border-radius: 15rpx 15rpx 0 0;flex-direction: column;align-items: center;justify-content: center;align-content: center;">
+    <image style="width: 80rpx ;height: 80rpx;margin-top: 15rpx;" src="/pages/images/assess_white.png">
+    </image>
+    <view style="margin-top: {{15-10}}rpx;font-size: 28rpx;font-weight: bold;color: white;margin-bottom: 20rpx;display: flex; flex-direction: row;justify-content: center;align-content: center;align-items: center;">
+      <text space="ensp">首发认购</text>
+    </view>
+  </view>
+
+
+  <view style="background-color: white;border-radius: 0 0 15rpx 15rpx;width: 500rpx;margin-left: 50rpx;margin-right: 50rpx;" wx:if="{{show_type==0}}">
+    <!-- <view style="margin-top: 45rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      C-point：宇宙点，简称CP。
+    </view>
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;margin-top: 45rpx;">
+      用于[Pick]或[购买]各种宇宙碎片
+    </view> -->
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 40rpx;margin-right: 40rpx;display: flex;flex-direction: row;align-items: center;align-content: center;line-height:30rpx;margin-top: 45rpx;vertical-align: middle;">
+      <view>是否花费{{data.initial_cp}}<span style="vertical-align: middle;display: inline;">
+          <image style="width: 30rpx;height: 30rpx;" src="/pages/images/c_info_point.png"></image>
+        </span>认购这块首发宇宙碎片？</view>
+    </view>
+
+    <view style="margin-top: 45rpx;font-size: 26rpx;color: #52515A;line-height:26rpx;width: 100%;display: flex;justify-content: center;align-content: center;align-items: center;width: 100%;">剩余可认购：{{data.assess_surplus_card_num}}块</view>
+    <view style="display: flex;margin-top:40rpx;align-items: center;align-content: center;justify-content: center;margin-bottom: 40rpx;font-size: 28rpx;">
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #E4C383;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-right: 15rpx;" catchtap="clickAffirm">
+        <view style="top: 0;bottom: 0;left: 0;right: 0;margin: auto;">认购</view>
+      </view>
+
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #AEAEAE;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-left: 15rpx;" catchtap="clickCancel">
+        <view style="top: 0;bottom: 0;left: 0;right: 0;margin: auto;">取消</view>
+      </view>
+    </view>
+  </view>
+
+  <view style="background-color: white;border-radius: 0 0 15rpx 15rpx;width: 500rpx;margin-left: 50rpx;margin-right: 50rpx;" wx:if="{{show_type==1}}">
+    <!-- <view style="margin-top: 45rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      C-point：宇宙点，简称CP。
+    </view>
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;margin-top: 45rpx;">
+      用于[Pick]或[购买]各种宇宙碎片
+    </view> -->
+
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 40rpx;margin-right: 40rpx;display: flex;flex-direction: row;align-items: center;align-content: center;line-height:30rpx;margin-top: 45rpx;vertical-align: middle;">
+      <view>您的剩余<span style="vertical-align: middle;display: inline;">
+          <image style="width: 30rpx;height: 30rpx;" src="/pages/images/c_info_point.png"></image>
+        </span>不足{{data.initial_cp}}，无法参与认购</view>
+    </view>
+
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 40rpx;margin-right: 40rpx;display: flex;flex-direction: row;align-items: center;align-content: center;line-height:30rpx;margin-top: 45rpx;vertical-align: middle;">
+      <view> 您可以[售出碎片]或[创造碎片]，获取更多<span style="vertical-align: middle;display: inline;">
+          <image style="width: 30rpx;height: 30rpx;" src="/pages/images/c_info_point.png"></image>
+        </span></view>
+    </view>
+
+
+
+    <view style="display: flex;margin-top:40rpx;align-items: center;align-content: center;justify-content: center;margin-bottom: 40rpx;font-size: 28rpx;">
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #E4C383;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-right: 15rpx;" catchtap="clickAffirm">
+        <view style="top: 0;bottom: 0;left: 0;right: 0;margin: auto;">去售出</view>
+      </view>
+
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #f46563;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-left: 15rpx;" catchtap="clickCancel">
+        <view style="top: 0;bottom: 0;left: 0;right: 0;margin: auto;">去创造</view>
+      </view>
+    </view>
+  </view>
+
+
+</view>

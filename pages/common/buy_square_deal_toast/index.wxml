@@ -1,0 +1,43 @@
+<view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;flex-direction: column;">
+  <view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;background-color: #E4C383;border-radius: 15rpx 15rpx 0 0;flex-direction: column;align-items: center;justify-content: center;align-content: center;">
+    <image style="width: 80rpx ;height: 80rpx;margin-top: 15rpx;" src="/pages/images/buy_square_white.png">
+    </image>
+    <view style="margin-top: {{15-10}}rpx;font-size: 28rpx;font-weight: bold;color: white;margin-bottom: 20rpx;display: flex; flex-direction: row;justify-content: center;align-content: center;align-items: center;">
+      <text space="ensp">用户间交易</text>
+    </view>
+  </view>
+  <view style="background-color: white;border-radius: 0 0 15rpx 15rpx;width: 500rpx;margin-left: 50rpx;margin-right: 50rpx;">
+    <view style="margin-top: 45rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      您可点击想要的地盘，发布评论联
+    </view>
+    <view style="margin-top: 15rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      系地主
+    </view>
+  
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;display: flex;flex-direction: row;align-items: center;align-content: center;line-height:26rpx;margin-top: 15rpx;">
+      <view>地主可通过[赠予]</view>
+      <image style="width: 35rpx;height: 35rpx;" src="/pages/images/get_card.png"></image>
+      <view>或[碎片码]将</view>
+    </view>
+    <view style="margin-top: 15rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      地盘转移给您
+    </view>
+    <!-- <view style="margin-top: 15rpx;font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;">
+      
+    </view> -->
+    <!-- <view style="width: 100%;;margin-top: 30rpx;margin-bottom: 35rpx;display: flex;justify-content: center;align-content: center;align-items: center;" bindtap="affirm">
+      <view style="font-size: 26rpx;color: #52515A;background-color: #E4C383;width: 200rpx;height: 55rpx;border-radius: 15rpx;display: flex;justify-content: center;align-content: center;align-items: center;font-weight: bold;color: white;">
+        买入碎片
+      </view>
+    </view> -->
+    <view style="display: flex;margin-top:40rpx;align-items: center;align-content: center;justify-content: center;margin-bottom: 40rpx;font-size: 28rpx;">
+      <view
+      style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #E4C383;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-right: 15rpx;"
+      bindtap="clickAffirm">确认</view>
+
+      <!-- <view
+      style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #AEAEAE;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-left: 15rpx;"
+      bindtap="clickCancel">取消</view> -->
+    </view>
+  </view>
+</view>

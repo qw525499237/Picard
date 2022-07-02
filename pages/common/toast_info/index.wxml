@@ -1,0 +1,22 @@
+<view style="display: flex;flex-direction: column;">
+  <image style="width: 540rpx;border-radius: 15rpx 15rpx 0 0;" mode="widthFix" src="{{data.top_bg}}">
+  </image>
+  <view style="display: flex;flex-direction: column;width: 540rpx;background-color: white;border-radius: 0 0 15rpx 15rpx;align-items: center;align-content: center;justify-content: center;font-size: 25rpx;">
+    <view style="display: flex;flex-direction: row;align-items: center;align-content: center;justify-content: center;margin-top:25rpx;">
+      <view style="color: {{data.title_color.lenght>0?data.title_color:'#000000'}};"> {{data.title}}</view>
+      <image style="height: 40rpx;width: 40rpx;margin-left: 5rpx;" src="/pages/images/c_info_point.png" wx:if="{{data.have_cp_icon}}"></image>
+    </view>
+    <view style="color: #F46563;margin-top: 25rpx;max-width: 440rpx;"> {{data.content}}</view>
+    <view wx:if="{{!data.enough}}">
+      <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #1C0941;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-right: 15rpx;margin-top:25rpx;margin-bottom: 40rpx;" bindtap="clickAffirm">确认</view>
+    </view>
+    <view wx:if="{{data.enough}}">
+      <view style="display: flex;margin-top:25rpx;align-items: center;align-content: center;justify-content: center;margin-bottom: 40rpx;">
+        <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #1C0941;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-right: 15rpx;" bindtap="clickAffirm2">确认</view>
+
+        <view style="height: 55rpx;width: 137rpx;border-radius: 15rpx;background-color: #AEAEAE;display: flex;align-items: center;align-content: center;justify-content: center;font-weight: bold;color: white;margin-left: 15rpx;" bindtap="clickCancel2">取消</view>
+      </view>
+    </view>
+
+  </view>
+</view>

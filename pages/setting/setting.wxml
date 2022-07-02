@@ -1,0 +1,10 @@
+<!--pages/setting/setting.wxml-->
+<page-meta>
+  <navigation-bar title="设置"  />
+</page-meta>
+<view style="height: 100vh;width: 100vw;background-color: #F4F8FB;display: flex;flex-direction: column;">
+  <l-list l-class="list_item_bg" l-content-class="list_item_text" l-right-class="list_item_icon" title="意见反馈" bindtap="toFeedBack"/>
+  <l-list l-class="list_item_bg" l-content-class="list_item_text" l-right-class="list_item_icon" title="隐私政策" bindtap="toProtocolPage"/>
+</view>
+
+<view style="position: fixed;bottom: 25rpx;margin: auto;width: 100vw;text-align: center; color: #333;font-size: 28rpx;">当前版本：2.0.14</view>

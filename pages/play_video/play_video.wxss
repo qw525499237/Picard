@@ -1,0 +1,158 @@
+.bottom_bar{
+  position:fixed;
+  /* border-top:1rpx solid rgba(128, 128, 128, 0.199); */
+  bottom:0;
+  width: 100%;
+  background-color: black;
+  height: 95rpx;
+}
+
+.bottom_bar_btn_layout{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  margin-left: 45rpx;
+  margin-right: 45rpx;
+}
+
+.bottom_bar_btn_son_layout{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+}
+
+.bottom_bar_btn{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 139rpx;
+}
+
+.bottom_bar_btn1{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 242rpx;
+}
+
+.bottom_bar1{
+  
+  width: 100%;
+  background-color: white;
+  height: 95rpx;
+}
+
+.ct-input {
+  position: fixed;
+  top: -110rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15rpx 20rpx;
+  background: #FFFFFF;
+  z-index: 1000;
+  border-top:1rpx solid rgba(128, 128, 128, 0.199);
+
+}
+ 
+.ct-input textarea {
+  margin-top: 4rpx;
+  flex: 1;
+  font-size: 28rpx;
+  color: #050505;  
+}
+ 
+.ct-input image {
+  margin-left: 40rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+
+.giftListView {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-top: 15rpx;
+  /* background-color: red; */
+}
+/* cell */
+.item {
+width: 92%;
+ display: flex;
+ flex-direction: column;
+ margin-left: 4%;
+ margin-right: 4%;
+ margin-top: 20rpx;
+}
+
+.item_account_info{
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.item_account_name{
+  display: flex;
+  margin-left: 15rpx;
+  width: 90%;
+  flex-direction: column;
+}
+
+
+.child_item {
+  width: 100%;
+   display: flex;
+   flex-direction: column;
+   margin-top: 20rpx;
+  }
+  
+  .child_item_account_info{
+    display: flex;
+    flex-direction: row;
+    
+  }
+  
+  .child_item_account_name{
+    display: flex;
+    margin-left: 15rpx;
+    width: 90%;
+    flex-direction: column;
+  }
+
+
+  .inscription{
+    display: flex;
+    flex-direction: row;
+    margin-top: 25rpx;
+    margin-left: 4%;
+    margin-right: 4%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+
+  .list_toast{
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
+    align-content: center;
+    align-items: center;
+    margin-top: 250rpx;
+    /* margin-bottom: 0; */
+  
+  }

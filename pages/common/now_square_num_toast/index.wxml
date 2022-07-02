@@ -1,0 +1,42 @@
+<view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;flex-direction: column;" catchtap="cantjump">
+  <view style="width: 500rpx;display: flex;justify-content: center;align-items: center;align-content: center;background-color: #E4C383;border-radius: 15rpx 15rpx 0 0;flex-direction: column;align-items: center;justify-content: center;align-content: center;">
+    <image style="width: 80rpx ;height: 80rpx;margin-top: 15rpx;" src="/pages/images/have_square.png">
+    </image>
+    <view style="margin-top: {{15-10}}rpx;font-size: 28rpx;font-weight: bold;color: white;margin-bottom: 20rpx;display: flex; flex-direction: row;justify-content: center;align-content: center;align-items: center;">
+      <text space="ensp">宇宙地盘: {{data.square_num}}块</text>
+    </view>
+  </view>
+  <view style="background-color: white;border-radius: 0 0 15rpx 15rpx;width: 500rpx;margin-left: 50rpx;margin-right: 50rpx;">
+    <!-- <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;margin-top: 15rpx;">
+      Pick或购买各种宇宙碎片（碎片详情
+    </view>
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;display: flex;flex-direction: row;align-items: center;align-content: center;line-height:26rpx;margin-top: 15rpx;">
+      <view>页右下角的</view>
+      <image style="width: 30rpx;height: 30rpx;" src="/pages/images/c_point.png"></image>
+      <view>按钮）。</view>
+    </view> -->
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;line-height:26rpx;margin-top: 45rpx;">
+      宇宙地盘：归属您的宇宙一角，您是该地唯一拥有者，且他人不可更改或复制。
+    </view>
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;display: flex;flex-direction: row;align-items: center;align-content: center;line-height:26rpx;margin-top: 15rpx;margin-top: 45rpx;">
+      <view>可以赠送他人（碎片详情页右下角<span style="vertical-align: middle;display: inline;">
+          <image style="width: 30rpx;height: 30rpx;" src="/pages/images/get_card.png"></image>
+        </span>按钮或碎片码兑换）</view>
+    </view>
+    <view style="font-size: 26rpx;color: #52515A;margin-left: 50rpx;margin-right: 50rpx;margin-top: 45rpx;">
+      可通过CP[购买]或接收他人[赠送]获得。
+    </view>
+
+
+    <view style="width: 100%;;margin-top: 30rpx;margin-bottom: 35rpx;display: flex;justify-content: center;align-content: center;align-items: center;">
+      <view style="font-size: 26rpx;color: #52515A;background-color: #E4C383;width: 150rpx;height: 55rpx;border-radius: 15rpx;display: flex;justify-content: center;align-content: center;align-items: center;font-weight: bold;color: white;" catchtap="affirm">
+        购买地盘
+      </view>
+      <view style="width: 50rpx;"></view>
+      <view style="font-size: 26rpx;color: #52515A;background-color: #f46563;width: 150rpx;height: 55rpx;border-radius: 15rpx;display: flex;justify-content: center;align-content: center;align-items: center;font-weight: bold;color: white;" catchtap="affirm2">
+        我的地盘
+      </view>
+    </view>
+
+  </view>
+</view>

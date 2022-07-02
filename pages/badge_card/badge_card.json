@@ -1,0 +1,16 @@
+{
+  "usingComponents": {
+    "l-water-flow":"../../miniprogram_npm/lin-ui/water-flow/index",
+    "l-sticky":"../../miniprogram_npm/lin-ui/sticky/index",
+    "l-sticky-item":"../../miniprogram_npm/lin-ui/sticky-item/index",
+    "l-tabs":"../../miniprogram_npm/lin-ui/tabs/index",
+    "l-tabpanel":"../../miniprogram_npm/lin-ui/tabpanel/index",
+    "card_item":"/pages/common/card_list_item/index",
+    "card_info":"/pages/common/card_info/index",
+    "l-mask":"../../miniprogram_npm/lin-ui/mask/index",
+    "toast_info":"/pages/common/toast_info/index",
+    "exchange_card_toast":"/pages/common/exchange_card_toast/index"
+  },
+  "navigationStyle": "custom", 
+  "navigationBarTextStyle": "black"
+}

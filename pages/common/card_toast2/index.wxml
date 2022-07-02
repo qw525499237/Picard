@@ -1,0 +1,58 @@
+<view
+  style="width: 600rpx;display: flex;justify-content: center;align-items: center;align-content: center;flex-direction: column;">
+  <view
+    style="width: 600rpx;display: flex;justify-content: center;align-items: center;align-content: center;background-color: #FBE087;border-radius: 15rpx 15rpx 0 0;flex-direction: column;">
+    <image style="width: {{data.info_icon_size}}rpx ;height: {{data.info_icon_size}}rpx;margin-top: {{data.info_icon_to_top_size}}rpx;" src="/pages/images/recharge.png" >
+    </image>
+    <view style="margin-top: {{data.info_icon_to_top_size-10}}rpx;font-size: 30rpx;font-weight: bold;color: #712602;margin-bottom: 20rpx;">
+      {{data.info_title}}
+    </view>
+  </view>
+  <view style="background-color: white;border-radius: 0 0 15rpx 15rpx;width: 600rpx;margin-left: 50rpx;margin-right: 50rpx;">
+    <view
+      style="margin-top: 45rpx;font-size: 26rpx;color: black;margin-left: 50rpx;margin-right: 50rpx;display: flex;flex-direction: row;">
+      <!-- <view style="font-weight: bold;"></view> -->
+      <view><span style="font-weight: bold;">充能：</span>每次抽卡消耗1份能量，每小时可以充能一次，最多积攒5份能量。</view>
+    </view>
+
+    <view
+      style="margin-top: 45rpx;font-size: 26rpx;color: black;margin-left: 50rpx;margin-right: 50rpx;display: flex;flex-direction: row;margin-bottom: 45rpx;">
+      <view >您现在暂时没有能量，无法抽卡；<span style="color: #F46563;">待倒计时结束后，即可继续抽卡。</span></view>
+      
+    </view>
+
+    <!-- <view style="display: flex;flex-direction: column;font-size: 26rpx;margin-top: 15rpx;margin-left: 15rpx;margin-right: 15rpx;margin-bottom: 45rpx;margin-left: 50rpx;margin-right: 50rpx;">
+      <view style="font-weight: bold;">{{data.info_content2}}</view>
+      <view style="display: flex;flex-direction: row;margin-top: 10rpx;align-items: center;align-content: center;">
+        <view style="font-weight: bold;width: 125rpx;">最近1天</view>
+        <image style="width: {{data.icon_size}}rpx;height: {{data.icon_size}}rpx;margin-left: 15rpx;" src="{{data.icon1}}"></image>
+        <view style="font-weight: bold">{{data.content3}}</view>
+        <view style="color: #F46563;width: 90rpx;margin-left: 15rpx;font-weight: bold">{{data.content11}}</view>
+        <image style="width: 40rpx;height: 40rpx;" src="{{data.icon2}}"></image>
+        <view style="color: #F46563;width: 90rpx;margin-left: 15rpx;font-weight: bold" wx:if="{{data.content22.length!=0}}">{{data.content12}}</view>
+        <image style="width: 30rpx;height: 30rpx;" src="{{data.icon3}}"></image>
+        <view style="color: #F46563;width: 90rpx;margin-left: 15rpx;font-weight: bold" wx:if="{{data.content22.length!=0}}">{{data.content13}}</view>
+      </view>
+      <view style="display: flex;flex-direction: row;margin-top: 10rpx;align-items: center;align-content: center;">
+        <view style="font-weight: bold;width: 125rpx;">最近7天</view>
+        <image style="width: {{data.icon_size}}rpx;height: {{data.icon_size}}rpx;margin-left: 15rpx;" src="{{data.icon1}}"></image>
+        <view style="font-weight: bold">{{data.content3}}</view>
+        <view style="color: #F46563;width: 90rpx;margin-left: 15rpx;font-weight: bold" >{{data.content21}}</view>
+        <image style="width: 40rpx;height: 40rpx;" src="{{data.icon2}}"></image>
+        <view style="color: #F46563;width: 90rpx;margin-left: 15rpx;font-weight: bold" wx:if="{{data.content22.length!=0}}">{{data.content22}}</view>
+        <image style="width: 30rpx;height: 30rpx;" src="{{data.icon3}}"></image>
+        <view style="color: #F46563;width: 90rpx;margin-left: 15rpx;font-weight: bold" wx:if="{{data.content22.length!=0}}">{{data.content23}}</view>
+      </view>
+      <view style="display: flex;flex-direction: row;margin-top: 10rpx;align-items: center;align-content: center;">
+        <view style="font-weight: bold;width: 125rpx;">最近30天</view>
+        <image style="width: {{data.icon_size}}rpx;height: {{data.icon_size}}rpx;margin-left: 15rpx;" src="{{data.icon1}}"></image>
+        <view style="font-weight: bold">{{data.content3}}</view>
+        <view style="color: #F46563;width: 90rpx;margin-left: 15rpx;font-weight: bold">{{data.content31}}</view>
+        <image style="width: 40rpx;height: 40rpx;" src="{{data.icon2}}"></image>
+        <view style="color: #F46563;width: 90rpx;margin-left: 15rpx;font-weight: bold" wx:if="{{data.content22.length!=0}}">{{data.content32}}</view>
+        <image style="width: 30rpx;height: 30rpx;" src="{{data.icon3}}"></image>
+        <view style="color: #F46563;width: 90rpx;margin-left: 15rpx;font-weight: bold" wx:if="{{data.content22.length!=0}}">{{data.content33}}</view>
+      </view>
+    </view> -->
+  </view>
+</view>

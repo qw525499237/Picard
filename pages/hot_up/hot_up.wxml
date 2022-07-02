@@ -1,0 +1,85 @@
+<!--pages/hot_up/hot_up.wxml-->
+
+<import src="hot_up.skeleton.wxml" />
+<view style="height: 100vh;width: 100vw;position: fixed;z-index: 1000000;background-color: white;top:  480rpx;" wx-if="{{loading}}">
+  <template is="skeleton" wx-if="{{loading}}" />
+</view>
+
+
+<view style="position: fixed;top: {{menuButtonToTop}}px;width: 100vw; z-index: 99;left: 25rpx;">
+  <image style="height:{{menuButtonHeight}}px;width: {{menuButtonHeight}}px;" src="/pages/images/back3.png" bindtap="backLastPage"></image>
+</view>
+<image style="position: fixed;top: 0;left: 0;width: 750rpx;height: 465rpx;z-index: 98;"
+  src="https://weiyu-bulletin-picture-1258021264.cos.ap-beijing.myqcloud.com/hot_up_top_bg.png"></image>
+
+<view
+  style="position: fixed;top: 370rpx;left: 34rpx;width: 682rpx;height: 100rpx;border-radius: 50rpx;background-color: #FE802B;z-index: 98;">
+  <view
+    style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;align-content: center;width: 682rpx;height: 100rpx;">
+    <view style="display: flex;flex-direction: column;font-size: 33rpx;color: white;margin-left: 55rpx;">
+      <view style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;align-content: center;">
+        <view>您的{{change_show?'卡片':'碎片'}}近期升值：{{account_info.last7_days_add_cpoint}}</view>
+        <image style="width: 34rpx;height: 34rpx;margin-left: 8rpx;" src="/pages/images/c_info_point.png"></image>
+      </view>
+
+      <view style="display: flex;flex-direction: column;font-size: 22rpx;color: white;">
+        <view style="display: flex;flex-direction: row;">
+          总值可{{change_show?'框选':'兑换'}} <view style="color: #FFE670;">{{account_info.can_get_best_prize_num}}%</view> 块{{change_show?'范围！':'宇宙地盘！'}}
+        </view>
+      </view>
+    </view>
+    <view style="width: 153rpx;height: 59rpx;border-radius: 30rpx;background-color: #FFE670;display: flex;justify-content: center;align-content: center;align-items: center;color: #560B01;font-size: 26rpx;font-weight: bold;margin-right: 55rpx;" bindtap="toMy">
+    去查看
+  </view>
+  </view>
+</view>
+
+<!-- <view style="height: 480rpx;width: 750rpx;display: flex;"></view> -->
+<view style="display: flex;width: 750rpx;height: 480rpx;background-color: #F4F8FB;">
+</view>
+<view class=".water-flow" style="display: flex;flex-direction: column;">
+
+  <l-water-flow generic:l-water-flow-item="product" bind:showCardNum="showCardNum" bind:showCardLv="showCardLv"
+    bind:showCardCPoint="showCardCPoint" change_show="{{change_show}}" bind:showAllInfo="showAllInfo" bind:showBadge="showBadge" bind:clickListItem="clikcListItem"/>
+  <view class="list_toast" wx:if="{{not_have_card}}">
+    <image style="width: 150rpx;height: 150rpx;" src="/pages/images/hava_card.png"></image>
+    <text style="margin-top: 15rpx; color: #979797;">{{no_data_content}}</text>
+  </view>
+</view>
+<!-- <view class=".water-flow">
+    <l-water-flow generic:l-water-flow-item="product" />
+</view> -->
+
+<l-mask show="{{show_mask}}" opacity="0.7">
+  <view
+    style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;"
+    bindtap="backList">
+    <card_info data="{{contents}}"></card_info>>
+  </view>
+</l-mask>
+
+<l-mask show="{{show_mask2}}" opacity="0.7">
+  <view
+    style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;"
+    bindtap="backList">
+    <toast_info data="{{toast_data}}" bind:clickAffirm="clickAffirm"></toast_info>
+  </view>
+</l-mask>
+
+<l-mask show="{{login_mask}}" opacity="0.7">
+  <view style="width: 750rpx;height: 100vh;display: flex;justify-content: center;align-items: center;align-content: center;">
+    <card_toast7 bind:clickAffirm="affirmToLogIn"></card_toast7>
+  </view>
+</l-mask>
+
+<l-mask show="{{true}}" opacity="0.7" wx:if="{{show_login_loading}}">
+  <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;">
+    <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;height: 235rpx;background-color: white;border-radius: 15rpx;">
+      <view style="height: 15rpx;"></view>
+      <l-loading l-container-class="l-container" bg-color="#f3f3f3" z-index="776" show="{{true}}" type="circle" style="margin-left: 25rpx;margin-right: 25rpx;">
+      </l-loading>
+      <view style="height: 25rpx;"></view>
+      <view style="margin-top: 20rpx;color: black;margin-left: 25rpx;margin-right: 25rpx;">登陆中.....</view>
+    </view>
+  </view>
+</l-mask>

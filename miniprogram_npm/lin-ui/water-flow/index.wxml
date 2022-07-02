@@ -1,0 +1,16 @@
+<view class="l-class water-flow-container" wx:if="{{data.length!==0}}">
+  <view class="water-column" style="margin-right:0">
+    <view id="left">
+      <block wx:for="{{leftData}}" wx:key="index">
+        <l-water-flow-item id="left_list" class="list_item" data-item="{{item}}" sell_mult_card="{{sell_mult_card}}" catch:tap="onTapItem" data="{{item}}" isSelf="{{isSelf}}" bind:likeCard="likeCard" bind:showSelfSellToast="showSelfSellToast" bind:showCardNum="showCardNum" bind:showCardLv="showCardLv" bind:showCardCPoint="showCardCPoint" bind:showAllInfo="showAllInfo" bind:showBadge="showBadge" bind:clickListItem="clickListItem"/>
+      </block>
+    </view>
+  </view>
+  <view class="water-column">
+    <view id="right">
+      <block wx:for="{{rightData}}" wx:key="index">
+        <l-water-flow-item id="right_list" class="list_item" data-item="{{item}}" sell_mult_card="{{sell_mult_card}}" catch:tap="onTapItem" data="{{item}}" isSelf="{{isSelf}}" bind:likeCard="likeCard"  bind:showSelfSellToast="showSelfSellToast" bind:showCardNum="showCardNum" bind:showCardLv="showCardLv" bind:showCardCPoint="showCardCPoint" bind:showAllInfo="showAllInfo" bind:showBadge="showBadge"  bind:clickListItem="clickListItem"/>
+      </block>
+    </view>
+  </view>
+</view>

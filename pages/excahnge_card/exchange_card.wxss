@@ -1,0 +1,90 @@
+/* pages/excahnge_card/exchange_card.wxss */
+.page{
+  background-color:  #1C0941;
+}
+
+
+.l-badge {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.l-badge-content {
+  max-width: 650rpx;
+  left: 70%;
+  color: #fff;
+  position: absolute;
+  font-size: 20rpx;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 10;
+  letter-spacing: .5rpx
+}
+
+.l-badge-content-bottomleft {
+  height: 38rpx;
+  min-width: 60rpx;
+  padding: 0rpx 15rpx;
+  border-radius: 0 15rpx 0 15rpx;
+  line-height: 38rpx;
+  bottom: 0rpx;
+  left: 0rpx;
+  font-size: 22rpx;
+  background-color: #F46563;
+}
+
+.l-badge-content-topleft {
+  top: 0rpx;
+  left: 7rpx;
+}
+
+
+.l-badge-content-topright {
+  top: 0rpx;
+  left: 153rpx;
+}
+
+
+.middle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+
+
+.ct-input {
+  position: fixed;
+  top: -110rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15rpx 20rpx;
+  background: #FFFFFF;
+  z-index: 1000;
+  border-top:1rpx solid rgba(128, 128, 128, 0.199);
+
+}
+ 
+.ct-input textarea {
+  margin-top: 4rpx;
+  flex: 1;
+  font-size: 28rpx;
+  color: #050505;  
+}
+ 
+.ct-input image {
+  margin-left: 40rpx;
+  width: 40rpx;
+  height: 40rpx;
+}

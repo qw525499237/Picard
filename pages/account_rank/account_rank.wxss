@@ -1,0 +1,4 @@
+/* pages/account_rank/account_rank.wxss */
+.top_bg{
+  background-image: url('');
+}

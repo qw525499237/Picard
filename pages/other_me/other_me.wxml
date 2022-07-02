@@ -1,0 +1,170 @@
+<import src="my.skeleton.wxml" />
+<view style="height: 100vh;width: 100vw;position: fixed;z-index: 1000000;background-color: white;top:  620rpx;" wx-if="{{loading}}">
+  <template is="skeleton" wx-if="{{loading}}" />
+</view>
+
+<view style="position: fixed;top: {{menuButtonToTop}}px;width: 100vw; z-index: 999;left: 25rpx;">
+  <image style="height:{{menuButtonHeight}}px;width: {{menuButtonHeight}}px;" src="/pages/images/back3.png" bindtap="backLastPage"></image>
+</view>
+
+<view style="position: fixed;top: 0;width: 100vw; z-index: 200;left: 0;height: {{sticky_top}}rpx; background-color: #d6c3bc;" wx:if="{{show_top_bar}}">
+</view>
+<view class="sticky_info" style="position:fixed;width:100vw;z-index: 200;top:{{sticky_top}}rpx;" wx:if="{{show_top_bar}}">
+  <l-tabs bind:linchange="changeTabs1" animated-for-line="true" l-header-class="bottom_tabs" active-key="{{now_key}}">
+    <l-tabpanel tab="创造" key="one" slot="one">
+    </l-tabpanel>
+    <l-tabpanel tab="想要" key="two" slot="two">
+    </l-tabpanel>
+    <l-tabpanel tab="地盘" key="four" slot="four" wx:if="{{!change_show}}">
+      </l-tabpanel>
+    <l-tabpanel tab="拥有" key="three" slot="three">
+    </l-tabpanel>
+  </l-tabs>
+  <view style="position: fixed;top:{{sticky_top}}rpx; background-color: white;z-index: 99;" wx:if="{{sell_mult_card}}">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;width: 100vw;height: 80rpx;font-size:27rpx;">
+      <view style="display: flex;flex-direction: row;align-content: center;align-items: center;width: 450rpx;">
+        <view>已选中 <span style="color: red;">{{sell_card_num}}</span> 块宇宙{{change_show?'卡片':'碎片'}}，价值 <span style="color: #E4C383;">{{sell_card_cp}}</span></view>
+        <image style="width: 35rpx;height: 35rpx;margin-left: 5rpx;" src="/pages/images/c_info_point.png"></image>
+      </view>
+      <view style="display: flex;width:105rpx;height: 48rpx;background-color: #F46563;color: white;justify-content: center;align-content: center;align-items: center;font-size: 27rpx;border-radius: 14rpx;font-weight: bold;" catchtap="sellCard">售出</view>
+      <view style="display: flex;width:105rpx;height: 48rpx;background-color: #AEAEAE;color: white;justify-content: center;align-content: center;align-items: center;font-size: 27rpx;border-radius: 14rpx;font-weight: bold;margin-left: 15rpx;" catchtap="cancelSellCard">取消</view>
+    </view>
+  </view>
+  <view style="position: fixed;width: 125rpx;left: 312rpx;background-color: #E4C383;height: 62rpx;z-index: 98;top: {{sticky_top+80}}rpx;border-radius: 0 0 10rpx 10rpx;border-style: solid;border-color: #e0e0e0;border-width: 5rpx;border-top: 0;" catchtap="sellMultCards" wx:if="{{!sell_mult_card&&now_key=='three'&&isSelf&&!change_show}}">
+    <view style="justify-content: center;align-items: center;align-content: center;font-size: 24rpx;color: white;width: 125rpx;height: 62rpx;display: flex;">
+      批量售出
+    </view>
+  </view>
+</view>
+
+<view class="top_bc" style="height: {{acccount_icon_width*3.78}}rpx;">
+  <view class="top_info" style=" margin-left: {{acccount_icon_width*0.24}}rpx;margin-top: {{acccount_icon_width*1.1}}rpx;margin-right: {{acccount_icon_width*0.24}}rpx;" bindtap="{{log_in?'':'getInfo'}}">
+    <image src="{{account_info.account_icon}}" style="width: {{acccount_icon_width}}rpx;height: {{acccount_icon_width}}rpx;border-radius: {{acccount_icon_width/2}}rpx;">
+    </image>
+    <view class="top_account_name_info" style=" margin-left: 25rpx;margin-top: 15rpx;width: {{750-acccount_icon_width*1.48-25}}rpx;">
+      <view style="display: flex; flex-direction: row;justify-content: space-between;align-items: center;align-content: center;">
+        <text style="font-weight:bold;font-size: {{acccount_icon_width*0.19}}rpx; color: white;">{{account_info.account_name}}</text>
+        <view style="height:  {{acccount_icon_width*0.39}}rpx;width:  {{acccount_icon_width*0.57}}rpx;border-radius: {{acccount_icon_width*0.57/2}}rpx;border: 3rpx solid white;background-color: rgba(255, 255, 255, 0.233);justify-content: center;align-content: center;align-items: center;display: flex;" wx:if="{{isSelf}}" bindtap="{{log_in?'toSetting':''}}">
+          <image style="width: {{acccount_icon_width*0.22}}rpx;height: {{acccount_icon_width*0.22}}rpx;display: flex;" src="/pages/images/setting.png"></image>
+        </view>
+      </view>
+      <text style="font-size: {{acccount_icon_width*0.15}}rpx;color: white;" wx:if="{{log_in}}">匹卡号：{{weiyu_id}}</text>
+    </view>
+  </view>
+
+  <view style=" margin-left: {{acccount_icon_width*0.24}}rpx;margin-top: 10rpx;margin-right: {{acccount_icon_width*0.24}}rpx;display: flex;flex-direction: row;">
+    <block wx:for="{{account_info.badges}}">
+      <image style="width: {{acccount_icon_width*0.71}}rpx;height:{{acccount_icon_width*0.71}}rpx;" src="{{item.badage_url}}" data-item="{{item}}" bindtap="toBagePage"></image>
+    </block>
+  </view>
+  <view style=" margin-left: {{acccount_icon_width*0.24}}rpx;margin-top: 10rpx;margin-right: {{acccount_icon_width*0.24}}rpx;display: flex;flex-direction: row;align-items: center;align-content: center;height:{{acccount_icon_width*0.71}}rpx;" bindtap="{{log_in?'':'getInfo'}}" wx:if="{{account_info.badges.length<=0}}">
+    <view style="color: white;font-size:26rpx;">点亮的徽章将显示在这里…</view>
+  </view>
+  <!-- <view style="margin-left: 40rpx;margin-top: 20rpx;"><text style="font-size: 26rpx;color: white;">去编辑资料完善个人信息吧</text></view> -->
+  <view style="display: flex;flex-direction: row;margin-left: {{acccount_icon_width*0.31}}rpx;margin-right: {{acccount_icon_width*0.31}}rpx;margin-top: {{acccount_icon_width*0.13}}rpx;justify-content: space-between;font-size:26rpx;">
+    <view class="item">
+      <text class="item_text">{{account_info.total_card_num}}</text>
+      <text class="item_text">拥有</text>
+    </view>
+    <view class="item2">
+      <text class="item_text">{{account_info.cpoint}}</text>
+      <text class="item_text">C-point</text>
+    </view>
+    <view class="item2">
+      <text class="item_text">{{account_info.have_create_card_num}}</text>
+      <text class="item_text">创造</text>
+    </view>
+    <view class="item2">
+      <text class="item_text">{{account_info.have_getted_card_num}}</text>
+      <text class="item_text">被pick</text>
+    </view>
+    <view class="item2">
+      <text class="item_text">{{account_info.commented_and_liked_num}}</text>
+      <text class="item_text">获赞与评论</text>
+    </view>
+  </view>
+</view>
+<view class="bottom_info" style=" height: {{window_height-acccount_icon_width*3.78+10}}rpx;background-color: #F4F8FB;" bindtap="{{log_in?'':'getInfo'}}">
+  <view class="sticky_info" id="tabs" style="width:100vw;z-index: 30;">
+    <l-tabs bind:linchange="changeTabs" animated-for-line="true" l-header-class="bottom_tabs" active-key="{{now_key}}">
+      <l-tabpanel tab="创造" key="one" slot="one">
+      </l-tabpanel>
+      <l-tabpanel tab="想要" key="two" slot="two">
+      </l-tabpanel>
+      <l-tabpanel tab="地盘" key="four" slot="four" wx:if="{{!change_show}}">
+      </l-tabpanel>
+      <l-tabpanel tab="拥有" key="three" slot="three">
+      </l-tabpanel>
+    </l-tabs>
+  </view>
+
+
+  <view style="position: absolute;top:{{0}}rpx; background-color: white;z-index: 98;" wx:if="{{sell_mult_card}}">
+    <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;width: 100vw;height: 80rpx;font-size:27rpx;">
+      <view style="display: flex;flex-direction: row;align-content: center;align-items: center;width: 450rpx;">
+        <view>已选中 <span style="color: red;">{{sell_card_num}}</span> 块宇宙{{change_show?'卡片':'碎片'}}，价值 <span style="color: #E4C383;">{{sell_card_cp}}</span></view>
+        <image style="width: 35rpx;height: 35rpx;margin-left: 5rpx;" src="/pages/images/c_info_point.png"></image>
+      </view>
+      <view style="display: flex;width:105rpx;height: 48rpx;background-color: #F46563;color: white;justify-content: center;align-content: center;align-items: center;font-size: 27rpx;border-radius: 14rpx;font-weight: bold;" catchtap="sellCard">售出</view>
+      <view style="display: flex;width:105rpx;height: 48rpx;background-color: #AEAEAE;color: white;justify-content: center;align-content: center;align-items: center;font-size: 27rpx;border-radius: 14rpx;font-weight: bold;margin-left: 15rpx;" catchtap="cancelSellCard">取消</view>
+    </view>
+  </view>
+
+
+  <view style="position: absolute;width: 125rpx;left: 312rpx;background-color: #E4C383;height: 62rpx;z-index: 30;top: {{80}}rpx;border-radius: 0 0 10rpx 10rpx;border-style: solid;border-color: #e0e0e0;border-width: 5rpx;border-top: 0;" catchtap="sellMultCards" wx:if="{{!sell_mult_card&&now_key=='three'&&isSelf&&!change_show}}">
+    <view style="justify-content: center;align-items: center;align-content: center;font-size: 24rpx;color: white;width: 125rpx;height: 62rpx;display: flex;">
+      批量售出
+    </view>
+  </view>
+
+
+
+  <view id="lists" style="background-color: #F4F8FB;">
+    <!-- <l-loadmore show="{{show_top_loading}}">
+  </l-loadmore> -->
+    <view class=".water-flow" style="min-height: 100%;">
+      <l-water-flow generic:l-water-flow-item="product" isSelf="{{isSelf}}" bind:showCardNum="showCardNum" bind:showCardLv="showCardLv" bind:showCardCPoint="showCardCPoint" bind:showSelfSellToast="showSelfSellToast" bind:showAllInfo="showAllInfo" bind:showBadge="showBadge" bind:clickListItem="clikcListItem" showSeleBox="{{sell_mult_card}}" change_show="{{change_show}}" id="show_list" />
+      <view class="list_toast" wx:if="{{not_have_card}}" bindtap="toCreateCard">
+        <image style="width: 150rpx;height: 150rpx;" src="{{not_have_card_icon}}"></image>
+        <text style="margin-top: 15rpx; color: #979797;">{{no_data_content}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view style="position: fixed; right: 15rpx; bottom: 35rpx;z-index: 99;opacity: {{create_card_opacity}};" wx:if="{{isSelf}}">
+  <image style="width: 118rpx;height: 118rpx;" src="/pages/images/create_card.png" bindtap="addCard"></image>
+</view>
+
+<l-mask show="{{show_mask}}" z-index="1000" opacity="0.7">
+  <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+    <card_info data="{{contents}}"></card_info>
+  </view>
+</l-mask>
+<!-- show_loading -->
+<l-mask show="{{show_loading}}" z-index="1000" opacity="0.7">
+  <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+    <view style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;height: 235rpx;background-color: white;border-radius: 15rpx;">
+      <view style="height: 15rpx;"></view>
+      <l-loading l-container-class="l-container" bg-color="#f3f3f3" z-index="776" show="{{true}}" type="circle" style="margin-left: 25rpx;margin-right: 25rpx;">
+      </l-loading>
+      <view style="height: 25rpx;"></view>
+      <view style="margin-top: 20rpx;color: black;margin-left: 35rpx;margin-right: 35rpx;">登陆中.....</view>
+    </view>
+  </view>
+</l-mask>
+
+<l-mask show="{{show_sell_toast}}" opacity="0.7">
+  <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+    <sell_card_toast sell_card_num="{{sell_card_num}}" sell_card_cp="{{sell_card_cp}}" bind:clickAffirm="affirmToSellCard" bind:clickCancel="cancelToSellCard"></sell_card_toast>
+  </view>
+</l-mask>
+
+
+<l-mask show="{{show_sold_toast}}" opacity="0.7">
+  <view style="display: flex;flex-direction: row;justify-content: center;align-content: center;align-items: center;height: 100vh;width: 100vw;" bindtap="backList">
+    <new_account_sold_toast bind:clickAffirm="toMap" bind:clickCancel="backList"></new_account_sold_toast>
+  </view>
+</l-mask>
+
+<l-toast  show="{{show_toast}}" title="{{toast_content}}" duration="{{toast_duration}}" />

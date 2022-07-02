@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "l-badge": "../../../miniprogram_npm/lin-ui/badge/index",
+    "l-mask": "../../miniprogram_npm/lin-ui/mask/index",
+    "card_toast7": "/pages/common/card_toast7/index"
+
+  }
+}
